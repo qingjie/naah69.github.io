@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 纳兰小筑</title>
+    <link>https://www.naah69.com/categories/</link>
+    <description>Recent content in Categories on 纳兰小筑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 01 Dec 2019 18:24:13 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.naah69.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python</title>
+      <link>https://www.naah69.com/categories/python/</link>
+      <pubDate>Sun, 01 Dec 2019 18:24:13 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://www.naah69.com/categories/java/</link>
+      <pubDate>Sun, 28 Jul 2019 10:41:51 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Others</title>
+      <link>https://www.naah69.com/categories/others/</link>
+      <pubDate>Sun, 23 Jun 2019 14:12:25 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/others/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>https://www.naah69.com/categories/go/</link>
+      <pubDate>Sun, 23 Jun 2019 13:42:08 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SOFTWARE</title>
+      <link>https://www.naah69.com/categories/software/</link>
+      <pubDate>Sat, 22 Jun 2019 20:28:03 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/software/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MATH</title>
+      <link>https://www.naah69.com/categories/math/</link>
+      <pubDate>Sat, 01 Dec 2018 14:25:38 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FOUNDATION</title>
+      <link>https://www.naah69.com/categories/foundation/</link>
+      <pubDate>Sat, 09 Sep 2017 11:46:51 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/foundation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ESSAY</title>
+      <link>https://www.naah69.com/categories/essay/</link>
+      <pubDate>Tue, 08 Aug 2017 22:30:05 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/essay/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

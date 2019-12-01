@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>    <title>数据结构图Graph之最终类-纳兰小筑</title>
+    
+    <meta name="description" content="使用图来实现一些算法" />
+    
+    
+    <meta name="keywords" content="数据结构,图" />
+    
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+
+    <link rel="shortcut icon" href="https://www.naah69.com/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BEgraph%E4%B9%8B%E6%9C%80%E7%BB%88%E7%B1%BB/">
+    
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <style>
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width:24px;
+            border-right: 1px solid #c5c5c5;
+        }
+        .hljs-ln-code {
+            padding-left: 10px;
+        }
+        .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+        .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+        .highlight pre, pre, .highlight .hll{padding: 6px 0px}
+        .hljs{padding: 8px 0px}
+        em{color: red}
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+        @media screen and (max-width: 500px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+        @media screen and (max-width: 768px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+    </style>
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npcw9vzj21hc0ecju9.jpg')
+    }
+
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+</style>
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/foundation" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;FOUNDATION</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F" title="拓扑排序" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;拓扑排序
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95" title="迪杰斯特拉算法" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;迪杰斯特拉算法
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98" title="最短路径问题" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;最短路径问题
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95" title="克鲁斯卡尔算法" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;克鲁斯卡尔算法
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%99%AE%E9%87%8C%E5%A7%86%E7%AE%97%E6%B3%95" title="普里姆算法" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;普里姆算法
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;最小生成树问题
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86" title="广度优先遍历" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;广度优先遍历
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86" title="深度优先遍历" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;深度优先遍历
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;数据结构
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E5%9B%BE" title="图" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;图
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>数据结构图Graph之最终类</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Thursday, Aug 17,2017 11:51:17
+                        
+                        <span id="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BEgraph%E4%B9%8B%E6%9C%80%E7%BB%88%E7%B1%BB/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#边节点类"> 边节点类</a></li>
+<li><a href="#邻接表元素类">邻接表元素类</a></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+
+                
+                
+                
+                
+                
+                
+                
+
+                
+
+                
+
+<p> 该类包括</p>
+
+<ol>
+<li>基础方法</li>
+<li>邻接矩阵</li>
+<li>邻接表</li>
+<li>深度优先遍历</li>
+<li>广度优先遍历</li>
+<li>最小生成树</li>
+<li>最短路径</li>
+
+<li><p>拓扑排序</p>
+
+<pre><code>package com.naah.s4_Graph;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+/**
+*
+* ClassNameCh 图
+* ClassNameEn Graph
+* Description 数据结构图
+* Company
+* @author Naah
+* @date 2017年8月13日 下午11:18:46
+* @param
+*/
+public class Graph&gt; {
+
+	// 顶点数组
+	private T[] vertexs;
+
+	// 邻接表元素数组
+	private VertexNeighborNode[] neighborArray;
+
+	// 邻接矩阵
+	private int[][] matrix;
+
+	// 度数组
+	private Edge[] edges;
+
+	// 泛型对象的类文件
+	private Class Class;
+
+	// 顶点数量
+	private int size;
+
+	// 常亮：未连接
+	public static final int NO_LINK = -1;
+
+	/**
+	 * 构造方法
+	 * @param Class 类对象
+	 * @param vertexs 顶点可选数组
+	 */
+	public Graph(Class Class, T... vertexs) {
+		super();
+		this.vertexs = vertexs;
+		this.size = vertexs.length;
+		this.Class = Class;
+
+	}
+
+	/**
+	 * 构造方法
+	 * @param vertexs 可选数组
+	 */
+	public Graph(T... vertexs) {
+		super();
+		this.vertexs = vertexs;
+		this.size = vertexs.length;
+
+	}
+
+	/**
+	 * 基础添加方法
+	 * @param vertex 顶点
+	 */
+	private void basicAdd(T vertex) {
+		// 创建新顶点数组
+		T[] newVertexs = (T[]) Array.newInstance(Class, vertexs.length + 1);
+
+		// 将原顶点数组复制到新顶点数组
+		System.arraycopy(vertexs, 0, newVertexs, 0, vertexs.length);
+
+		// 将新顶点添加到新顶点数组
+		newVertexs[newVertexs.length - 1] = vertex;
+
+		// 将新顶点数组设置为原顶点数组
+		vertexs = newVertexs;
+
+		// 长度增加
+		size++;
+
+	}
+
+	/**
+	 * 添加顶点方法（无邻接矩阵）
+	 * @param vertex 顶点
+	 * @return 顶点的下标
+	 * @throws Exception 有邻接矩阵
+	 */
+	public int add(T vertex) throws Exception {
+
+		// 判断当前对象是否含有邻接矩阵、
+		// 没有则进入
+		if (matrix == null) {
+
+			// 添加顶点
+			basicAdd(vertex);
+
+			// 返回新顶点下标
+			return vertexs.length - 1;
+		} else {
+
+			// 有邻接矩阵则抛出异常
+			throw new Exception(&quot;当前存在邻接矩阵！请使用重载方法！&quot;);
+		}
+
+	}
+
+	/**
+	 * 添加节点（有邻接矩阵）
+	 * @param vertex 顶点
+	 * @param inWeight 入度(不包含自己)
+	 * @param outWeight 出度(不包含自己)
+	 * @return 顶点下标
+	 * @throws Exception 邻接数组长度不对
+	 * @throws Exception 不存在邻接数组
+	 */
+	public int add(T vertex, int[] inWeight, int[] outWeight) throws Exception {
+
+		// 判断是否有邻接矩阵，如果没有则抛出异常
+		if (matrix == null) {
+			throw new Exception(&quot;当前不存在邻接矩阵！请使用重载方法！或建立邻接矩阵！&quot;);
+		}
+
+		// 判断邻接数组长度是否与顶点数组长度相同
+		if (inWeight.length != vertexs.length
+				|| outWeight.length != vertexs.length) {
+			throw new Exception(&quot;邻接数组长度不对&quot;);
+		}
+
+		// 添加元素
+		basicAdd(vertex);
+
+		// 创建新邻接矩阵
+		int[][] newMatrix = new int[vertexs.length][vertexs.length];
+
+		// 遍历原邻接矩阵
+		for (int i = 0; i &lt; matrix.length; i++) {
+
+			// 将原邻接矩阵数组元素复制到新邻接矩阵数组中
+			System.arraycopy(matrix[i], 0, newMatrix[i], 0, matrix[i].length);
+
+			// 将新顶点的出度添加到邻接矩阵中
+			newMatrix[i][vertexs.length - 1] = inWeight[i];
+
+			// 将新节点的入度添加到邻接矩阵中
+			newMatrix[vertexs.length - 1][i] = outWeight[i];
+		}
+
+		// 顶点与自己的度为0
+		newMatrix[vertexs.length - 1][vertexs.length - 1] = 0;
+
+		// 将新的邻接矩阵设置为邻接矩阵
+		matrix = newMatrix;
+
+		// 返回行顶点的下标
+		return vertexs.length - 1;
+	}
+
+	/**
+	 * 得到出度数量
+	 * @param vertex 顶点
+	 * @return 出度数量
+	 * @throws Exception 未定义邻接矩阵
+	 */
+	public int getOutSize(T vertex) throws Exception {
+		// 如果邻接矩阵为空
+		if (matrix == null) {
+
+			// 抛出异常
+			throw new Exception(&quot;未找到邻接矩阵&quot;);
+		}
+
+		// 得到顶点下标
+		int position = getIndex(vertex);
+
+		// 判断是否找到
+		if (position != -1) {
+
+			// 出度数量
+			int size = 0;
+
+			// 遍历顶点的出度数组
+			for (int i = 0; i &lt; matrix[position].length; i++) {
+
+				// 不为自己 并且 有链接
+				if (matrix[position][i] &gt; 0 &amp;&amp; matrix[position][i] != NO_LINK) {
+
+					// 出度数量增加
+					size++;
+				}
+			}
+
+		} else {
+
+			throw new Exception(&quot;未找到该顶点&quot;);
+		}
+
+		// 返回出度数量
+		return size;
+	}
+
+	/**
+	 * 得到入度数量
+	 * @param vertex 顶点
+	 * @return 入度数量
+	 * @throws Exception 未找到邻接矩阵
+	 */
+	public int getInSize(T vertex) throws Exception {
+
+		// 如果邻接矩阵为空
+		if (matrix == null) {
+
+			// 抛出异常
+			throw new Exception(&quot;未找到邻接矩阵&quot;);
+		}
+
+		// 得到顶点下标
+		int position = getIndex(vertex);
+
+		// 判断是否找到
+		if (position != -1) {
+
+			// 出度数量
+			int size = 0;
+
+			// 遍历入度数组
+			for (int i = 0; i &lt; matrix.length; i++) {
+
+				// 不为自己 并且 有链接
+				if (matrix[i][position] &gt; 0 &amp;&amp; matrix[i][position] != NO_LINK) {
+
+					// 出度数量增加
+					size++;
+				}
+			}
+		} else {
+			throw new Exception(&quot;未找到该节点&quot;);
+		}
+		// 返回出度数量
+		return size;
+	}
+
+	/**
+	 * 得到下标位置
+	 * @param vertex 顶点
+	 * @return下标位置
+	 */
+	public int getIndex(T vertex) {
+
+		// 遍历顶点数组
+		for (int i = 0; i &lt; vertexs.length; i++) {
+
+			// 顶点不为空 并且 相同
+			if (vertexs[i] != null &amp;&amp; vertexs[i].equals(vertex)) {
+
+				// 找到则返回下标
+				return i;
+			}
+		}
+
+		// 找不到返回-1
+		return -1;
+	}
+
+	/**
+	 * 得到邻接矩阵
+	 * @return
+	 */
+	public int[][] getMatrix() {
+		return matrix;
+	}
+
+	/**
+	 * 设置邻接矩阵
+	 * @param matrix 邻接矩阵
+	 * @throws Exception 数组长度不对
+	 */
+	public void setMatrix(int[][] matrix) throws Exception {
+		if (matrix.length != this.vertexs.length) {
+			throw new Exception(&quot;二维数组长度不对&quot;);
+		}
+		for (int i = 0; i &lt; matrix.length; i++) {
+			if (matrix[i].length != this.vertexs.length) {
+				throw new Exception(&quot;二维数组长度不对&quot;);
+			}
+
+		}
+		this.matrix = matrix;
+	}
+
+	/**
+	 * 得到顶点数量
+	 * @return 顶点数量
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * 设置顶点数组
+	 * @param vertexs 顶点数组
+	 */
+	public void setVertexs(T[] vertexs) {
+		this.vertexs = vertexs;
+		this.size = vertexs.length;
+	}
+
+	/**
+	 * 得到顶点数组
+	 * @return 顶点数组
+	 */
+	public T[] getVertexs() {
+		return vertexs;
+	}
+
+	/**
+	 * 得到度数组
+	 * @return
+	 */
+	public Edge[] getEdges() {
+		return edges;
+	}
+
+	/**
+	 * 深度优先遍历方法（递归）
+	 */
+	public void depthFirst() {
+		// 建立记录数组
+		boolean[] isVisited = new boolean[size];
+
+		// 顶点数组循环
+		for (int i = 0; i &lt; vertexs.length; i++) {
+
+			// 全部遍历标记，为节省资源
+			boolean isAllTrue = true;
+
+			// 遍历记录数组是否已全部记录
+			for (int j = 0; j &lt; isVisited.length; j++) {
+
+				// 如果有一个没记录
+				if (isVisited[j] == false) {
+
+					// 则将全部遍历标记设置为false
+					isAllTrue = false;
+
+					// 跳出该循环
+					break;
+				}
+			}
+
+			// 如果已全部遍历
+			if (isAllTrue) {
+
+				// 跳出循环，不再继续
+				break;
+			}
+
+			// 判断当前顶点是否已遍历，如果没有则进行遍历
+			if (!isVisited[i]) {
+
+				// 遍历该顶点
+				depthFirst(isVisited, i);
+			}
+		}
+	}
+
+	/**
+	 * 深度优先遍历实现方法（递归）
+	 * @param isVisited 遍历记录数组
+	 * @param i 遍历的起点
+	 */
+	private void depthFirst(boolean[] isVisited, int i) {
+
+		// 将当前顶点设置为已遍历
+		isVisited[i] = true;
+
+		// 找到该顶点的第一个出度顶点下标
+		int weight = getFirstNeighbor(i);
+
+		// 深度遍历出度顶点，直到没有出度顶点
+		while (weight != -1) {
+
+			// 判断出度顶点是否已遍历过，如果没遍历过则进行遍历
+			if (!isVisited[weight]) {
+
+				// 输出该出度顶点的信息
+				System.out.println(&quot;第&quot; + weight + &quot;个顶点被访问：&quot; + vertexs[weight]);
+
+				// 深度遍历该出度顶点
+				depthFirst(isVisited, weight);
+			}
+
+			// 如果没有出度顶点，则查找该顶点下一个出度顶点
+			weight = getNextNeighbor(i, weight);
+		}
+	}
+
+	/**
+	 * 得到该顶点的第一个出度顶点下标
+	 * @param i 顶点数组下标
+	 * @return 第一个出度顶点下标
+	 */
+	private int getFirstNeighbor(int i) {
+
+		// 循环矩阵中顶点的出度数组
+		for (int j = 0; j &lt; size; j++) {
+
+			// 如果该出度不为0，并且相连
+			if (matrix[i][j] != 0 &amp;&amp; matrix[i][j] != NO_LINK) {
+
+				// 返回出度顶点下标
+				return j;
+			}
+		}
+
+		// 返回未连接
+		return NO_LINK;
+	}
+
+	/**
+	 * 得到该顶点从某位置后的第一个出度顶点下标
+	 * @param i 顶点数组下标
+	 * @param weight 位置
+	 * @return 出度顶点下标
+	 */
+	private int getNextNeighbor(int i, int weight) {
+
+		// 从某位置开始循环矩阵中顶点的出度数组
+		for (int j = weight + 1; j &lt; size; j++) {
+
+			// 如果该出度不为0，并且相连
+			if (matrix[i][j] != 0 &amp;&amp; matrix[i][j] != NO_LINK) {
+
+				// 返回出度顶点下标
+				return j;
+			}
+		}
+
+		// 返回未连接
+		return NO_LINK;
+	}
+
+	/**
+	 * 广度优先遍历方法（递归）
+	 */
+	public void bredthFirst() {
+		// 建立记录数组
+		boolean[] isVisited = new boolean[size];
+
+		// 创建队列
+		LinkedList queue = new LinkedList();
+
+		// 广度优先遍历方法实现，从第一个开始
+		bredthFirst(isVisited, queue, 0);
+
+	}
+
+	/**
+	 * 广度优先算法遍历方法实现
+	 * @param isVisited 记录数组
+	 * @param queue 队列
+	 * @param i 开始顶点
+	 */
+	private void bredthFirst(boolean[] isVisited, LinkedList queue,
+			int i) {
+
+		// 将当前顶点设置为已遍历
+		isVisited[i] = true;
+		System.out.println(&quot;第&quot; + i + &quot;个顶点被访问了：&quot; + vertexs[i]);
+
+		// 循环将该顶点的出度顶点下标添加到队列中
+		for (int j = 0; j &lt; size; j++) {
+
+			// 出度顶点判断，不为自己 并且 相连 并且没有访问过
+			if (matrix[i][j] != 0 &amp;&amp; matrix[i][j] != NO_LINK &amp;&amp; !isVisited[j]) {
+
+				// 添加到队列
+				queue.offer(j);
+			}
+		}
+
+		// 如果队列不为空则循环
+		while (!queue.isEmpty()) {
+
+			// 将顶点下标从队首移出
+			int weight = queue.poll();
+
+			// 如果该顶点没访问过
+			if (!isVisited[weight]) {
+
+				// 递归广度遍历该方法
+				bredthFirst(isVisited, queue, weight);
+			}
+		}
+
+	}
+
+	/**
+	 * 最小生成树方法-普里姆算法
+	 *
+	 */
+	public void prim() {
+
+		// 创建最小权值数组
+		int[] least = new int[size];
+
+		// 上一个顶点下标数组
+		int[] lastIndex = new int[size];
+
+		// 最小权值和
+		int sum = 0;
+
+		// 初始化最小权值数组
+		for (int i = 0; i &lt; least.length; i++) {
+			least[i] = matrix[0][i];
+		}
+
+		// 循环查找最小生成树
+		for (int i = 1; i &lt; least.length; i++) {
+
+			// 将最小权值设置为int最大值
+			int min = Integer.MAX_VALUE;
+
+			// 将最小权值下标设置为0
+			int minIndex = 0;
+
+			// 循环查找最小权值数组中的最小值
+			for (int j = 1; j &lt; least.length; j++) {
+
+				// 大于0的最小权值
+				if (least[j] &gt; 0 &amp;&amp; least[j] &lt; min) {
+
+					// 设置为最小值
+					min = least[j];
+
+					// 将当前下标设置为最小权值下标
+					minIndex = j;
+				}
+			}
+
+			// 输出已找到的最小顶点
+			System.out.println(
+					lastIndex[minIndex] + &quot;顶点---&quot; + minIndex + &quot;顶点:&quot; + min);
+
+			// 将已找到的最小权值点设置为0，标记为已找到
+			least[minIndex] = 0;
+
+			// 将最小权值累加到最小权值和中
+			sum += min;
+
+			// 将上一个顶点的所有出度权值添加到最小权值数组中
+			for (int j = 1; j &lt; least.length; j++) {
+
+				// 没遍历的顶点 并且 上一个顶点所到该顶点的权值 小于 最小权值数组中到该顶点的权值时 进入
+				// 最小权值数组中无法到达的顶点 并且上一个顶点能到达该顶点时 进入
+				if ((least[j] &gt; 0 &amp;&amp; matrix[minIndex][j] != NO_LINK
+						&amp;&amp; matrix[minIndex][j] &lt; least[j])
+						|| (least[j] == NO_LINK
+								&amp;&amp; matrix[minIndex][j] != NO_LINK)) {
+
+					// 将上一个顶点到该顶点的出度权值添加到最小权值数组中
+					least[j] = matrix[minIndex][j];
+
+					// 将上一个顶点设置为该顶点的入度顶点
+					lastIndex[j] = minIndex;
+				}
+			}
+
+		}
+
+		// 输出最小权值和
+		System.out.println(sum);
+	}
+
+	/**
+	 * 最小生成树方法-克鲁斯卡尔算法
+	 */
+	public void kruskal() {
+
+		// 创建查找数组
+		// 该数组下标为顶点下边
+		// 该数组值为顶点出度顶点下标
+		int[] parent = new int[size];
+
+		// 最小权值和
+		int sum = 0;
+
+		// 构建度数组
+		createEdge();
+
+		// 循环出度数组
+		for (Edge edge : edges) {
+
+			// 从查找数组中寻找该出度的头所到达的顶点下标
+			int n = find(parent, edge.begin);
+
+			// 从查找数组中寻找该出度的尾所到达的顶点下标
+			int m = find(parent, edge.end);
+
+			// 如果头尾顶点下标不相等，进入
+			// 如果头尾顶点下标相对，则代表该度为多余度
+			if (n != m) {
+
+				// 输出该度信息
+				System.out.println(
+						edge.begin + &quot;顶点---&quot; + edge.end + &quot;顶点：&quot; + edge.weight);
+
+				// 将查询数组中头下标的值设置为尾下标
+				parent[n] = m;
+
+				// 累计权值
+				sum += edge.weight;
+			}
+		}
+
+		// 输出权值
+		System.out.println(sum);
+
+	}
+
+	/**
+	 * 查找数组中该顶点能到达的最后位置
+	 * @param parent 查找数组
+	 * @param i 顶点下标
+	 * @return 最后位置
+	 */
+	private int find(int[] parent, int i) {
+
+		// 如果该下标位置有出度则循环
+		while (parent[i] &gt; 0) {
+
+			// 将出度下标设置为下一次查找的下标
+			i = parent[i];
+		}
+
+		// 返回最后位置
+		return i;
+	}
+
+	/**
+	 * 构建度数组
+	 */
+	public void createEdge() {
+
+		// 创建度的链表，不确定度的数量，所以使用链表
+		List edgeList = new LinkedList();
+
+		// 从第一个顶点开始构建度的链表
+		createEdge(edgeList, 0);
+
+		// 创建度的数组
+		this.edges = new Edge[edgeList.size()];
+
+		// 数组赋值标记
+		int i = 0;
+
+		// 遍历链表，添加到数组
+		for (Edge edge : edgeList) {
+
+			// 将链表值添加到数组
+			this.edges[i] = edge;
+
+			// 标记自增
+			i++;
+		}
+
+		// 通过Edge类实现Comparable接口进行排序
+		Arrays.sort(this.edges);
+	}
+
+	/**
+	 * 构建度数组
+	 *
+	 * 此方法思路与广度优先相同
+	 * 但是没有采用上面的递归广度优先思路
+	 * 而是使用迭代完成
+	 * @param edges 度的链表
+	 * @param i 开始节点
+	 */
+	private void createEdge(List edges, int i) {
+
+		// 创建度的队列
+		LinkedList queue = new LinkedList();
+
+		// 将顶点下标添加到队列中
+		queue.offer(i);
+
+		// 队列不为空则循环
+		while (!queue.isEmpty()) {
+
+			// 取出队首顶点下标
+			int n = queue.poll();
+
+			// 取得顶点的第一个邻接点
+			int m = getFirstNeighbor(n);
+
+			// 当邻接点连接时循环
+			while (m != NO_LINK) {
+
+				// 是否包含度标记
+				boolean isHave = false;
+
+				// 遍历度链表
+				for (Edge e : edges) {
+
+					// 如果两节点相等
+					if (e.equals(n, m, matrix[n][m])) {
+
+						// 将标记设置为真
+						isHave = true;
+						break;
+					}
+				}
+
+				// 当没有该度时
+				if (!isHave) {
+
+					// 向度链表中添加该度
+					edges.add(new Edge(n, m, matrix[n][m]));
+
+					// 将邻接点下标添加到队尾
+					queue.offer(m);
+				}
+
+				// 得到m邻接点后的一个邻接点
+				m = getNextNeighbor(n, m);
+			}
+
+		}
+
+	}
+
+	/**
+	 * 最短路径-迪杰特斯拉算法
+	 * @param v 下标
+	 * @return 最小路径数组
+	 * @throws Exception
+	 */
+	public int[] dijstra(int v) throws Exception {
+
+		// 如果链接矩阵为空，则
+		if (matrix == null) {
+
+			// 抛出异常
+			throw new Exception(&quot;未找到邻接矩阵&quot;);
+		}
+
+		// 创建最短路径数组
+		int[] least = new int[size];
+
+		// 创建记录数组
+		boolean[] getLeastWeight = new boolean[size];
+		int k = 0;
+
+		// 初始化最短路径数组
+		for (int i = 0; i &lt; least.length; i++) {
+			least[i] = matrix[v][i];
+
+		}
+
+		// 将当前下标记录
+		getLeastWeight[v] = true;
+
+		// 循环找出最短路径
+		for (int i = 0; i &lt; least.length; i++) {
+
+			// 将最小值赋值
+			int min = Integer.MAX_VALUE;
+
+			// 循环查找最小的权值，并暂时保存下标
+			for (int j = 0; j &lt; least.length; j++) {
+				if (!getLeastWeight[j] &amp;&amp; least[j] &gt; 0 &amp;&amp; least[j] &lt; min) {
+					min = least[j];
+					k = j;
+				}
+			}
+
+			// 将该顶点记录
+			getLeastWeight[k] = true;
+
+			// 循环最小权值的顶点，如果有比上一个顶点到那个顶点权值更小，则将更小的权值赋值
+			for (int j = 0; j &lt; getLeastWeight.length; j++) {
+				if (!getLeastWeight[j] &amp;&amp; ((matrix[k][j] + min &lt; least[j]
+						&amp;&amp; matrix[k][j] &gt; 0)
+						|| (least[j] == NO_LINK &amp;&amp; matrix[k][j] != NO_LINK))) {
+					least[j] = matrix[k][j] + min;
+				}
+			}
+		}
+
+		// 返回最小路径数组
+		return least;
+
+	}
+
+	/**
+	 * 通过顶点的入度数量来构建邻接表
+	 * @param vertexsInEdgeNum 顶点的入度数量数组
+	 * @return 邻接表
+	 * @throws Exception 未找到顶点数组
+	 */
+	public VertexNeighborNode[] getNeighborArray(int... vertexsInEdgeNum)
+			throws Exception {
+
+		// 如果未找到顶点数组，抛出异常
+		if (vertexs == null) {
+			throw new Exception(&quot;未找到顶点数组!&quot;);
+		}
+
+		// 创建邻接表
+		neighborArray = new VertexNeighborNode[size];
+
+		// 通过传入的顶点入度数量数组构建邻接表
+		for (int i = 0; i &lt; size; i++) {
+
+			// 通过顶点入度数量创建邻接表元素
+			neighborArray[i] = new VertexNeighborNode(vertexsInEdgeNum[i]);
+		}
+		// 返回邻接表
+		return neighborArray;
+	}
+
+	/**
+	 * 设置邻接表元素的度
+	 * @param neighborIndex 邻接表数组元素下标
+	 * @param array 邻接表度元素数组
+	 * @throws Exception 未找到邻接数组
+	 */
+	public void setNeighborEdgeNode(int neighborIndex, EdgeNode... array)
+			throws Exception {
+
+		// 如果邻接数组为空，抛出异常
+		if (neighborArray == null) {
+			throw new Exception(&quot;未找到邻接数组!&quot;);
+		}
+
+		// 如果度元素数组有元素，则
+		if (array.length &gt; 0) {
+			// 将度元素数组第一个设置为邻接表元素的第一个度
+			neighborArray[neighborIndex].setFirstEdge(array[0]);
+		}
+
+		// 如果度元素数组长度超过1，则
+		if (array.length &gt; 1) {
+			// 通过循环，将度元素数组剩余度链接到度元素链表中
+			for (int i = 1; i &lt; array.length; i++) {
+
+				// 获取邻接表数组中的当前元素的第一个度
+				EdgeNode en = neighborArray[neighborIndex].getFirstEdge();
+
+				// 将当前度的下一个引用为第一个度
+				array[i].setNext(en);
+
+				// 将当前元素的第一个度设置为当前度
+				neighborArray[neighborIndex].setFirstEdge(array[i]);
+			}
+		}
+
+	}
+
+	/**
+	 * 拓扑排序方法
+	 * @throws Exception
+	 */
+	public void Topologic() throws Exception {
+
+		// 创建栈，用于添加入度为0的邻接元素下标
+		Stack zero = new Stack();
+
+		// 创建拓扑排序数量
+		int count = 0;
+
+		// 循环邻接表元素数组
+		for (int i = 0; i &lt; size; i++) {
+
+			// 如果当前元素的入度数量为0
+			if (neighborArray[i].getIn() == 0) {
+
+				// 将当前元素的下标压入栈中
+				zero.push(i);
+			}
+		}
+
+		// 如果栈不为空，遍历栈
+		while (!zero.isEmpty()) {
+
+			// 弹出栈顶的下标
+			int zeroIndex = zero.pop();
+
+			// 输出该顶点的下标和值
+			System.out.println(zeroIndex + &quot;:&quot; + vertexs[zeroIndex]);
+
+			// 拓扑数量自增
+			count++;
+
+			// 遍历入度为0的邻接表元素的度元素
+			for (EdgeNode e = neighborArray[zeroIndex]
+					.getFirstEdge(); e != null; e = e.getNext()) {
+
+				// 取得弧尾顶点的下标（顶点的出度顶点）
+				int nextIndex = e.getIndex();
+
+				// 通过下标取得邻接表数组元素
+				VertexNeighborNode v = neighborArray[nextIndex];
+
+				// 将该元素的入度减1，证明该元素的入度有一个已遍历过
+				v.setIn(v.getIn() - 1);
+
+				// 如果该元素的当前入度为0，则
+				if (v.getIn() == 0) {
+
+					// 将该元素的下标压入栈中
+					zero.push(nextIndex);
+				}
+			}
+		}
+
+		// 如果遍历过的顶点数量不是全部顶点数量
+		if (count != size) {
+
+			// 则代表拓扑失败，有回环
+			throw new Exception(&quot;拓扑失败！有回环&quot;);
+		}
+	}
+}
+
+/**
+*
+* ClassNameCh 度
+* ClassNameEn Edge
+* Description 度的数据结构
+* Company
+* @author Naah
+* @date 2017年8月14日 下午10:52:53
+*/
+class Edge implements Comparable {
+
+	// 度的头顶点下标
+	int begin;
+
+	// 度的尾顶点下标
+	int end;
+
+	// 度的权值
+	int weight;
+
+	public Edge() {
+		super();
+	}
+
+	/**
+	 * 构造函数
+	 * @param begin 头顶点下标
+	 * @param end 尾顶点下标
+	 * @param weight 权值
+	 */
+	public Edge(int begin, int end, int weight) {
+		super();
+		this.begin = begin;
+		this.end = end;
+		this.weight = weight;
+	}
+
+	/**
+	 * 判断相等方法
+	 * @param begin
+	 * @param end
+	 * @param weight
+	 * @return true/false
+	 */
+	public boolean equals(int begin, int end, int weight) {
+
+		// 首先判断权值相等
+		if (weight == this.weight) {
+
+			// 判断下标是否相同，包括头尾互换
+			if ((begin == this.begin &amp;&amp; end == this.end)
+					|| (end == this.begin &amp;&amp; begin == this.end)) {
+
+				// 返回相等
+				return true;
+			}
+
+		}
+
+		// 返回不相等
+		return false;
+
+	}
+
+	@Override
+	public String toString() {
+		return &quot;Edge [begin=&quot; + begin + &quot;, end=&quot; + end + &quot;, weight=&quot; + weight
+				+ &quot;]&quot;;
+	}
+
+	/**
+	 * 判断大小方法
+	 * 以权值大小判断，为度数组的从小到大排序
+	 */
+	@Override
+	public int compareTo(Edge o) {
+
+		if (this.weight &gt; o.weight) {
+			return 1;
+		} else if (this.weight &lt; o.weight) {
+			return -1;
+		}
+		return 0;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+}
+</code></pre></li>
+</ol>
+
+<h1 id="边节点类"> 边节点类</h1>
+
+<pre><code>package com.naah.s4_Graph;
+
+/**
+ *
+ * ClassNameCh 边节点
+ * ClassNameEn EdgeNode
+ * Description 边节点 ，用于记录该顶点的出度顶点
+ * Company
+ * @author Naah
+ * @date 2017年8月17日 下午9:27:19
+ */
+public class EdgeNode {
+
+	// 出度顶点下标
+	private int index;
+
+	// 下一个出度顶点的引用
+	private EdgeNode next;
+
+	// 权值
+	private int weight;
+
+	public EdgeNode(int index) {
+		super();
+		this.index = index;
+	}
+
+	public EdgeNode(int index, int weight) {
+		super();
+		this.index = index;
+		this.weight = weight;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public EdgeNode getNext() {
+		return next;
+	}
+
+	public void setNext(EdgeNode next) {
+		this.next = next;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;EdgeNode [index=&quot; + index + &quot;, next=&quot; + next + &quot;, weight=&quot;
+				+ weight + &quot;]&quot;;
+	}
+
+}
+</code></pre>
+
+<h1 id="邻接表元素类">邻接表元素类</h1>
+
+<pre><code>package com.naah.s4_Graph;
+
+/**
+ *
+ * ClassNameCh 邻接表元素
+ * ClassNameEn VertexNeighborNode
+ * Description 邻接表数组的元素，包括该顶点的第一条边
+ * Company
+ * @author Naah
+ * @date 2017年8月17日 下午9:25:59
+ * @param
+ */
+public class VertexNeighborNode {
+
+	// 入度数
+	private int in;
+
+	// 边节点
+	private EdgeNode firstEdge;
+
+	public VertexNeighborNode(int in) {
+		super();
+		this.in = in;
+	}
+
+	public int getIn() {
+		return in;
+	}
+
+	public void setIn(int in) {
+		this.in = in;
+	}
+
+	public EdgeNode getFirstEdge() {
+		return firstEdge;
+	}
+
+	public void setFirstEdge(EdgeNode firstEdge) {
+		this.firstEdge = firstEdge;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;[in=&quot; + in + &quot;, firstEdge=&quot; + firstEdge + &quot;]&quot;;
+	}
+
+}
+</code></pre>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BEgraph%E4%B9%8B%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" data-toggle="tooltip" data-placement="top" title="数据结构图Graph之拓扑排序">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" data-toggle="tooltip" data-placement="top" title="数据结构之思维导图">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2017-08-17-11:51:17-数据结构图Graph之最终类'></div>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
+<script type="text/javascript">
+    (function () {
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else {
+            var loadJs = function (d, a) {
+                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                var b = document.createElement("script");
+                b.setAttribute("type", "text/javascript");
+                b.setAttribute("charset", "UTF-8");
+                b.setAttribute("src", d);
+                if (typeof a === "function") {
+                    if (window.attachEvent) {
+                        b.onreadystatechange = function () {
+                            var e = b.readyState;
+                            if (e === "loaded" || e === "complete") {
+                                b.onreadystatechange = null;
+                                a()
+                            }
+                        }
+                    } else {
+                        b.onload = a
+                    }
+                }
+                c.appendChild(b)
+            };
+            loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+                window.changyan.api.config({appid: appid, conf: conf})
+            });
+        }
+    })();
+
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%B8%A9%E5%9D%91" title="踩坑"  target="_blank" >
+            踩坑(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 纳兰小筑  2017 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<script >
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad({
+        singleLine: true
+    });
+</script>
+</body>
+</html>

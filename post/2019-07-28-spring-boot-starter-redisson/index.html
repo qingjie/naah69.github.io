@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>    <title>最简单的spring-boot-starter-redisson发布啦！-纳兰小筑</title>
+    
+    <meta name="description" content="Naah,那焱,纳兰,一只正在通往机器学习的可爱的程序猿,热爱生活,拥抱变化,喜欢有关草木植物的任何事物,偶尔喜欢读读书写写诗" />
+    
+    
+    <meta name="keywords" content="redisson,spring-boot-starter,spring-boot-starter-redisson" />
+    
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+
+    <link rel="shortcut icon" href="https://www.naah69.com/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2019-07-28-spring-boot-starter-redisson/">
+    
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <style>
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width:24px;
+            border-right: 1px solid #c5c5c5;
+        }
+        .hljs-ln-code {
+            padding-left: 10px;
+        }
+        .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+        .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+        .highlight pre, pre, .highlight .hll{padding: 6px 0px}
+        .hljs{padding: 8px 0px}
+        em{color: red}
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+        @media screen and (max-width: 500px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+        @media screen and (max-width: 768px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+    </style>
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npcw9vzj21hc0ecju9.jpg')
+    }
+
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+</style>
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/java" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Java</a>
+                        
+                        
+                        <a class="tag" href="/tags/java" title="Java" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;Java
+                        </a>
+                        
+                        <a class="tag" href="/tags/springcloud" title="SpringCLoud" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;SpringCLoud
+                        </a>
+                        
+                        <a class="tag" href="/tags/springboot" title="SpringBoot" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;SpringBoot
+                        </a>
+                        
+                        <a class="tag" href="/tags/redisson" title="Redisson" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;Redisson
+                        </a>
+                        
+                        <a class="tag" href="/tags/redis" title="Redis" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;Redis
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>最简单的spring-boot-starter-redisson发布啦！</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Sunday, Jul 28,2019 10:41:51
+                        
+                        <span id="/post/2019-07-28-spring-boot-starter-redisson/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#spring-boot-starter-redisson">spring-boot-starter-redisson</a>
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#1-介绍">1 介绍</a></li>
+<li><a href="#2-软件依赖">2 软件依赖</a></li>
+<li><a href="#3-当前版本">3 当前版本</a></li>
+<li><a href="#4-快速开始">4 快速开始</a>
+<ul>
+<li><a href="#4-1-准备工作">4.1 准备工作</a></li>
+<li><a href="#4-2-开始使用">4.2 开始使用</a></li>
+<li><a href="#4-3-自定义组件redisutils说明">4.3 自定义组件RedisUtils说明</a></li>
+<li><a href="#4-4-事务使用示例">4.4 事务使用示例</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+
+                
+                
+                
+                
+                
+                
+                
+
+                
+
+                
+
+<h1 id="spring-boot-starter-redisson">spring-boot-starter-redisson</h1>
+
+<h2 id="前言">前言</h2>
+
+<p>最近忽然发现<code>springboot2</code>的<code>spring-boot-starter-data-redis</code>底层默认使用了<code>lettuce</code>作为连接池，经过一番试用后，我的评价是<strong>辣鸡</strong>!</p>
+
+<p><code>lettuce</code>对比<code>jedis</code>的优化主要是使用了<code>netty</code>作为底层通信，实现了对<code>redis</code>非阻塞通信，对并发场景更加友好。</p>
+
+<p> 然后在<code>redis</code>非阻塞通信这种场景下，我们为何不用我们大天朝码农和沙皇俄国码农共同开发的<code>redisson</code>。</p>
+
+<p>性能方面可是甩了<code>lettuce</code>一条街，而且在封装上，给你提供<code>分布式锁</code>、<code>分布式事务</code>等友好的接口，最让我中意的点是集群下的<code>mget</code>也是通过计算<code>key</code>的槽，来对节点进行<code>pipline</code>计算，这对集群执行<code>mget</code>、<code>mset</code>简直就是福利，不用自己再去实现<code>pipline</code>了</p>
+
+<p>下面就让我们开始吧！</p>
+
+<p>而且经过昨天的战斗，我已经成功的将这个依赖上传到中央仓库啦！你可以直接引用偶！</p>
+
+<p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"><img src="https://img.shields.io/badge/Java-v1.8-green" alt="" /></a>
+<a href="https://search.maven.org/artifact/com.naah69/spring-boot-starter-redisson/1.0.0/jar"><img src="https://img.shields.io/maven-central/v/com.naah69/spring-boot-starter-redisson" alt="" /></a>
+<a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/github/license/naah69/spring-boot-starter-redisson" alt="" /></a>
+<a href="https://github.com/naah69/spring-boot-starter-redisson/releases"><img src="https://img.shields.io/github/release/naah69/spring-boot-starter-redisson" alt="" /></a></p>
+
+<p><a href="https://github.com/naah69/spring-boot-starter-redisson">Github</a></p>
+
+<p><a href="https://github.com/naah69/spring-boot-starter-redisson/blob/master/README.md">[中文]</a> <a href="https://github.com/naah69/spring-boot-starter-redisson/blob/master/README.en.md">[English]</a></p>
+
+<h2 id="1-介绍">1 介绍</h2>
+
+<p><code>RedisTemplate</code>与<code>StringRedisTemplate</code>整合<code>Redisson</code>，开箱即用，提供更友好更完善的API，更方便的调用!</p>
+
+<p>最大的优点是省略<code>redisson.yaml</code>配置文件</p>
+
+<p>本项目是基于<a href="https://gitee.com/xsxgit/redis-spring-boot-starter">xsxgit/redis-spring-boot-starter</a>改写的（站在巨人的肩膀上）</p>
+
+<h2 id="2-软件依赖">2 软件依赖</h2>
+
+<p><a href="https://github.com/spring-projects/spring-boot/blob/v2.1.5.RELEASE/spring-boot-project/spring-boot-parent/pom.xml"><img src="https://img.shields.io/badge/spring--boot--starter--parent-v2.1.5.RELEASE-blue" alt="" /></a></p>
+
+<p><a href="https://github.com/spring-projects/spring-boot/blob/v2.1.5.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-data-redis/pom.xml"><img src="https://img.shields.io/badge/spring--boot--starter--data--redis-v2.1.5.RELEASE-blue" alt="" /></a></p>
+
+<p><a href="https://github.com/redisson/redisson/tree/master/redisson-spring-data/redisson-spring-data-21"><img src="https://img.shields.io/badge/redisson--spring--data--21-v3.11.0-blue" alt="" /></a></p>
+
+<h2 id="3-当前版本">3 当前版本</h2>
+
+<p><a href="https://search.maven.org/artifact/com.naah69/spring-boot-starter-redisson/1.0.0/jar"><img src="https://img.shields.io/maven-central/v/com.naah69/spring-boot-starter-redisson" alt="" /></a></p>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.naah69&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-redisson&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h2 id="4-快速开始">4 快速开始</h2>
+
+<h3 id="4-1-准备工作">4.1 准备工作</h3>
+
+<p>当前demo源码在本项目的<code>spring-boot-starter-redisson-demo</code>中</p>
+
+<ol>
+<li>添加依赖：</li>
+</ol>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.naah69&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-redisson&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<ol>
+<li>redis配置：</li>
+</ol>
+
+<p>yml方式：</p>
+
+<pre><code>server:
+  port: 6969
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  redis:
+    redisson:
+      enable: true
+      singleServerConfig:
+        idleConnectionTimeout: 10000
+        pingTimeout: 1000
+        connectTimeout: 10000
+        timeout: 3000
+        retryAttempts: 3
+        retryInterval: 1500
+        failedSlaveReconnectionInterval: 3000
+        failedSlaveCheckInterval: 3
+        #        password: null
+        subscriptionsPerConnection: 5
+        clientName: &quot;redisson-demo&quot;
+        address: &quot;redis://127.0.0.1:6379&quot;
+        subscriptionConnectionMinimumIdleSize: 1
+        subscriptionConnectionPoolSize: 50
+        connectionMinimumIdleSize: 32
+        connectionPoolSize: 64
+        database: 0
+      threads: 0
+      nettyThreads: 0
+      codec:
+        class: &quot;org.redisson.codec.JsonJacksonCodec&quot;
+      transportMode: &quot;NIO&quot;
+---
+spring:
+  profiles: cluster
+  redis:
+    redisson:
+      enable: true
+      clusterServersConfig:
+        idleConnectionTimeout: 10000
+        pingTimeout: 1000
+        connectTimeout: 10000
+        timeout: 3000
+        retryAttempts: 3
+        retryInterval: 1500
+        failedSlaveReconnectionInterval: 3000
+        failedSlaveCheckInterval: 3
+        password: 'password'
+        subscriptionsPerConnection: 5
+        clientName: &quot;redisson-demo&quot;
+        loadBalancer:
+          class: &quot;org.redisson.connection.balancer.RoundRobinLoadBalancer&quot;
+        slaveSubscriptionConnectionMinimumIdleSize: 1
+        slaveSubscriptionConnectionPoolSize: 50
+        slaveConnectionMinimumIdleSize: 32
+        slaveConnectionPoolSize: 64
+        masterConnectionMinimumIdleSize: 32
+        masterConnectionPoolSize: 64
+        readMode: &quot;SLAVE&quot;
+        nodeAddresses:
+        - &quot;redis://127.0.0.1:7110&quot;
+        - &quot;redis://127.0.0.1:7111&quot;
+        - &quot;redis://127.0.0.1:7112&quot;
+        - &quot;redis://127.0.0.1:7113&quot;
+        scanInterval: 1000
+      threads: 0
+      nettyThreads: 0
+      codec:
+        class: &quot;org.redisson.codec.JsonJacksonCodec&quot;
+      transportMode: &quot;NIO&quot;
+</code></pre>
+
+<h3 id="4-2-开始使用">4.2 开始使用</h3>
+
+<p>下面的顺序为推荐使用的顺序</p>
+
+<ol>
+<li>RedisTemplate</li>
+</ol>
+
+<pre><code class="language-java">@Autowired
+private StringRedisTemplate redisTemplate;
+
+@Test
+public void test() {
+    //获取客户端
+    ValueOperations&lt;String, String&gt; redisClient = redisTemplate.opsForValue();
+
+    //key
+    String key = &quot;RedisTemplateTest&quot;;
+
+    //删除
+    redisTemplate.delete(key);
+
+    //value
+    long current = System.currentTimeMillis();
+    String value = current + &quot;&quot;;
+
+    //set
+    redisClient.set(key, value);
+
+    //校验
+    Assert.assertEquals(redisClient.get(key), value);
+}
+</code></pre>
+
+<ol>
+<li>RedisUtils</li>
+</ol>
+
+<pre><code class="language-java">@Test
+public void test() {
+    //获取客户端
+    StringHandler redisClient = RedisUtil.getStringHandler();
+
+    //key
+    String key = &quot;RedisUtilsTest&quot;;
+
+    //删除
+    redisClient.remove(key);
+
+    //value
+    long current = System.currentTimeMillis();
+    String value = current + &quot;&quot;;
+
+    //set
+    redisClient.set(key, value);
+
+    //校验
+    Assert.assertEquals(redisClient.get(key), value);
+}
+</code></pre>
+
+<ol>
+<li>RedissonClient</li>
+</ol>
+
+<pre><code class="language-java">@Autowired
+private RedissonClient redissonClient;
+
+@Test
+public void test() {
+    //key
+    String key = &quot;RedissonClientTest&quot;;
+
+    //获取客户端
+    RBucket&lt;String&gt; redisClient = redissonClient.getBucket(key);
+
+    //删除
+    redisClient.delete();
+
+    //value
+    long current = System.currentTimeMillis();
+    String value = current + &quot;&quot;;
+
+    //set
+    redisClient.set(value);
+
+    //校验
+    Assert.assertEquals(redisClient.get(), value);
+}
+</code></pre>
+
+<h3 id="4-3-自定义组件redisutils说明">4.3 自定义组件RedisUtils说明</h3>
+
+<p>获取操作实例：</p>
+
+<pre><code class="language-java">// 获取默认数据库实例(DB)
+DBHandler dbHandler = RedisUtil.getDBHandler();
+...
+
+// 获取数据库索引为2的数据库实例(DB)
+DBHandler dbHandler = RedisUtil.getDBHandler(2);
+...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">实例</th>
+<th align="center">数据类型</th>
+<th align="center">获取方式</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">NumberHandler</td>
+<td align="center">数字(Number)</td>
+<td align="center">RedisUtil.getNumberHandler()<br>RedisUtil.getNumberHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">StringHandler</td>
+<td align="center">字符串(String)</td>
+<td align="center">RedisUtil.getStringHandler()<br>RedisUtil.getStringHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">HashHandler</td>
+<td align="center">哈希(Hash)</td>
+<td align="center">RedisUtil.getHashHandler()<br>RedisUtil.getHashHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">SetHandler</td>
+<td align="center">无序集合(Set)</td>
+<td align="center">RedisUtil.getSetHandler()<br>RedisUtil.getSetHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">ZsetHandler</td>
+<td align="center">有序集合(Zset)</td>
+<td align="center">RedisUtil.getZsetHandler()<br>RedisUtil.getZsetHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">HyperLogLogHandler</td>
+<td align="center">基数(HyperLogLog)</td>
+<td align="center">RedisUtil.getHyperLogLogHandler()<br>RedisUtil.getHyperLogLogHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">BitmapHandler</td>
+<td align="center">位图(Bitmap)</td>
+<td align="center">RedisUtil.getBitmapHandler()<br>RedisUtil.getBitmapHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">GeoHandler</td>
+<td align="center">地理位置(Geo)</td>
+<td align="center">RedisUtil.getGeoHandler()<br>RedisUtil.getGeoHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">KeyHandler</td>
+<td align="center">键(Key)</td>
+<td align="center">RedisUtil.getKeyHandler()<br>RedisUtil.getKeyHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">ScriptHandler</td>
+<td align="center">脚本(Lua Script)</td>
+<td align="center">RedisUtil.getScriptHandler()<br>RedisUtil.getScriptHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">PubSubHandler</td>
+<td align="center">发布订阅(Pubsub)</td>
+<td align="center">RedisUtil.getPubSubHandler()<br>RedisUtil.getPubSubHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">StreamHandler</td>
+<td align="center">流(Stream)</td>
+<td align="center">RedisUtil.getStreamHandler()<br>RedisUtil.getStreamHandler(dbIndex)<br>RedisUtil.getStreamHandler(dbIndex, mapper)</td>
+</tr>
+
+<tr>
+<td align="center">DBHandler</td>
+<td align="center">数据库(DB)</td>
+<td align="center">RedisUtil.getDBHandler()<br>RedisUtil.getDBHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">SentinelHandler</td>
+<td align="center">哨兵(Sentinel)</td>
+<td align="center">RedisUtil.getSentinelHandler()<br>RedisUtil.getSentinelHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">ClusterHandler</td>
+<td align="center">集群(Cluster)</td>
+<td align="center">RedisUtil.getClusterHandler()</td>
+</tr>
+
+<tr>
+<td align="center">CustomCommandHandler</td>
+<td align="center">自定义命令(CustomCommand)</td>
+<td align="center">RedisUtil.getCustomCommandHandler()<br>RedisUtil.getCustomCommandHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">RedisLockHandler</td>
+<td align="center">分布式锁(Lock)</td>
+<td align="center">RedisUtil.getRedisLockHandler()<br>RedisUtil.getRedisLockHandler(dbIndex)</td>
+</tr>
+
+<tr>
+<td align="center">TransactionHandler</td>
+<td align="center">事务(Transaction)</td>
+<td align="center">RedisUtil.getTransactionHandler()<br>RedisUtil.getTransactionHandler(dbIndex)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="4-4-事务使用示例">4.4 事务使用示例</h3>
+
+<pre><code class="language-java">List execute = RedisUtil.getTransactionHandler(2).execute(handler -&gt; {
+    // 开启监控
+    handler.watch(&quot;xx&quot;, &quot;test&quot;);
+    // 开启事务
+    handler.beginTransaction();
+    // 获取对应事务字符串助手
+    StringHandler stringHandler = handler.getStringHandler();
+    // 执行操作
+    stringHandler.set(&quot;xx&quot;, &quot;hello&quot;);
+    stringHandler.append(&quot;xx&quot;, &quot;world&quot;);
+    stringHandler.append(&quot;xx&quot;, &quot;!&quot;);
+    // 获取对应事务数字助手
+    NumberHandler numberHandler = handler.getNumberHandler();
+    numberHandler.addLong(&quot;test&quot;, 100);
+    numberHandler.incrementLong(&quot;test&quot;);
+    numberHandler.incrementLong(&quot;test&quot;);
+    numberHandler.incrementLong(&quot;test&quot;);
+    // 提交事务返回结果
+    return handler.commit();
+});
+</code></pre>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-06-28-tornado/" data-toggle="tooltip" data-placement="top" title="快速构建高性能web框架Tornado的基础结构">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-10-04-mlch01/" data-toggle="tooltip" data-placement="top" title="机器学习系列01-机器学习相关基础概念">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2019-07-28-10:41:51-最简单的spring-boot-starter-redisson发布啦！'></div>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
+<script type="text/javascript">
+    (function () {
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else {
+            var loadJs = function (d, a) {
+                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                var b = document.createElement("script");
+                b.setAttribute("type", "text/javascript");
+                b.setAttribute("charset", "UTF-8");
+                b.setAttribute("src", d);
+                if (typeof a === "function") {
+                    if (window.attachEvent) {
+                        b.onreadystatechange = function () {
+                            var e = b.readyState;
+                            if (e === "loaded" || e === "complete") {
+                                b.onreadystatechange = null;
+                                a()
+                            }
+                        }
+                    } else {
+                        b.onload = a
+                    }
+                }
+                c.appendChild(b)
+            };
+            loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+                window.changyan.api.config({appid: appid, conf: conf})
+            });
+        }
+    })();
+
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%B8%A9%E5%9D%91" title="踩坑"  target="_blank" >
+            踩坑(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 纳兰小筑  2019 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<script >
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad({
+        singleLine: true
+    });
+</script>
+</body>
+</html>

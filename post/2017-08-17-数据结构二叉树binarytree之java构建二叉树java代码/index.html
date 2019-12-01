@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>    <title>数据结构二叉树BinaryTree之java构建二叉树JAVA代码-纳兰小筑</title>
+    
+    <meta name="description" content="使用java代码构建二叉树，进行前序遍历，中序遍历，后序遍历" />
+    
+    
+    <meta name="keywords" content="数据结构,二叉树" />
+    
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+
+    <link rel="shortcut icon" href="https://www.naah69.com/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%8C%E5%8F%89%E6%A0%91binarytree%E4%B9%8Bjava%E6%9E%84%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91java%E4%BB%A3%E7%A0%81/">
+    
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <style>
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width:24px;
+            border-right: 1px solid #c5c5c5;
+        }
+        .hljs-ln-code {
+            padding-left: 10px;
+        }
+        .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+        .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+        .highlight pre, pre, .highlight .hll{padding: 6px 0px}
+        .hljs{padding: 8px 0px}
+        em{color: red}
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+        @media screen and (max-width: 500px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+        @media screen and (max-width: 768px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+    </style>
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npcw9vzj21hc0ecju9.jpg')
+    }
+
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+</style>
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/foundation" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;FOUNDATION</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86" title="二叉树遍历" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;二叉树遍历
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;数据结构
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;二叉树
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>数据结构二叉树BinaryTree之java构建二叉树JAVA代码</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Thursday, Aug 17,2017 10:52:45
+                        
+                        <span id="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%8C%E5%8F%89%E6%A0%91binarytree%E4%B9%8Bjava%E6%9E%84%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91java%E4%BB%A3%E7%A0%81/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#经过几天的学习-简单的编写了一个二叉树的类">经过几天的学习，简单的编写了一个二叉树的类</a>
+<ul>
+<li><a href="#其中包括">其中包括</a>
+<ul>
+<li><a href="#属性">属性</a></li>
+<li><a href="#方法">方法</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+
+                
+                
+                
+                
+                
+                
+                
+
+                
+
+                
+
+<h1 id="经过几天的学习-简单的编写了一个二叉树的类">经过几天的学习，简单的编写了一个二叉树的类</h1>
+
+<h2 id="其中包括">其中包括</h2>
+
+<h3 id="属性">属性</h3>
+
+<ol>
+<li>根节点</li>
+</ol>
+
+<h3 id="方法">方法</h3>
+
+<ol>
+<li>层序构建二叉树</li>
+<li>前序构建二叉树</li>
+<li>得到当前的深度</li>
+<li>得到当前的节点数</li>
+<li>前序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+<li>层序遍历</li>
+</ol>
+
+<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g069y8lcjaj20hn08smz0.jpg" alt="" /></p>
+
+<pre><code>//
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Stack;
+
+public class BinaryTree {
+
+	/**
+	 * 根节点
+	 */
+	public TreeEntry root;
+
+	/**
+	 * 构造函数初始化根节点
+	 * @param rootData
+	 */
+	public BinaryTree(T rootData) {
+		root = new TreeEntry(1, rootData);
+	}
+
+	/**
+	 * 构造函数初始化根节点
+	 */
+	public BinaryTree() {
+	}
+
+	/**
+	 * 根据层序构建二叉树
+	 * @param a 可选参数
+	 */
+	public void newBinaryTreeByIndex(T... a) {
+		if (root == null) {
+			root = new TreeEntry(1, a[0]);
+			a = Arrays.copyOfRange(a, 1, a.length);
+		}
+		TreeEntry buffer = root;
+
+		// 通过队列构造二叉树
+		LinkedList child = new LinkedList();
+
+		// 将根节点插入队列
+		child.offer(buffer);
+
+		// 第一个节点的序号为2
+		int i = 2;
+
+		// 遍历可选参数
+		for (T data : a) {
+
+			// 根据当前序号选择左孩子还是右孩子
+			switch (i % 2) {
+
+			// 可以被2整除为做孩子
+			case 0:
+
+				// 取出父节点
+				buffer = child.peek();
+
+				// 通过当前序号和数据构建节点，并设置为父节点的左孩子
+				buffer.leftChild = new TreeEntry(i, data);
+
+				// 将左孩子插入到队列
+				child.offer(buffer.leftChild);
+				break;
+
+			// 除2余1为右孩子
+			case 1:
+
+				// 取出父节点，并移除父节点（弹出）
+				// 因为二叉树每个节点只有两个孩子节点，所以当添加右孩子节点以后可以移除
+				buffer = child.poll();
+
+				// 通过当前序号和数据构建节点，并设置为父节点的右孩子
+				buffer.rightChild = new TreeEntry(i, data);
+
+				// 将右孩子插入到队列
+				child.offer(buffer.rightChild);
+				break;
+
+			default:
+				new RuntimeException(&quot;构建二叉树错误！&quot;);
+				break;
+			}
+
+			// 自增序号
+			i++;
+
+		}
+	}
+
+	/**
+	 * 根据前序构建二叉树
+	 * @param a 可选参数
+	 */
+	public void newBinaryTreeByPrePrder(T... a) {
+		// 创建线性表
+		ArrayList list = new ArrayList();
+		// 将数组数据复制到线性表
+		Collections.addAll(list, a);
+		putByPreOrder(1, list);
+	}
+
+	/**
+	 * 前序添加二叉树
+	 * @param index 序号
+	 * @param list 剩余元素
+	 * @return 二树
+	 */
+	public TreeEntry putByPreOrder(int index, ArrayList list) {
+
+		// 取出元素
+		T element = list.get(0);
+
+		// 如果元素为空则移除元素返回
+		if (element == null) {
+			list.remove(0);
+			return null;
+		}
+
+		// 创建新节点
+		TreeEntry buffer = new TreeEntry(index, element);
+
+		// 如果没有跟元素，则设置为根元素
+		if (root == null) {
+			root = buffer;
+		}
+
+		// 移除该元素
+		list.remove(0);
+
+		// 通过迭代创建子树
+		buffer.leftChild = putByPreOrder(index++, list);
+		buffer.rightChild = putByPreOrder(index++, list);
+
+		// 返回子树
+		return buffer;
+	}
+
+	/**
+	 * 得到当前树的深度
+	 * @return 深度
+	 */
+	public int getHeight() {
+
+		return getHeright(root);
+
+	}
+
+	/**
+	 * 递归二叉树深度私有方法
+	 * @param tree 父节点
+	 * @return 深度
+	 */
+	private int getHeright(TreeEntry tree) {
+		// 如果父节点点为空，则返回0
+		if (tree == null) {
+			return 0;
+		} else {
+
+			// i为左子树的深度，j为右子树的深度
+			int i = 0, j = 0;
+
+			// 递归得到左子树的深度
+			i = getHeright(tree.leftChild);
+
+			// 递归的得到右子树的深度
+			j = getHeright(tree.rightChild);
+
+			// 返回左右子树深度更深的一个并加当前层数
+			return i &gt;= j ? i + 1 : j + 1;
+		}
+	}
+
+	/**
+	 * 得到当前树的节点数
+	 * @return
+	 */
+	public int getSize() {
+		return getSize(root);
+	}
+
+	/**
+	 * 递归二叉树节点数方法
+	 * @param tree 父节点
+	 * @return 节点数
+	 */
+	private int getSize(TreeEntry tree) {
+		// 如果节点为空，则返回0
+		if (tree == null) {
+			return 0;
+		} else {
+
+			// i为左子树的节点数，j为右子树的节点数
+			int i = 0, j = 0;
+
+			// 递归得到左子树节点数
+			i = getSize(tree.leftChild);
+
+			// 递归得到右子树节点数
+			j = getSize(tree.rightChild);
+
+			// 返回子树节点数并加当前节点
+			return i + j + 1;
+		}
+	}
+
+	/**
+	 * 递归前序遍历当前树
+	 */
+	public void preOrder() {
+		preOrder(root);
+	}
+
+	/**
+	 * 递归二叉树前序遍历方法
+	 * @param tree
+	 */
+	private void preOrder(TreeEntry tree) {
+		// 如果为空则返回
+		if (tree == null) {
+			return;
+		} else {
+			// 前序遍历的顺序为，根左右
+
+			// 输出根的数据
+			System.out.println(tree.data);
+
+			// 前序遍历左子树
+			preOrder(tree.leftChild);
+
+			// 前序遍历右子树
+			preOrder(tree.rightChild);
+		}
+	}
+
+	/**
+	 * 非递归前序遍历当前树
+	 */
+	public void nonRecPreOrder() {
+		nonRecPreOrder(root);
+
+	}
+
+	/**
+	 * 非递归二叉树前序遍历方法
+	 * @param tree
+	 */
+	private void nonRecPreOrder(TreeEntry tree) {
+		// 通过栈遍历二叉树
+		Stack child = new Stack();
+
+		// 将根节点压如栈中
+		child.push(tree);
+
+		// 构建临时引用变量
+		TreeEntry temp;
+
+		// 前序遍历的顺序为，根左右
+		// 如果栈不为空则循环
+		while (!child.isEmpty()) {
+
+			// 将栈顶元素弹出到临时变量
+			temp = child.pop();
+
+			// 输出根元素
+			System.out.println(temp.data);
+
+			// 因为栈是后入先出，所以要想先遍历左孩子节点，就要先插入右孩子节点
+			if (temp.rightChild != null) {
+
+				// 将右孩子节点压入栈中
+				child.push(temp.rightChild);
+			}
+
+			if (temp.leftChild != null) {
+
+				// 将左孩子节点压入栈中
+				child.push(temp.leftChild);
+			}
+		}
+
+	}
+
+	/**
+	 * 递归中序遍历当前树
+	 */
+	public void midOrder() {
+		midOrder(root);
+	}
+
+	/**
+	 * 递归二叉树中序遍历方法
+	 * @param tree
+	 */
+	private void midOrder(TreeEntry tree) {
+		// 如果节点为空，则返回
+		if (tree == null) {
+			return;
+		} else {
+
+			// 中序遍历的顺序为，左根右
+
+			// 中序遍历左子树
+			midOrder(tree.leftChild);
+
+			// 输出根节点
+			System.out.println(tree.data);
+
+			// 中序遍历右子树
+			midOrder(tree.rightChild);
+		}
+	}
+
+	/**
+	 * 非递归中序遍历当前树
+	 */
+	public void nonRecMidOrder() {
+
+		nonRecMidOrder(root);
+
+	}
+
+	/**
+	 * 非递归二叉树中序遍历方法
+	 * @param tree
+	 */
+	private void nonRecMidOrder(TreeEntry tree) {
+		// 通过栈遍历二叉树
+		Stack child = new Stack();
+
+		// 构建临时引用变量
+		TreeEntry temp = tree;
+
+		// 中序遍历顺序，左根右
+
+		// 如果临时变量不为空 或 栈不为空则循环
+		while (temp != null || !child.isEmpty()) {
+
+			// 遍历节点，将当前节点的左孩子节点压入栈中，直到没有左孩子节点为止
+			// 如果临时变量不为空则循环
+			while (temp != null) {
+
+				// 将当前遍历压入栈中
+				child.push(temp);
+
+				// 将临时变量设置为左孩子节点
+				temp = temp.leftChild;
+			}
+
+			// 遍历每个节点的右孩子节点
+			// 如果栈不为空
+			if (!child.isEmpty()) {
+
+				// 将栈顶元素弹出到临时变量
+				temp = child.pop();
+
+				// 输出当前节点的数据
+				System.out.println(temp.data);
+
+				// 将临时变量设置为右孩子节点，使循环后右孩子节点进行遍历左孩子节点
+				temp = temp.rightChild;
+			}
+		}
+	}
+
+	/**
+	 * 递归后序遍历当前树
+	 */
+	public void postOrder() {
+		postOrder(root);
+	}
+
+	/**
+	 * 递归二叉树后续遍历方法
+	 * @param tree
+	 */
+	private void postOrder(TreeEntry tree) {
+		// 如果当前节点为空则返回
+		if (tree == null) {
+			return;
+		} else {
+			// 后续遍历的顺序为，左右根
+
+			// 后续遍历左子树
+			postOrder(tree.leftChild);
+
+			// 后续遍历右子树
+			postOrder(tree.rightChild);
+
+			// 输出根元素
+			System.out.println(tree.data);
+		}
+	}
+
+	/**
+	 * 非递归后续遍历当前树
+	 */
+	public void nonRecPostOrder() {
+		nonRecPostOrder(root);
+
+	}
+
+	/**
+	 * 非递归二叉树后续遍历
+	 * @param tree
+	 */
+	private void nonRecPostOrder(TreeEntry tree) {
+		// 通过栈后序遍历二叉树
+		Stack child = new Stack();
+
+		// 创建临时节点 和 上一个遍历的节点，并赋值为根节点
+		TreeEntry temp = tree, prev = tree;
+
+		// 如果临时节点不为空 或 栈不为空则继续遍历则循环
+		while (temp != null || !child.isEmpty()) {
+
+			// 遍历节点，将当前节点的左孩子节点压入栈中，直到没有左孩子节点为止
+			// 如果临时变量不为空则循环
+			while (temp != null) {
+				child.push(temp);
+				temp = temp.leftChild;
+			}
+
+			// 遍历每个节点的右孩子节点
+			// 如果栈不为空
+			if (!child.isEmpty()) {
+
+				// 取出栈顶元素的右孩子节点设置为临时右孩子节点
+				TreeEntry tempRight = child.peek().rightChild;
+
+				// 如果临时右孩子节点为空，或者临时右孩子节点是上一个遍历的节点，则遍历父节点
+				// 否则，临时右孩子节点不为空，遍历临时右孩子节点的子树
+				if (tempRight == null || tempRight == prev) {
+
+					// 弹出栈顶元素（临时右孩子节点的父节点），并设置为临时节点
+					temp = child.pop();
+
+					// 输出临时节点的数据
+					System.out.println(temp.data);
+
+					// 将临时节点设置为上一个遍历的节点
+					prev = temp;
+
+					// 将临时节点设置为空
+					temp = null;
+				} else {
+
+					// 将临时右孩子节点设置为临时节点，进入下一个循环时，遍历临时右孩子节点的子树
+					temp = tempRight;
+				}
+			}
+		}
+	}
+
+	/**
+	 * 递归层序遍历当前树
+	 */
+	public void indOrder() {
+		indOrder(root);
+	}
+
+	/**
+	 * 递归二叉树层序遍历方法
+	 * @param tree
+	 */
+	private void indOrder(TreeEntry tree) {
+
+		// 如果当前节点为空，则返回
+		if (tree == null) {
+			return;
+		} else {
+
+			// 通过队列进行层序宾利
+			LinkedList child = new LinkedList();
+
+			// 将根节点存入队列
+			child.offer(tree);
+
+			// 设置临时节点变量
+			TreeEntry temp;
+
+			// 输出当前节点
+			System.out.println(tree.data);
+
+			// 如归队首节点不为空，则循环
+			while ((temp = child.poll()) != null) {
+
+				// 如果临时节点的左孩子节点不为空
+				if (temp.leftChild != null) {
+
+					// 输出左孩子节点的数据
+					System.out.println(temp.leftChild.data);
+
+					// 将左孩子节点存入队列
+					child.offer(temp.leftChild);
+				}
+
+				// 如果临时节点的右孩子节点不为空
+				if (temp.rightChild != null) {
+
+					// 输出右孩子节点的数据
+					System.out.println(temp.rightChild.data);
+
+					// 将右孩子节点的存入队列
+					child.offer(temp.rightChild);
+				}
+
+			}
+
+		}
+	}
+
+	public class TreeEntry {
+		private int index;
+		private T data;
+		private TreeEntry leftChild;
+		private TreeEntry rightChild;
+
+		public TreeEntry(int index) {
+			super();
+			this.index = index;
+		}
+
+		public TreeEntry(int index, T data) {
+			super();
+			this.index = index;
+			this.data = data;
+		}
+
+		public int getIndex() {
+			return index;
+		}
+
+		public void setIndex(int index) {
+			this.index = index;
+		}
+
+		public T getData() {
+			return data;
+		}
+
+		public void setData(T data) {
+			this.data = data;
+		}
+
+		public TreeEntry getLeftChild() {
+			return leftChild;
+		}
+
+		public void setLeftChild(TreeEntry leftChild) {
+			this.leftChild = leftChild;
+		}
+
+		public TreeEntry getRightChild() {
+			return rightChild;
+		}
+
+		public void setRightChild(TreeEntry rightChild) {
+			this.rightChild = rightChild;
+		}
+
+		@Override
+		public String toString() {
+			return data.toString();
+		}
+
+	}
+}
+</code></pre>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%8C%E5%8F%89%E6%A0%91binarytree%E4%B9%8B%E9%81%8D%E5%8E%86/" data-toggle="tooltip" data-placement="top" title="数据结构二叉树BinaryTree之遍历">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2017-08-17-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9F%A5%E6%89%BE%E4%BA%8C%E5%8F%89%E6%A0%91searchbinarytree%E4%B9%8Bjava%E4%BB%A3%E7%A0%81/" data-toggle="tooltip" data-placement="top" title="数据结构查找二叉树SearchBinaryTree之JAVA代码">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2017-08-17-10:52:45-数据结构二叉树BinaryTree之java构建二叉树JAVA代码'></div>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
+<script type="text/javascript">
+    (function () {
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else {
+            var loadJs = function (d, a) {
+                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                var b = document.createElement("script");
+                b.setAttribute("type", "text/javascript");
+                b.setAttribute("charset", "UTF-8");
+                b.setAttribute("src", d);
+                if (typeof a === "function") {
+                    if (window.attachEvent) {
+                        b.onreadystatechange = function () {
+                            var e = b.readyState;
+                            if (e === "loaded" || e === "complete") {
+                                b.onreadystatechange = null;
+                                a()
+                            }
+                        }
+                    } else {
+                        b.onload = a
+                    }
+                }
+                c.appendChild(b)
+            };
+            loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+                window.changyan.api.config({appid: appid, conf: conf})
+            });
+        }
+    })();
+
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%B8%A9%E5%9D%91" title="踩坑"  target="_blank" >
+            踩坑(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 纳兰小筑  2017 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<script >
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad({
+        singleLine: true
+    });
+</script>
+</body>
+</html>

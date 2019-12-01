@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>    <title>Spring Cloud Gateway转发WebSocket-纳兰小筑</title>
+    
+    <meta name="description" content="Spring Cloud Gateway转发WebSocket的Demo" />
+    
+    
+    <meta name="keywords" content="SpringCloud,Gateway,websocket" />
+    
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+
+    <link rel="shortcut icon" href="https://www.naah69.com/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2018-05-31-springcloud-gateway-websocket/">
+    
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <style>
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width:24px;
+            border-right: 1px solid #c5c5c5;
+        }
+        .hljs-ln-code {
+            padding-left: 10px;
+        }
+        .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+        .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+        .highlight pre, pre, .highlight .hll{padding: 6px 0px}
+        .hljs{padding: 8px 0px}
+        em{color: red}
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+        @media screen and (max-width: 500px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+        @media screen and (max-width: 768px){
+            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+            #index nav ul li {padding-left: 0em;}
+            #index nav ul li ul {padding-left: 1em;}
+        }
+    </style>
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npcw9vzj21hc0ecju9.jpg')
+    }
+
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+</style>
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/java" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Java</a>
+                        
+                        
+                        <a class="tag" href="/tags/springcloud" title="SpringCloud" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;SpringCloud
+                        </a>
+                        
+                        <a class="tag" href="/tags/gateway" title="GateWay" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;GateWay
+                        </a>
+                        
+                        <a class="tag" href="/tags/websocket" title="WebSocket" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;WebSocket
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>Spring Cloud Gateway转发WebSocket</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Thursday, May 31,2018 22:11:46
+                        
+                        <span id="/post/2018-05-31-springcloud-gateway-websocket/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-搭建-spring-websocket">1.搭建 Spring WebSocket</a>
+<ul>
+<li><a href="#1-1-pom-xml-websocket-maven依赖">1.1  pom.xml websocket maven依赖</a></li>
+<li><a href="#1-2-application-yml-配置文件">1.2  application.yml 配置文件</a></li>
+<li><a href="#1-3-bulletapplication-websocket启动程序">1.3  BulletApplication websocket启动程序</a></li>
+<li><a href="#1-4-websocketautoconfig-websocket配置类">1.4  WebSocketAutoConfig websocket配置类</a></li>
+<li><a href="#1-5-bulletmessagevo类">1.5  BulletMessageVO类</a></li>
+<li><a href="#1-6-bulletcontroller-websocket控制器">1.6  BulletController websocket控制器</a></li>
+</ul></li>
+<li><a href="#2-搭建-spring-cloud-gateway">2 搭建 Spring Cloud Gateway</a>
+<ul>
+<li><a href="#2-1-pom-xml-gateway网关maven依赖">2.1  pom.xml gateway网关maven依赖</a></li>
+<li><a href="#2-2-application-yml-gateway网关配置文件">2.2  application.yml gateway网关配置文件</a></li>
+<li><a href="#2-3-gatewayapplication-gateway启动类">2.3 GatewayApplication gateway启动类</a></li>
+</ul></li>
+<li><a href="#3-编写html">3 编写html</a></li>
+<li><a href="#4-启动程序">4 启动程序</a></li>
+<li><a href="#5-测试程序">5  测试程序</a></li>
+<li><a href="#6-源码">6 源码</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+
+                
+                
+                
+                
+                
+                
+                
+
+                
+
+                
+
+<p>在经过了两天的刻苦钻研，在经过了<code>google</code>,<code>stackoverflow</code>,<code>github</code>轮番查找无果，而官方文档又毫无记录的情况下。</p>
+
+<p>终于，一个夜里，在肯德基的我调试通过&hellip;为了防止大家重复踩相同的坑，所以在这里记录一下。</p>
+
+<p>希望遇到同样问题的人不要浪费太多时间。我们在这里模拟一个广播弹幕的<code>websocket</code>。<code>springcloud gateway</code>通过<code>eureka</code>注册中心拉取服务进行转发<code>websocket</code></p>
+
+<h2 id="1-搭建-spring-websocket">1.搭建 Spring WebSocket</h2>
+
+<h3 id="1-1-pom-xml-websocket-maven依赖">1.1  pom.xml websocket maven依赖</h3>
+
+<pre><code>        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+</code></pre>
+
+<h3 id="1-2-application-yml-配置文件">1.2  application.yml 配置文件</h3>
+
+<pre><code>spring:
+  application:
+    name: bullet
+server:
+  port: 5678
+eureka:
+  client:
+     serviceUrl:
+      defaultZone: http://localhost:1025/eureka/
+</code></pre>
+
+<h3 id="1-3-bulletapplication-websocket启动程序">1.3  BulletApplication websocket启动程序</h3>
+
+<pre><code>@SpringBootApplication
+public class BulletApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BulletApplication.class, args);
+    }
+}
+</code></pre>
+
+<h3 id="1-4-websocketautoconfig-websocket配置类">1.4  WebSocketAutoConfig websocket配置类</h3>
+
+<pre><code>@Configuration
+@EnableWebSocketMessageBroker
+public class WebSocketAutoConfig implements WebSocketMessageBrokerConfigurer {
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint(&quot;/bullet&quot;)         //开启/bullet端点
+                .setAllowedOrigins(&quot;*&quot;)         //允许跨域访问
+                .withSockJS();                  //使用sockJS
+    }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker(&quot;/toAll&quot;);  //订阅Broker名称
+    }
+}
+</code></pre>
+
+<h3 id="1-5-bulletmessagevo类">1.5  BulletMessageVO类</h3>
+
+<p>使用<code>lombok</code>的@<code>Getter</code>和@<code>Setter</code>注解来自动生成<code>get</code>、<code>set</code>方法</p>
+
+<pre><code>@Getter
+@Setter
+public class BulletMessageVO {
+    String username;
+    String message;
+}
+</code></pre>
+
+<h3 id="1-6-bulletcontroller-websocket控制器">1.6  BulletController websocket控制器</h3>
+
+<pre><code>@Controller
+public class BulletController {
+
+    @MessageMapping(&quot;/chat&quot;)
+    @SendTo(&quot;/toAll/bulletScreen&quot;)             //SendTo 发送至 Broker 下的指定订阅路径
+    public String say(BulletMessageVO clientMessage) {
+        String result=null;
+        if (clientMessage!=null){
+            result=clientMessage.getUsername()+&quot;:&quot;+clientMessage.getMessage();
+        }
+        return result;
+    }
+}
+</code></pre>
+
+<h2 id="2-搭建-spring-cloud-gateway">2 搭建 Spring Cloud Gateway</h2>
+
+<h3 id="2-1-pom-xml-gateway网关maven依赖">2.1  pom.xml gateway网关maven依赖</h3>
+
+<pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+</code></pre>
+
+<h3 id="2-2-application-yml-gateway网关配置文件">2.2  application.yml gateway网关配置文件</h3>
+
+<pre><code>spring:
+  application:
+    name: gateway
+  gateway:
+        routes:
+        - id: bulletscreen
+          # 重点！/info必须使用http进行转发，lb代表从注册中心获取服务
+          uri: lb://bullet
+          predicates:
+          # 重点！转发该路径！
+          - Path=/bullet/info/**
+        - id: bulletscreen
+          # 重点！lb:ws://代表从注册中心获取服务，并且转发协议为websocket，这种格式怀疑人生！
+          uri: lb:ws://bullet
+          predicates:
+          # 转发/bullet端点下的所有路径
+          - Path=/bullet/**
+server:
+  port: 8888
+eureka:
+  client:
+     serviceUrl:
+      defaultZone: http://localhost:1025/eureka/
+</code></pre>
+
+<h3 id="2-3-gatewayapplication-gateway启动类">2.3 GatewayApplication gateway启动类</h3>
+
+<pre><code>@SpringCloudApplication
+public class GatewayApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(GatewayApplication.class, args);
+    }
+}
+</code></pre>
+
+<h2 id="3-编写html">3 编写html</h2>
+
+<p>这个是从网上找来的html代码，可以保存到本地文件，不需要放入服务里面</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;title&gt;Spring Boot WebSocket+广播式&lt;/title&gt;
+&lt;/head&gt;
+&lt;body onload=&quot;disconnect()&quot;&gt;
+    &lt;noscript&gt;
+        &lt;h2 style=&quot;color:#ff0000&quot;&gt;貌似你的浏览器不支持websocket&lt;/h2&gt;
+    &lt;/noscript&gt;
+    &lt;div&gt;
+        &lt;div&gt;
+            &lt;button id=&quot;connect&quot; onclick=&quot;connect()&quot;&gt;连接&lt;/button&gt;
+            &lt;button id=&quot;disconnect&quot;  onclick=&quot;disconnect();&quot;&gt;断开连接&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;conversationDiv&quot;&gt;
+            &lt;label&gt;输入你的名字&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;
+            &lt;br&gt;
+            &lt;label&gt;输入消息&lt;/label&gt; &lt;input type=&quot;text&quot; id=&quot;messgae&quot; /&gt;
+            &lt;button id=&quot;send&quot; onclick=&quot;send();&quot;&gt;发送&lt;/button&gt;
+            &lt;p id=&quot;response&quot;&gt;&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        var stompClient = null;
+        //gateway网关的地址
+        var host=&quot;http://127.0.0.1:8888&quot;;
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+            $('#response').html();
+        }
+
+        function connect() {
+            //地址+端点路径，构建websocket链接地址
+            var socket = new SockJS(host+'/bullet');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function(frame) {
+                setConnected(true);
+                console.log('Connected:' + frame);
+                //监听的路径以及回调
+                stompClient.subscribe('/toAll/bulletScreen', function(response) {
+                    showResponse(response.body);
+                });
+
+            });
+        }
+
+
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log(&quot;Disconnected&quot;);
+        }
+
+        function send() {
+            var name = $('#name').val();
+            var message = $('#messgae').val();
+            //发送消息的路径
+            stompClient.send(&quot;/chat&quot;, {}, JSON.stringify({username:name,message:message}));
+        }
+
+        function showResponse(message) {
+            var response = $('#response');
+            response.html(message);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="4-启动程序">4 启动程序</h2>
+
+<ol>
+<li>启动<code>Eureka服务端</code>，开启注册中心</li>
+<li>启动<code>Bullet WebSocket</code>程序</li>
+<li>启动<code>GateWay</code>网关</li>
+</ol>
+
+<h2 id="5-测试程序">5  测试程序</h2>
+
+<ol>
+<li><p>开启多个html页面，并打开控制台
+<img src="http://springcloud-new.oss-cn-shenzhen.aliyuncs.com/fa80300e03825afecdedee1a8cb7fab7.png?Expires=1849511713&amp;OSSAccessKeyId=LTAI57F52hRuWq3h&amp;Signature=2P5g2foC%2F6rkuEq%2FCnKKJd2H0Qo%3D" alt="" /></p></li>
+
+<li><p>在多个页面中点击连接按钮，观察控制台是否连接成功
+<img src="http://springcloud-new.oss-cn-shenzhen.aliyuncs.com/11b4351711bbbae6ebcb58abb65e2054.png?Expires=1849511792&amp;OSSAccessKeyId=LTAI57F52hRuWq3h&amp;Signature=8n7lwgy6HZHyyLSrS603A2i0q7I%3D" alt="" /></p></li>
+
+<li><p>输入名字和消息，观察是否成功进行广播</p></li>
+</ol>
+
+<p><img src="http://springcloud-new.oss-cn-shenzhen.aliyuncs.com/393a3cc1c89db0c1038202204553910c.png?Expires=1849511842&amp;OSSAccessKeyId=LTAI57F52hRuWq3h&amp;Signature=fPfLl%2FPgl30rdPOLM6dPNIaKRh0%3D" alt="" /></p>
+
+<h2 id="6-源码">6 源码</h2>
+
+<p><a href="https://github.com/naah69/SpringCloud-Gateway-WebSocket-Demo">https://github.com/naah69/SpringCloud-Gateway-WebSocket-Demo</a></p>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2017-09-13-%E6%B1%89%E7%8E%8B%E8%8B%B1%E8%AF%91%E6%B1%89%E8%AF%8D%E5%85%B8%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5%E5%B7%A5%E5%85%B7/" data-toggle="tooltip" data-placement="top" title="汉王英译汉词典批量导入工具">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/about/" data-toggle="tooltip" data-placement="top" title="ABOUT ME">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2018-05-31-22:11:46-Spring Cloud Gateway转发WebSocket'></div>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
+<script type="text/javascript">
+    (function () {
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else {
+            var loadJs = function (d, a) {
+                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                var b = document.createElement("script");
+                b.setAttribute("type", "text/javascript");
+                b.setAttribute("charset", "UTF-8");
+                b.setAttribute("src", d);
+                if (typeof a === "function") {
+                    if (window.attachEvent) {
+                        b.onreadystatechange = function () {
+                            var e = b.readyState;
+                            if (e === "loaded" || e === "complete") {
+                                b.onreadystatechange = null;
+                                a()
+                            }
+                        }
+                    } else {
+                        b.onload = a
+                    }
+                }
+                c.appendChild(b)
+            };
+            loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+                window.changyan.api.config({appid: appid, conf: conf})
+            });
+        }
+    })();
+
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%B8%A9%E5%9D%91" title="踩坑"  target="_blank" >
+            踩坑(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 纳兰小筑  2018 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<script >
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad({
+        singleLine: true
+    });
+</script>
+</body>
+</html>
