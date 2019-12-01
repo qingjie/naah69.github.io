@@ -38,5 +38,23 @@
       <description>本文环境 ubuntu 18.04 1 nvidia显卡驱动 sudo apt-get install nvidia-driver-435 2 cuda 2.1 下载cuda CUDA官网 选择配置，但是Installer Type必须选择runfile,根据</description>
     </item>
     
+    <item>
+      <title>k8s怎么使用GPU？这篇文章告诉你怎么做！</title>
+      <link>https://www.naah69.com/post/2019-06-22-docker-k8s-gpu/</link>
+      <pubDate>Sat, 22 Jun 2019 20:44:47 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2019-06-22-docker-k8s-gpu/</guid>
+      <description>我是不会告诉你为啥要用docker,nvidia-docker,k8s的！ 百度和google一堆，自己找找！ 这里只教你怎么部署坑最少！ 1 所需</description>
+    </item>
+    
+    <item>
+      <title>最完善的docker安装和配置教程</title>
+      <link>https://www.naah69.com/post/2019-06-21-docker/</link>
+      <pubDate>Fri, 21 Jun 2019 20:44:47 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2019-06-21-docker/</guid>
+      <description>1 所需环境 可能大部分人喜欢用ubuntu来进行，但是我喜欢用centos，所以本文就用centos7 谁让我是作者，就是这么任性！ 2 安装和配置</description>
+    </item>
+    
   </channel>
 </rss>

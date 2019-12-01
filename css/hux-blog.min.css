@@ -767,12 +767,13 @@ body {
     margin-bottom: -5px
 }
 
+
 .tags a, .tags .tag {
     display: inline-block;
-    border: 1px solid rgba(255, 255, 255, .8);
+    border: 1px solid rgba(0, 0, 0 );
     border-radius: 999em;
     padding: 0 10px;
-    color: #fff;
+    color: #000;
     line-height: 24px;
     font-size: 12px;
     text-decoration: none;
