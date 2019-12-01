@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>GPU开发环境配置教程</title>
-      <link>https://www.naah69.com/post/2019-12-01-ubuntu-gpu-evn/</link>
-      <pubDate>Sun, 01 Dec 2019 13:23:02 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/post/2019-12-01-ubuntu-gpu-evn/</guid>
-      <description>本文环境 ubuntu 18.04 1 nvidia显卡驱动 sudo apt-get install nvidia-driver-435 2 cuda 2.1 下载cuda CUDA官网 选择配置，但是Installer Type必须选择runfile,根据</description>
-    </item>
-    
-    <item>
       <title>机器学习系列03-决策树算法</title>
       <link>https://www.naah69.com/post/2019-10-06-mlch03-tree/</link>
       <pubDate>Sat, 05 Oct 2019 15:06:16 +0800</pubDate>

@@ -90,6 +90,12 @@
   </url>
   
   <url>
+    <loc>https://www.naah69.com/categories/others/</loc>
+    <lastmod>2019-12-01T13:23:02+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.naah69.com/post/2019-10-06-mlch03-tree/</loc>
     <lastmod>2019-10-05T15:06:16+08:00</lastmod>
   </url>
@@ -157,12 +163,6 @@
   </url>
   
   <url>
-    <loc>https://www.naah69.com/categories/others/</loc>
-    <lastmod>2019-06-23T14:12:25+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.naah69.com/tags/docker/</loc>
     <lastmod>2019-06-23T14:12:25+08:00</lastmod>
     <priority>0</priority>
@@ -202,7 +202,7 @@
   </url>
   
   <url>
-    <loc>https://www.naah69.com/tags/nvidia-docer/</loc>
+    <loc>https://www.naah69.com/tags/nvidia-docker/</loc>
     <lastmod>2019-06-22T20:44:47+08:00</lastmod>
     <priority>0</priority>
   </url>
