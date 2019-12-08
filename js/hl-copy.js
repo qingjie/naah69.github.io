@@ -1,9 +1,11 @@
+//代码高亮
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad({
     singleLine: true
 });
 
-// ref: https://github.com/zenorocha/codecopy/blob/master/src/scripts/main.js
+
+//代码复制
 var snippets = document.querySelectorAll('pre>code');
 var htmlCopyButton = `<button class="codecopy-btn tooltipped tooltipped-sw" aria-label="Copy to clipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>`;
 
@@ -18,8 +20,8 @@ snippets.forEach(snippet => {
 
     wrapper.classList.add('code-highlight');
     wrapper.firstChild.insertAdjacentHTML('beforebegin', htmlCopyButton);
-    var class0=(snippet.classList[0]||'code')
-    var lang = (class0.replace("language-","") || 'code').toUpperCase();
+    var class0 = (snippet.classList[0] || 'code')
+    var lang = (class0.replace("language-", "") || 'code').toUpperCase();
     wrapper.setAttribute('data-lang', lang);
 });
 
@@ -47,5 +49,21 @@ btns.forEach(btn => {
 
     btn.addEventListener('click', e => {
         e.preventDefault();
+    });
+});
+
+//图片放大
+$("img").click(function () {
+    layer.photos({
+        photos: this.parentNode,
+        shift: -1,
+        tab: function (pic, layero) {
+            imgs = $(".layui-layer-shade")
+            for (i = 1; i < imgs.length; i++) {
+                $(".layui-layer.layui-layer-page.layui-layer-photos")[0].remove()
+                $(".layui-layer-shade")[0].remove()
+
+            }
+        }
     });
 });
