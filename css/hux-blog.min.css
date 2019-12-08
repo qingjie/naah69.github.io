@@ -1034,3 +1034,143 @@ body {
 /*畅言去广告*/
 #feedAv{ transform: scale(0);position: absolute !important;z-index: -9999;top: -1000px;display: none;}
 
+.tooltipped {
+    position: relative
+}
+
+.tooltipped::after {
+    position: absolute;
+    z-index: 1000000;
+    display: none;
+    padding: .5em .75em;
+    -webkit-font-smoothing: subpixel-antialiased;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: break-word;
+    white-space: pre;
+    pointer-events: none;
+    content: attr(aria-label);
+    background: #616161;
+    border-radius: 3px;
+    opacity: 0
+}
+
+.tooltipped::before {
+    position: absolute;
+    z-index: 1000001;
+    display: none;
+    width: 0;
+    height: 0;
+    color: #616161;
+    pointer-events: none;
+    content: "";
+    border: 6px solid transparent;
+    opacity: 0
+}
+
+@-webkit-keyframes tooltip-appear {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes tooltip-appear {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.tooltipped:active::after,.tooltipped:active::before,.tooltipped:focus::after,.tooltipped:focus::before,.tooltipped:hover::after,.tooltipped:hover::before {
+    display: inline-block;
+    text-decoration: none;
+    -webkit-animation-name: tooltip-appear;
+    animation-name: tooltip-appear;
+    -webkit-animation-duration: .1s;
+    animation-duration: .1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in
+}
+
+.tooltipped-s::after,.tooltipped-sw::after {
+    top: 100%;
+    right: 50%;
+    margin-top: 6px
+}
+
+.tooltipped-s::before,.tooltipped-sw::before {
+    top: auto;
+    right: 50%;
+    bottom: -7px;
+    margin-right: -6px;
+    border-bottom-color: #616161
+}
+
+.tooltipped-sw::after {
+    margin-right: -16px
+}
+
+.tooltipped-s::after {
+    transform: translateX(50%)
+}
+
+
+.code-highlight {
+    position: relative;
+}
+
+.code-highlight::before {
+    content: attr(data-lang);
+    font-family: "Roboto Mono",Consolas,monospace,sans-serif;
+    font-size: .6em;
+    color: #b1b1b1;
+    line-height: 18px;
+    position: absolute;
+    top: 4px;
+    right: 37px;
+    z-index: 1
+}
+
+@media (max-width: 820px) {
+    .code-highlight::before {
+        right:37px
+    }
+}
+
+.codecopy-btn {
+    width: 24px;
+    height: 26px;
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    border: none;
+    box-shadow: none;
+    background: 0 0;
+    z-index: 1;
+    font-size: 14px;
+    color: #fff;
+    transition: color .2s
+}
+
+.codecopy-btn:hover {
+    color: #7bf
+}
+
+@media (max-width: 820px) {
+    .codecopy-btn {
+        right:6px
+    }
+}

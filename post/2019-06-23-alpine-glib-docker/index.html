@@ -11,34 +11,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
     <link rel="canonical" href="https://www.naah69.com/post/2019-06-23-alpine-glib-docker/">
     
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
-    
     <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
-    
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
     <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
-    
     
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
     <style>
         .hljs-ln-numbers {
             -webkit-touch-callout: none;
@@ -355,15 +347,7 @@
                     </div>
                 </div>
                 
-
                 
-                
-                
-                
-                
-                
-                
-
                 
 
                 
@@ -541,25 +525,31 @@ ADD conda.tar.gz /opt
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh &amp;&amp; \
-    conda clean -p -t -y -all &amp;&amp; \
-    rm -rf /opt/conda/pkgs
 
-RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/ &amp;&amp; \
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ &amp;&amp; \
-conda config --set show_channel_urls yes
-
-WORKDIR ~
-RUN rm -rf ~/.pip/pip.conf &amp;&amp; mkdir ~/.pip &amp;&amp; echo &quot;[global] &quot; &gt;&gt; ~/.pip/pip.conf &amp;&amp; \
-echo &quot;trusted-host=mirrors.aliyun.com &quot; &gt;&gt; ~/.pip/pip.conf &amp;&amp; \
-echo &quot;index-url=https://mirrors.aliyun.com/pypi/simple/ &quot; &gt;&gt; ~/.pip/pip.conf &amp;&amp; \
-cat ~/.pip/pip.conf
-
+RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    &amp;&amp; rm -rf ~/.pip &amp;&amp; mkdir ~/.pip &amp;&amp; echo &quot;[global] &quot; &gt;&gt; ~/.pip/pip.conf \
+    &amp;&amp; echo &quot;trusted-host=mirrors.aliyun.com &quot; &gt;&gt; ~/.pip/pip.conf \
+    &amp;&amp; echo &quot;index-url=https://mirrors.aliyun.com/pypi/simple/ &quot; &gt;&gt; ~/.pip/pip.conf \
+    &amp;&amp; cat ~/.pip/pip.conf \
+    &amp;&amp; echo &quot;channels:&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  - defaults&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;show_channel_urls: true&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;default_channels:&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;custom_channels:&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; echo &quot;  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud&quot; &gt; ~/.condarc \
+    &amp;&amp; conda config --set show_channel_urls yes \
+    &amp;&amp; conda clean -p -t -y -all \
+    &amp;&amp; rm -rf /opt/conda/pkgs \
+    &amp;&amp; rm -rf ~/.cache/pip
+    
 CMD [ &quot;/bin/sh&quot; ]
 </code></pre>
 
@@ -947,7 +937,7 @@ CMD [ &quot;/bin/sh&quot; ]
 
     </div>
 </article>
-
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
 
 
 
@@ -1122,11 +1112,6 @@ CMD [ &quot;/bin/sh&quot; ]
 
 
 
-<script >
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad({
-        singleLine: true
-    });
-</script>
+
 </body>
 </html>

@@ -11,34 +11,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
     <link rel="canonical" href="https://www.naah69.com/post/2019-06-22-docker-k8s-gpu/">
     
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
-    
     <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
-    
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
     <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
-    
     
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
     <style>
         .hljs-ln-numbers {
             -webkit-touch-callout: none;
@@ -375,15 +367,7 @@
                     </div>
                 </div>
                 
-
                 
-                
-                
-                
-                
-                
-                
-
                 
 
                 
@@ -396,13 +380,11 @@
 
 <p>可能大部分人喜欢用<code>ubuntu</code>来进行，但是我喜欢用<code>centos</code>，所以本文就用<code>centos7</code></p>
 
-<p>谁让我是作者，就是这么任性！</p>
-
-<ol>
-<li>centos7</li>
-<li>gpu驱动</li>
-<li>cuda</li>
-</ol>
+<p>谁让我是作者，就是这么任性！
+1. docker（版本小于19.03）
+2. centos7
+3. gpu驱动
+4. cuda</p>
 
 <p>使用该方案的前提下，需要你的linux机器已经安装好<strong>gpu的驱动</strong>和<strong>cuda</strong>
 <br>
@@ -450,7 +432,7 @@ sudo pkill -SIGHUP dockerd
 </blockquote>
 
 <pre><code>sudo systemctl stop docker
-sudo echo &quot;{&quot;registry-mirrors&quot;:[&quot;https://registry.docker-cn.com&quot;,&quot;https://docker.mirrors.ustc.edu.cn&quot;,&quot;https://xgb5chrw.mirror.aliyuncs.com&quot;],&quot;default-runtime&quot;:&quot;nvidia&quot;,&quot;runtimes&quot;:{&quot;nvidia&quot;:{&quot;path&quot;:&quot;nvidia-container-runtime&quot;,&quot;runtimeArgs&quot;:[]}}}&quot; &gt; /etc/docker/daemon.json
+sudo echo '{&quot;registry-mirrors&quot;:[&quot;https://registry.docker-cn.com&quot;,&quot;https://docker.mirrors.ustc.edu.cn&quot;,&quot;https://xgb5chrw.mirror.aliyuncs.com&quot;],&quot;default-runtime&quot;:&quot;nvidia&quot;,&quot;runtimes&quot;:{&quot;nvidia&quot;:{&quot;path&quot;:&quot;nvidia-container-runtime&quot;,&quot;runtimeArgs&quot;:[]}},&quot;insecure-registries&quot;:[&quot;192.168.101.253:1234&quot;]}' &gt; /etc/docker/daemon.json
 sudo systemctl start docker
 </code></pre>
 
@@ -569,7 +551,7 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 
 <p>rancher默认不安装<code>kubectl</code>,但是没有<code>kubect</code>就是没有灵魂的<code>k8s</code>,下面我们就来安装吧！</p>
 
-<p>1.进入页面 <a href="https://www.cnrancher.com/docs/rancher/v2.x/cn/install-prepare/download/kubernetes/">kubectl下载</a></p>
+<p>1.进入页面 <a href="https://docs.rancher.cn/rancher2x/install-prepare/download/kubernetes.html">kubectl下载</a></p>
 
 <blockquote>
 <p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4ac6c5jnlj20t413kmxm.jpg" alt="" /></p>
@@ -1058,7 +1040,7 @@ vim ~/.kube/config
 
     </div>
 </article>
-
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
 
 
 
@@ -1233,11 +1215,6 @@ vim ~/.kube/config
 
 
 
-<script >
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad({
-        singleLine: true
-    });
-</script>
+
 </body>
 </html>
