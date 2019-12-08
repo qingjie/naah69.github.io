@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>jenkins钉钉机器人通知(201912最新版本)-纳兰小筑</title>
+    <meta name="description" content="钉钉机器人安全策略下配置Jenkins通知" />
+    <meta name="keywords" content="jenkins,dingding,钉钉机器人" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2019-12-08-jenkins-dingding-notify-new-version/">
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/bash.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/shell.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/java.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/json.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/python.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/xml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/yaml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/properties.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<style>
+
+     
+    header.intro-header {
+        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
+    }
+     
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+    #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+    #index nav ul li {padding-left: 0em;}
+    #index nav ul li ul {padding-left: 1em;}
+    @media screen and (max-width: 500px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+    @media screen and (max-width: 768px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+
+     
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width:24px;
+        border-right: 1px solid #c5c5c5;
+        color: hsla(0,0%,100%,.3);
+        border-right: 1px solid #000000;
+        text-align: center;
+    }
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+    .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+    .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+    .highlight pre, pre, .highlight .hll{padding: 6px 0px;padding-top: 22px;background-color:#282c34;border-radius: 6px;}
+    .hljs{padding: 8px 0px;background-color:#282c34;color: #ccc;}
+
+</style>
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/others" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Others</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;环境配置系列
+                        </a>
+                        
+                        <a class="tag" href="/tags/jenkins" title="Jenkins" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;Jenkins
+                        </a>
+                        
+                        <a class="tag" href="/tags/ci/cd" title="CI/CD" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;CI/CD
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>jenkins钉钉机器人通知(201912最新版本)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Sunday, Dec 08,2019 17:23:38
+                        
+                        <span id="/post/2019-12-08-jenkins-dingding-notify-new-version/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#1-安装jenkins插件">1 安装jenkins插件</a></li>
+<li><a href="#2-创建钉钉机器人">2 创建钉钉机器人</a></li>
+<li><a href="#3-配置钉钉机器人通知">3 配置钉钉机器人通知</a></li>
+<li><a href="#4-构建项目">4 构建项目</a></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+                
+                
+
+                
+
+<h1 id="1-安装jenkins插件">1 安装jenkins插件</h1>
+
+<ol>
+<li><p>Manage Jenkins</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmssbt1vj30cs0ikt93.jpg" alt="" /></p></li>
+
+<li><p>Manage Plugins</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmt3y7icj30ei09q0t1.jpg" alt="" /></p></li>
+
+<li><p>安装<code>Dingding[钉钉] Plugin</code></p></li>
+
+<li><p>重启jenkins</p></li>
+</ol>
+
+<h1 id="2-创建钉钉机器人">2 创建钉钉机器人</h1>
+
+<p>只有<code>群主</code>和<code>群管理员</code>才能创建机器人</p>
+
+<ol>
+<li><p>进入<code>群设置</code>,点击<code>智能群助手</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jm9g1gs5j30jo0lmwex.jpg" alt="" /></p></li>
+
+<li><p>点击<code>添加机器人</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jman49t1j30k60psgmf.jpg" alt="" /></p></li>
+
+<li><p>点击右方<code>3个点</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmcb8sdjj3106080mxg.jpg" alt="" /></p></li>
+
+<li><p>点击<code>自定义</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmbeukaxj31000iw0u4.jpg" alt="" /></p></li>
+
+<li><p>点击<code>添加</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmcvax9lj30vm0f6t98.jpg" alt="" /></p></li>
+
+<li><p>输入相关信息（钉钉更新后，必须添加安全策略，这里填写关键词<code>构建</code>）</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmg3ckbgj30xh0u00u2.jpg" alt="" /></p></li>
+
+<li><p>点击<code>复制</code>，点击<code>完成</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmhtghhxj30xm0nyjsc.jpg" alt="" /></p></li>
+</ol>
+
+<p>将下方的<code>access_token</code>单独复制出来</p>
+
+<pre><code>https://oapi.dingtalk.com/robot/send?access_token=e1234567e60e3149d70bccac534a74223534023042c1c626e97a21949f4ed83e
+</code></pre>
+
+<h1 id="3-配置钉钉机器人通知">3 配置钉钉机器人通知</h1>
+
+<ol>
+<li><p>进入jenkins的项目</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmq8zdd2j30rg08s74b.jpg" alt="" /></p></li>
+
+<li><p>进入<code>配置</code>，并将页面拉倒最下方</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmqww7kyj309s0gadg2.jpg" alt="" /></p></li>
+
+<li><p>点击<code>构建后操作</code>下方的<code>增加构建后操作步骤</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmld28dvj30a60b03yk.jpg" alt="" /></p></li>
+
+<li><p>点击<code>钉钉通知器配置</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmmxu8f3j30gi05kq31.jpg" alt="" /></p></li>
+
+<li><p>输入相关信息，点击<code>保存</code>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jmpiw6cqj31gm0qywgd.jpg" alt="" /></p></li>
+</ol>
+
+<h1 id="4-构建项目">4 构建项目</h1>
+
+<p>这时构建项目就可以收到通知了</p>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-12-01-onnx-tensorrt/" data-toggle="tooltip" data-placement="top" title="ONNX-TensorRT6安装教程(python)">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-12-08-centos7-gpu-env/" data-toggle="tooltip" data-placement="top" title="CentOS配置GPU开发环境教程">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2019-12-08-17:23:38-jenkins钉钉机器人通知(201912最新版本)'></div>
+
+
+
+<script type="text/javascript">
+    (function(){
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            script.id = 'changyan_mobile_js';
+            script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+            head.appendChild(script);
+        } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(10)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/ci/cd" title="ci/cd"  target="_blank" >
+            ci/cd(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;   2019 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

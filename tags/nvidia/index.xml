@@ -6,13 +6,22 @@
     <description>Recent content in NVIDIA on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Dec 2019 13:23:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 17:29:04 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/tags/nvidia/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>GPU开发环境配置教程</title>
+      <title>CentOS配置GPU开发环境教程</title>
+      <link>https://www.naah69.com/post/2019-12-08-centos7-gpu-env/</link>
+      <pubDate>Sun, 08 Dec 2019 17:29:04 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2019-12-08-centos7-gpu-env/</guid>
+      <description>本文环境 CentOS7 1 nvidia显卡驱动 通过ELRepo源的nvidia-detect命令来自动化安装驱动，省时省力，告别传统手工操作，一步一个坑 1.1</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04配置GPU开发环境教程</title>
       <link>https://www.naah69.com/post/2019-12-01-ubuntu-gpu-evn/</link>
       <pubDate>Sun, 01 Dec 2019 13:23:02 +0800</pubDate>
       

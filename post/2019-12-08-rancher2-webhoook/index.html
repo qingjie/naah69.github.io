@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>Rancher2配置Webhook(修复官方bug)-纳兰小筑</title>
+    <meta name="description" content="通过webhook来操作rancher2达成持续部署" />
+    <meta name="keywords" content="rancher2,webhook,harbor,ci/cd" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2019-12-08-rancher2-webhoook/">
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/bash.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/shell.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/java.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/json.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/python.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/xml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/yaml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/properties.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<style>
+
+     
+    header.intro-header {
+        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
+    }
+     
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+    #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+    #index nav ul li {padding-left: 0em;}
+    #index nav ul li ul {padding-left: 1em;}
+    @media screen and (max-width: 500px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+    @media screen and (max-width: 768px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+
+     
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width:24px;
+        border-right: 1px solid #c5c5c5;
+        color: hsla(0,0%,100%,.3);
+        border-right: 1px solid #000000;
+        text-align: center;
+    }
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+    .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+    .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+    .highlight pre, pre, .highlight .hll{padding: 6px 0px;padding-top: 22px;background-color:#282c34;border-radius: 6px;}
+    .hljs{padding: 8px 0px;background-color:#282c34;color: #ccc;}
+
+</style>
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/others" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Others</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;环境配置系列
+                        </a>
+                        
+                        <a class="tag" href="/tags/rancher" title="rancher" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;rancher
+                        </a>
+                        
+                        <a class="tag" href="/tags/ci/cd" title="CI/CD" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;CI/CD
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>Rancher2配置Webhook(修复官方bug)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Sunday, Dec 08,2019 19:01:18
+                        
+                        <span id="/post/2019-12-08-rancher2-webhoook/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#起因">起因</a></li>
+<li><a href="#1-配置rancher配置文件">1 配置rancher配置文件</a></li>
+<li><a href="#2-webhooks镜像安装">2 webhooks镜像安装</a></li>
+<li><a href="#3-webhooks触发地址">3 webhooks触发地址</a></li>
+<li><a href="#4-配置仓库触发">4 配置仓库触发</a>
+<ul>
+<li><a href="#4-1-aliyun">4.1 aliyun</a></li>
+<li><a href="#4-2-docker">4.2 Docker</a></li>
+<li><a href="#4-3-自定义webhooks">4.3 自定义webhooks</a></li>
+</ul></li>
+<li><a href="#5-触发webhooks">5 触发webhooks</a></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+                
+                
+
+                
+
+<h1 id="起因">起因</h1>
+
+<p>由于我们团队的开发环境是使用<code>jenkins</code>+<code>Harbor</code>+<code>rancher2</code>进行部署ci/cd的，所以需要进行webhook调用</p>
+
+<p>但是在通过官方文档提供的方法部署后出现问题，于是进行排查并进行修复，所以才有了这篇文章</p>
+
+<p><a href="https://docs.rancher.cn/rancher2x/admin-manual/webhooks.html#_1-%E7%AE%80%E8%BF%B0">官方文档</a></p>
+
+<h1 id="1-配置rancher配置文件">1 配置rancher配置文件</h1>
+
+<blockquote>
+<p>建议把webhooks作为系统服务运行在system项目下</p>
+</blockquote>
+
+<ol>
+<li>登录Rancher UI切换到<code>system</code>项目下，然后依次进入<code>资源\配置映射</code>，点击页面右上角的<code>添加配置映射</code>。</li>
+<li>修改模板中对应的参数:
+
+<ul>
+<li><code>&lt;webhooks_id&gt;</code>: 此webhooks-id具有唯一性，不能重复。建议设置为服务名，比如<code>springboot-demo</code>；</li>
+<li><code>&lt;token&gt;</code>: 设置一个token值用于匹配校验，自己生成，建议使用<code>sha256摘要算法</code>对服务名进行摘要生成；</li>
+<li><code>&lt;workload&gt;</code>: 指定一个应用，书写格式为<code>类型/服务名</code>,例如: <code>deployment/springboot-demo</code>、<code>daemonset/webhooks</code>；</li>
+<li><code>&lt;namespaces&gt;</code>: 指定服务所在的命名空间，如果你在rancher部署镜像没有特别设置，就是<code>default</code>；</li>
+<li><code>&lt;container&gt;</code>: 指定容器名称，对于一个有多容器的Pod，升级时需要指定容器名称，一般都是设置服务名，比如<code>springboot-demo</code>；</li>
+<li><code>&lt;MAIL_TO&gt;</code>: 收件人邮箱地址，(可选)；</li>
+<li><code>&lt;NET_TYPE&gt;</code>: 发送webhook请求时发的，一般不指定就行了,如果阿里云的镜像仓库，可在url中添加net_type指定网络类型: 1.公共网络: 不指定默认为公共网络，2.专有网络: <code>net_type=vpc</code>，3.经典网络: <code>net_type=internal</code>；</li>
+</ul></li>
+</ol>
+
+<pre><code class="language-json">[
+    {
+        &quot;id&quot;: &quot;&lt;webhooks-id&gt;&quot;,
+        &quot;execute-command&quot;: &quot;/webhooks.sh&quot;,
+        &quot;command-working-directory&quot;: &quot;/home&quot;,
+        &quot;response-message&quot;: &quot;I got the payload!&quot;,
+        &quot;include-command-output-in-response&quot;: true,
+        &quot;include-command-output-in-response-on-error&quot;: true,
+        &quot;trigger-rule-mismatch-http-response-code&quot;: 500,
+        &quot;response-headers&quot;:
+        [
+            {
+                &quot;name&quot;: &quot;Access-Control-Allow-Origin&quot;,
+                &quot;value&quot;: &quot;*&quot;
+            }
+        ],
+        &quot;pass-arguments-to-command&quot;:
+        [
+            {
+                &quot;source&quot;: &quot;entire-payload&quot;
+            }
+          ],
+        &quot;pass-environment-to-command&quot;:
+        [
+            {
+                &quot;envname&quot;: &quot;APP_NS&quot;,
+                &quot;source&quot;: &quot;url&quot;,
+                &quot;name&quot;: &quot;ns&quot;
+            },
+            {
+                &quot;envname&quot;: &quot;APP_WORKLOAD&quot;,
+                &quot;source&quot;: &quot;url&quot;,
+                &quot;name&quot;: &quot;workload&quot;
+            },
+            {
+                &quot;envname&quot;: &quot;APP_CONTAINER&quot;,
+                &quot;source&quot;: &quot;url&quot;,
+                &quot;name&quot;: &quot;container&quot;
+            },
+            {
+                &quot;envname&quot;: &quot;REPO_TYPE&quot;,
+                &quot;source&quot;: &quot;url&quot;,
+                &quot;name&quot;: &quot;repo_type&quot;
+            },
+            {
+                &quot;envname&quot;: &quot;NET_TYPE&quot;,
+                &quot;source&quot;: &quot;url&quot;,
+                &quot;name&quot;: &quot;net_type&quot;
+            },
+            {
+                &quot;envname&quot;: &quot;MAIL_TO&quot;,
+                &quot;source&quot;: &quot;string&quot;,
+                &quot;name&quot;: &quot;&lt;MAIL_TO&gt;&quot;
+            }
+        ],
+        &quot;trigger-rule&quot;:
+        {
+            &quot;and&quot;:
+            [
+                {
+                    &quot;match&quot;:
+                    {
+                        &quot;type&quot;: &quot;value&quot;,
+                        &quot;value&quot;: &quot;&lt;token&gt;&quot;,
+                        &quot;parameter&quot;:
+                        {
+                            &quot;source&quot;: &quot;url&quot;,
+                            &quot;name&quot;: &quot;token&quot;
+                        }
+                    }
+                },
+                {
+                    &quot;match&quot;:
+                    {
+                        &quot;type&quot;: &quot;value&quot;,
+                        &quot;value&quot;: &quot;&lt;namespaces&gt;&quot;,
+                        &quot;parameter&quot;:
+                        {
+                            &quot;source&quot;: &quot;url&quot;,
+                            &quot;name&quot;: &quot;ns&quot;
+                        }
+                    }
+                },
+                {
+                    &quot;match&quot;:
+                    {
+                        &quot;type&quot;: &quot;value&quot;,
+                        &quot;value&quot;: &quot;&lt;workload&gt;&quot;,
+                        &quot;parameter&quot;:
+                        {
+                            &quot;source&quot;: &quot;url&quot;,
+                            &quot;name&quot;: &quot;workload&quot;
+                        }
+                    }
+                },
+                {
+                    &quot;match&quot;:
+                    {
+                        &quot;type&quot;: &quot;value&quot;,
+                        &quot;value&quot;: &quot;&lt;container&gt;&quot;,
+                        &quot;parameter&quot;:
+                        {
+                            &quot;source&quot;: &quot;url&quot;,
+                            &quot;name&quot;: &quot;container&quot;
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
+
+</code></pre>
+
+<p>3.填写<code>添加配置映射</code>参数，其中:</p>
+
+<ul>
+<li>名称: 可以随意填写;</li>
+<li>键: 以<code>.json</code>结尾的文件名，比如<code>springboot-demo.json</code>;</li>
+<li>值: 设置为上一步中修改的配置文件;</li>
+<li>如果有多个服务，可以添加多个键值对，如图:
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oedklztoj31n80quq3s.jpg" alt="" /></li>
+</ul>
+
+<h1 id="2-webhooks镜像安装">2 webhooks镜像安装</h1>
+
+<p>依次点击 <code>system项目\工作负载\工作负载</code>，点击右侧<code>部署服务</code>。</p>
+
+<p>下面这个镜像是我自己打包的，官方的镜像包，在你使用自定义镜像仓库时会报错</p>
+
+<pre><code>registry.cn-hangzhou.aliyuncs.com/rancher2/webhook:1.0
+</code></pre>
+
+<ol>
+<li><p>配置服务名称和镜像
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oeju59zuj31c40dyjrl.jpg" alt="" /></p></li>
+
+<li><p>对外服务</p>
+
+<p>服务默认监听端口为9000，如果使用NodePort提供服务，则安以下方式配置；
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oekl3ibzj31na0eit8v.jpg" alt="" /></p></li>
+
+<li><p>环境变量</p>
+
+<p>如果不使用邮箱，只配置<code>WEBHOOK_CMD</code>就行</p>
+
+<ul>
+<li><code>WEBHOOK_CMD</code>=-template: 系统命令；</li>
+<li><code>MAIL_SMTP_PORT</code>=: 邮箱SMTP服务器端口；</li>
+<li><code>MAIL_SMTP_SERVER</code>=: 邮箱SMTP服务器地址；</li>
+<li><code>MAIL_FROM</code>= : 发件人邮箱；</li>
+<li><code>MAIL_PASSWORD</code>=: 发件人邮箱密码(需要base64加密: echo &lt;密码&gt; | base64 )；</li>
+<li><code>MAIL_CACERT</code>=: 自签名CA证书，邮箱服务器采用自签名ssl证书时使用(需要base64加密: cat <ca文件> | base64 )；</li>
+<li><code>MAIL_TLS_CHECK</code>=: 是否开启TLS认证(false/true,默认true)；</li>
+</ul></li>
+
+<li><p>配置健康检查
+端口: <code>9000</code>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oenzi6rtj31b40py0to.jpg" alt="" /></p></li>
+
+<li><p>配置数据卷</p>
+
+<ul>
+<li>选择配置映射卷
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ofn71lz9j30ea0kujrr.jpg" alt="" /></li>
+<li>配置映射名: 选择前面创建的配置映射;</li>
+<li>容器路径: <code>/etc/webhook/source</code>;</li>
+<li>其他参数保持默认;
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogonnblrj31hs0u0dh5.jpg" alt="" /></li>
+</ul></li>
+
+<li><p>最后点击启动，启动后查看日志，可以看到当前监听的服务</p></li>
+
+<li><p>设置<code>serviceaccounts</code></p>
+
+<p>这一步相对比较重要，<code>webhooks</code>服务需要<code>serviceaccounts</code>才可以正常的与K8S通信。因为目前Rancher UI不支持设置<code>serviceaccounts</code>，所以需要编辑yaml文件来配置<code>serviceaccounts</code>。为了方便，这里复用了rancher组件使用的<code>serviceaccounts</code>账号<code>cattle</code>，具有集群管理员角色，您也可以根据需要定制<code>serviceaccounts</code>角色。</p>
+
+<ul>
+<li>如图，选择 <code>查看/编辑YAML</code>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogqmix7ij31zs0pc772.jpg" alt="" /></li>
+<li>在<code>securityContext: {}</code> 下边添加<code>serviceAccount: cattle</code>和<code>serviceAccountName: cattle</code>；
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogr96hddj30xu0fst9p.jpg" alt="" /></li>
+<li>保存</li>
+</ul></li>
+</ol>
+
+<h1 id="3-webhooks触发地址">3 webhooks触发地址</h1>
+
+<pre><code class="language-bash">http(s)://&lt;webhooks_url&gt;/hooks/\
+&lt;webhooks_id&gt;?\
+token=&lt;token&gt;&amp;\
+ns=&lt;namespaces&gt;&amp;\
+workload=&lt;workload&gt;&amp;\
+container=&lt;container&gt;&amp;\
+repo_type=&lt;repo_type&gt;
+</code></pre>
+
+<p>如果是阿里云的镜像仓库，可在url中添加<code>net_type</code>指定网络类型:</p>
+
+<ul>
+<li>公共网络:如果不指定，则默认为公共网络拉取镜像</li>
+<li>专有网络:<code>net_type=vpc</code></li>
+<li>经典网络:<code>net_type=internal</code></li>
+</ul>
+
+<p>其中<code>&lt;webhooks_id&gt;</code>、<code>&lt;namespaces&gt;</code>、<code>&lt;workload&gt;</code>、<code>&lt;container&gt;</code>对应模板中的参数，<code>&lt;repo_type&gt;</code>支持:<code>aliyun</code>、<code>dockerhub</code>、<code>custom</code>。</p>
+
+<h1 id="4-配置仓库触发">4 配置仓库触发</h1>
+
+<h2 id="4-1-aliyun">4.1 aliyun</h2>
+
+<p>见<a href="https://docs.rancher.cn/rancher2x/admin-manual/webhooks.html#_1-%E7%AE%80%E8%BF%B0">官方文档</a></p>
+
+<h2 id="4-2-docker">4.2 Docker</h2>
+
+<p>见<a href="https://docs.rancher.cn/rancher2x/admin-manual/webhooks.html#_1-%E7%AE%80%E8%BF%B0">官方文档</a></p>
+
+<h2 id="4-3-自定义webhooks">4.3 自定义webhooks</h2>
+
+<p>如果是使用Jenkins自定义构建镜像，可以设置<code>repo_type=custom</code>。</p>
+
+<p>在Jenkins构建项目中，在镜像<code>push</code>操作后增加一个<code>执行shell命令</code>的步骤。这个操作主要是在镜像成功推送到镜像仓库后发出<code>POST消息</code>去触发<code>webhooks</code>，这步中需要把上一步推送的<code>镜像仓库地址</code>,<code>镜像命名空间</code>,<code>镜像名</code>，以及镜像tag作为变量传递到这一步，这样在发送<code>POST消息</code>才可以把相关的镜像信息传递给webhooks,从而触发服务升级。</p>
+
+<p>示例POST消息:</p>
+
+<pre><code class="language-bash">curl -X POST \
+  'http(s)://&lt;webhooks_url&gt;/hooks/&lt;webhooks_id&gt;?\
+  token=&lt;token&gt;&amp;\
+  ns=&lt;namespaces&gt;&amp;\
+  workload=&lt;workload&gt;&amp;\
+  container=&lt;container&gt;&amp;\
+  repo_type=custom' \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache' \
+  -d '{
+    &quot;push_data&quot;: {
+        &quot;tag&quot;: &quot;${images_tag}&quot;
+    },
+    &quot;repository&quot;: {
+        &quot;repo_url&quot;: ${images_repo_url},
+        &quot;name&quot;: &quot;${images_name}&quot;,
+        &quot;namespace&quot;: &quot;${images_namespace}&quot;
+    }
+}'
+</code></pre>
+
+<h1 id="5-触发webhooks">5 触发webhooks</h1>
+
+<p>配置完以上参数，提交代码到git仓库后将会自动触发阿里云仓库或者dockerhub的自动构建，创建自动构建方法请自行查阅相关文档。</p>
+
+<p>webhooks服务收到消息后，会马上触发服务的升级。查看webhooks服务的日志，可以看到已经成功升级。</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pe1pb9xdj31oq0l075p.jpg" alt="" /></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pe1tgz04j31vy0le0v9.jpg" alt="" /></p>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-12-08-centos7-gpu-env/" data-toggle="tooltip" data-placement="top" title="CentOS配置GPU开发环境教程">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-12-08-sonarqube/" data-toggle="tooltip" data-placement="top" title="docker构建SonarQube进行代码质量检查">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2019-12-08-19:01:18-Rancher2配置Webhook(修复官方bug)'></div>
+
+
+
+<script type="text/javascript">
+    (function(){
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            script.id = 'changyan_mobile_js';
+            script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+            head.appendChild(script);
+        } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(10)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/ci/cd" title="ci/cd"  target="_blank" >
+            ci/cd(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;   2019 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

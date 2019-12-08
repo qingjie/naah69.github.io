@@ -1136,12 +1136,13 @@ body {
     content: attr(data-lang);
     font-family: "Roboto Mono",Consolas,monospace,sans-serif;
     font-size: .6em;
-    color: #b1b1b1;
+    color: hsla(0,0%,100%,.4);
     line-height: 18px;
     position: absolute;
     top: 4px;
     right: 37px;
-    z-index: 1
+    z-index: 1;
+    padding-top: 5px;
 }
 
 @media (max-width: 820px) {
@@ -1161,8 +1162,9 @@ body {
     background: 0 0;
     z-index: 1;
     font-size: 14px;
-    color: #fff;
-    transition: color .2s
+    color: hsla(0,0%,100%,.4);
+    transition: color .2s;
+    padding-top: 5px;
 }
 
 .codecopy-btn:hover {

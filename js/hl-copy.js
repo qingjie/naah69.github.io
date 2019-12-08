@@ -8,11 +8,13 @@ var snippets = document.querySelectorAll('pre>code');
 var htmlCopyButton = `<button class="codecopy-btn tooltipped tooltipped-sw" aria-label="Copy to clipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>`;
 
 snippets.forEach(snippet => {
-    var parent = snippet.parentNode;
+    var pre = snippet.parentNode;
+    var pre_parent = pre.parentNode;
+
     var wrapper = document.createElement('div');
 
-    parent.replaceChild(wrapper, snippet);
-    wrapper.appendChild(snippet);
+    pre_parent.replaceChild(wrapper, pre);
+    wrapper.appendChild(pre);
 
     wrapper.classList.add('code-highlight');
     wrapper.firstChild.insertAdjacentHTML('beforebegin', htmlCopyButton);

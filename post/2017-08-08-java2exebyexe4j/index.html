@@ -1,70 +1,96 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>    <title>java程序转为EXE，无需安装JAVA环境运行程序-纳兰小筑</title>
-    
+<head>
+    <title>java程序转为EXE，无需安装JAVA环境运行程序-纳兰小筑</title>
     <meta name="description" content="通过exe4j打包jar为exe" />
-    
-    
     <meta name="keywords" content="java,exe,脱离java环境" />
-    
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
     <link rel="canonical" href="https://www.naah69.com/post/2017-08-08-java2exebyexe4j/">
-    
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
     <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
-    
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
-    <style>
-        .hljs-ln-numbers {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            width:24px;
-            border-right: 1px solid #c5c5c5;
-        }
-        .hljs-ln-code {
-            padding-left: 10px;
-        }
-        .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
-        .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
-        .highlight pre, pre, .highlight .hll{padding: 6px 0px}
-        .hljs{padding: 8px 0px}
-        em{color: red}
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/bash.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/shell.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/java.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/json.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/python.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/xml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/yaml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/properties.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<style>
+
+     
+    header.intro-header {
+        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
+    }
+     
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+    #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+    #index nav ul li {padding-left: 0em;}
+    #index nav ul li ul {padding-left: 1em;}
+    @media screen and (max-width: 500px){
         #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
         #index nav ul li {padding-left: 0em;}
         #index nav ul li ul {padding-left: 1em;}
-        @media screen and (max-width: 500px){
-            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
-            #index nav ul li {padding-left: 0em;}
-            #index nav ul li ul {padding-left: 1em;}
-        }
-        @media screen and (max-width: 768px){
-            #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
-            #index nav ul li {padding-left: 0em;}
-            #index nav ul li ul {padding-left: 1em;}
-        }
-    </style>
+    }
+    @media screen and (max-width: 768px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+
+     
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width:24px;
+        border-right: 1px solid #c5c5c5;
+        color: hsla(0,0%,100%,.3);
+        border-right: 1px solid #000000;
+        text-align: center;
+    }
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+    .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+    .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+    .highlight pre, pre, .highlight .hll{padding: 6px 0px;padding-top: 22px;background-color:#282c34;border-radius: 6px;}
+    .hljs{padding: 8px 0px;background-color:#282c34;color: #ccc;}
+
+</style>
 
 </head>
 
@@ -171,20 +197,6 @@
 
 
 
-<style type="text/css">
-    header.intro-header {
-        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
-    }
-
-    #floatting_dir {
-        position: fixed;
-        display: none;
-        width: auto;
-        height: auto;
-        font-size: 13px;
-    }
-</style>
-
 <script language="javascript">
 
     $(document).ready(function () {
@@ -248,7 +260,6 @@
             }
         });
     });
-
 
 </script>
 <header class="intro-header">
@@ -396,13 +407,15 @@
 <h3 id="2-1-精简jre-bin">2.1 精简JRE \ BIN</h3>
 
 <ol>
-<li><p>在你的java代码中最后结束的位置假如如下代码</p>
+<li>在你的java代码中最后结束的位置假如如下代码</li>
+</ol>
 
-<pre><code>InputStreamReader ir = new InputStreamReader(System.in);
+<pre><code class="language-java">InputStreamReader ir = new InputStreamReader(System.in);
 System.out.println(&quot;hello&quot;);
 ir.read();
-</code></pre></li>
+</code></pre>
 
+<ol>
 <li><p>编译你的代码，并使用命令行的java代码运行类</p></li>
 
 <li><p>这个时候命令行会执行你的代码，并且最后停留在输入字符界面，使用管理员权限打开ProcessExplorer（点击下载）。</p></li>
@@ -428,16 +441,19 @@ ir.read();
 <h3 id="2-2-精简jre-lib">2.2 精简JRE \ LIB</h3>
 
 <ol>
-<li><p>在jar包的目录下建立txt文件，复制下方代码，将代码中jar包的名称改为你的jar包的名称，然后将txt扩展名改为bat。</p>
+<li>在jar包的目录下建立txt文件，复制下方代码，将代码中jar包的名称改为你的jar包的名称，然后将txt扩展名改为bat。</li>
+</ol>
 
-<pre><code>java -jar -verbose：class ss.jar &gt;&gt; classlog.txt
-</code></pre></li>
+<pre><code class="language-bash">java -jar -verbose：class ss.jar &gt;&gt; classlog.txt
+</code></pre>
 
+<ol>
 <li><p>打开刚才建立的蝙蝠，等待命令行窗口消失后，打开jar包目录下classlog.txt。查看是否有运行日志，如果有运行日志请继续往下看。</p></li>
 
-<li><p>将下列代码修改source,dest,logname,jarArr,建立相应文件夹后编译运行。</p>
+<li><p>将下列代码修改source,dest,logname,jarArr,建立相应文件夹后编译运行。</p></li>
+</ol>
 
-<pre><code>import java.io.BufferedReader;
+<pre><code class="language-java">import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -451,141 +467,142 @@ import java.util.List;
 
 public class sm {
 
-private String source=&quot;C:/Users/Naah/Desktop/ss/jre7/lib&quot;;
-private String dest=&quot;C:/Users/Naah/Desktop/ss/jre7/lib&quot;;
-private static String logname=&quot;C:/Users/Naah/Desktop/ss/classlog.txt&quot;;
-private String[] jarArr=new String[]{&quot;rt&quot;,&quot;charsets&quot;} ;
-/***
-*
-* @param source 类源目录
-* @param dest 类拷贝目的目录
-* @param dest classlog的路径
-* @param jarArr 需要的提取的jar文件
-*/
-public static void main(String[] args) {
-// TODO Auto-generated method stub
+ private String source=&quot;C:/Users/Naah/Desktop/ss/jre7/lib&quot;;
+ private String dest=&quot;C:/Users/Naah/Desktop/ss/jre7/lib&quot;;
+ private static String logname=&quot;C:/Users/Naah/Desktop/ss/classlog.txt&quot;;
+ private String[] jarArr=new String[]{&quot;rt&quot;,&quot;charsets&quot;} ;
+ /***
+ *
+ * @param source 类源目录
+ * @param dest 类拷贝目的目录
+ * @param dest classlog的路径
+ * @param jarArr 需要的提取的jar文件
+ */
+ public static void main(String[] args) {
+ // TODO Auto-generated method stub
 
-try {
-List list=finJar(logname,&quot;ss.jar&quot;);
-InputStreamReader ir = new InputStreamReader(System.in);
-System.out.println(&quot;请清理lib目录并解压相关jar包,输入任何字符继续！&quot;);
-ir.read();
-String a=&quot;&quot;;
-for (String string : list) {
-a=a+&quot;\n&quot;+string;
-}
-a=a.substring(1,a.length());
-FileOutputStream out=new FileOutputStream(new File(logname));
-out.write(a.getBytes());
-out.flush();
-out.close();
+ try {
+ List list=finJar(logname,&quot;ss.jar&quot;);
+ InputStreamReader ir = new InputStreamReader(System.in);
+ System.out.println(&quot;请清理lib目录并解压相关jar包,输入任何字符继续！&quot;);
+ ir.read();
+ String a=&quot;&quot;;
+ for (String string : list) {
+ a=a+&quot;\n&quot;+string;
+ }
+ a=a.substring(1,a.length());
+ FileOutputStream out=new FileOutputStream(new File(logname));
+ out.write(a.getBytes());
+ out.flush();
+ out.close();
 
-sm obj = new sm();
-obj.readAndCopy(logname);
-} catch (IOException e) {
-e.printStackTrace();
-}
+ sm obj = new sm();
+ obj.readAndCopy(logname);
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
 
-}
+ }
 
 
-public static List finJar(String txtPath,String jarname) throws IOException{
-List list=new ArrayList&lt;&gt;();
-List jar=new ArrayList&lt;&gt;();
-List a=Files.readAllLines(Paths.get(txtPath), Charset.forName(&quot;GBK&quot;));
-for (String s : a) {
+ public static List finJar(String txtPath,String jarname) throws IOException{
+ List list=new ArrayList&lt;&gt;();
+ List jar=new ArrayList&lt;&gt;();
+ List a=Files.readAllLines(Paths.get(txtPath), Charset.forName(&quot;GBK&quot;));
+ for (String s : a) {
 // if(s.contains(&quot;ss.jar&quot;)==false&amp;&amp;!list.contains(s.substring(s.length()-16,s.length())))
 // list.add(s.substring(s.length()-16,s.length()));
-try{
-if(s.contains(jarname)==false&amp;&amp;!jar.contains(s.substring(s.lastIndexOf('\\')+1, s.lastIndexOf(']'))))
-jar.add(s.substring(s.lastIndexOf('\\')+1, s.lastIndexOf(']')));
+ try{
+ if(s.contains(jarname)==false&amp;&amp;!jar.contains(s.substring(s.lastIndexOf('\\')+1, s.lastIndexOf(']'))))
+ jar.add(s.substring(s.lastIndexOf('\\')+1, s.lastIndexOf(']')));
 
 
-if(s.contains(jarname)==false&amp;&amp;!list.contains(s.substring(s.indexOf(' ')+1, s.indexOf(&quot;from&quot;)-1)))
-list.add(s.substring(s.indexOf(' ')+1, s.indexOf(&quot;from&quot;)-1).replace('.', '/'));
-}
-catch(Exception e)
-{continue;}
+ if(s.contains(jarname)==false&amp;&amp;!list.contains(s.substring(s.indexOf(' ')+1, s.indexOf(&quot;from&quot;)-1)))
+ list.add(s.substring(s.indexOf(' ')+1, s.indexOf(&quot;from&quot;)-1).replace('.', '/'));
+ }
+ catch(Exception e)
+ {continue;}
 
 //
-}
-for (String string : jar) {
-System.out.println(string);
-}
-return list;
-}
+ }
+ for (String string : jar) {
+ System.out.println(string);
+ }
+ return list;
+ }
 
-public void readAndCopy(String logName)
-{
-int count = 0; // 用于记录成功拷贝的类数
-try
-{
-FileInputStream fi = new FileInputStream(logName);
-InputStreamReader ir = new InputStreamReader(fi);
-BufferedReader br = new BufferedReader(ir);
+ public void readAndCopy(String logName)
+ {
+ int count = 0; // 用于记录成功拷贝的类数
+ try
+ {
+ FileInputStream fi = new FileInputStream(logName);
+ InputStreamReader ir = new InputStreamReader(fi);
+ BufferedReader br = new BufferedReader(ir);
 
-String string = br.readLine();
-while(string != null)
-{
-if(copyClass(string) == true)
-count++;
-else
-System.out.println(&quot;ERROR &quot; + count + &quot;: &quot; + string);
-string = br.readLine();
-}
-}
-catch (IOException e)
-{
-System.out.println(&quot;ERROR: &quot; + e);
-}
-System.out.println(&quot;count: &quot; + count);
-}
+ String string = br.readLine();
+ while(string != null)
+ {
+ if(copyClass(string) == true)
+ count++;
+ else
+ System.out.println(&quot;ERROR &quot; + count + &quot;: &quot; + string);
+ string = br.readLine();
+ }
+ }
+ catch (IOException e)
+ {
+ System.out.println(&quot;ERROR: &quot; + e);
+ }
+ System.out.println(&quot;count: &quot; + count);
+ }
 
-/***
-* 从原jar路径提取相应的类到目标路径，如将java/lang/CharSequence类从rt目录提取到rt1目录
-* @param string 提取类的全路径
-* @return
-* @throws IOException
-*/
-public boolean copyClass(String string) throws IOException
-{
-String classDir = string.substring(0,string.lastIndexOf(&quot;/&quot;));
-String className = string.substring(string.lastIndexOf(&quot;/&quot;)+1,string.length()) + &quot;.class&quot;;
+ /***
+ * 从原jar路径提取相应的类到目标路径，如将java/lang/CharSequence类从rt目录提取到rt1目录
+ * @param string 提取类的全路径
+ * @return
+ * @throws IOException
+ */
+ public boolean copyClass(String string) throws IOException
+ {
+ String classDir = string.substring(0,string.lastIndexOf(&quot;/&quot;));
+ String className = string.substring(string.lastIndexOf(&quot;/&quot;)+1,string.length()) + &quot;.class&quot;;
 
-boolean result =false;
+ boolean result =false;
 
-for(String jar : jarArr){
-File srcFile = new File(source + &quot;/&quot;+jar+&quot;/&quot; + classDir + &quot;/&quot; + className);
-if(!srcFile.exists())
-{
-continue;
+ for(String jar : jarArr){
+ File srcFile = new File(source + &quot;/&quot;+jar+&quot;/&quot; + classDir + &quot;/&quot; + className);
+ if(!srcFile.exists())
+ {
+ continue;
+ }
+
+ byte buf[] = new byte[256];
+ FileInputStream fin = new FileInputStream(srcFile);
+
+ /* 目标目录不存在,创建 */
+ File destDir = new File(dest + &quot;/&quot;+jar+&quot;1/&quot; + classDir);
+ if(!destDir.exists())
+ destDir.mkdirs();
+
+ File destFile = new File(destDir + &quot;/&quot; + className);
+ FileOutputStream fout = new FileOutputStream(destFile);
+ int len = 0;
+ while((len = fin.read(buf)) != -1)
+ {
+ fout.write(buf,0,len);
+ }
+ fout.flush();
+ result = true;
+ break;
+ }
+ return result;
+ }
+
 }
+</code></pre>
 
-byte buf[] = new byte[256];
-FileInputStream fin = new FileInputStream(srcFile);
-
-/* 目标目录不存在,创建 */
-File destDir = new File(dest + &quot;/&quot;+jar+&quot;1/&quot; + classDir);
-if(!destDir.exists())
-destDir.mkdirs();
-
-File destFile = new File(destDir + &quot;/&quot; + className);
-FileOutputStream fout = new FileOutputStream(destFile);
-int len = 0;
-while((len = fin.read(buf)) != -1)
-{
-fout.write(buf,0,len);
-}
-fout.flush();
-result = true;
-break;
-}
-return result;
-}
-
-}
-</code></pre></li>
-
+<ol>
 <li><p>在运行时，将lib目录下除了提示的jar包与amd64文件夹下的jvm.cfg保留，其他全部删除。</p></li>
 
 <li><p>将提示的jar包以文件夹方式解压到lib目录下。</p></li>
@@ -803,6 +820,13 @@ return result;
             
             
             
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(10)
+            </a>
+
+            
+            
+            
             <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
             排序算法(9)
             </a>
@@ -818,7 +842,7 @@ return result;
             
             
             <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
-            机器学习系列(6)
+            机器学习系列(7)
             </a>
 
             
@@ -838,8 +862,8 @@ return result;
             
             
             
-            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
-            环境配置系列(5)
+            <a href="/tags/ci/cd" title="ci/cd"  target="_blank" >
+            ci/cd(4)
             </a>
 
             
@@ -917,13 +941,6 @@ return result;
             
             <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
             最小生成树问题(3)
-            </a>
-
-            
-            
-            
-            <a href="/tags/%E8%B8%A9%E5%9D%91" title="踩坑"  target="_blank" >
-            踩坑(3)
             </a>
 
             
@@ -1100,7 +1117,7 @@ return result;
 
 
 <script>
-    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function () {
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
         var $nav = document.querySelector("nav");
         if ($nav) FastClick.attach($nav);
     })

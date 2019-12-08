@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>CentOS配置GPU开发环境教程-纳兰小筑</title>
+    <meta name="description" content="centos构建包含nvidia drive,cuda,cudnn的gpu开发环境" />
+    <meta name="keywords" content="nvidia驱动,cuda,cudnn,ubuntu" />
+    <meta name="baidu-site-verification" content="LRrmH41lz7" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
+    <link rel="canonical" href="https://www.naah69.com/post/2019-12-08-centos7-gpu-env/">
+    <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.naah69.com/css/hux-blog.min.css">
+    <link rel="stylesheet" href="https://www.naah69.com/css/syntax.css">
+    
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/bash.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/shell.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/java.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/json.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/python.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/xml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/yaml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/properties.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<style>
+
+     
+    header.intro-header {
+        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
+    }
+     
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+    #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+    #index nav ul li {padding-left: 0em;}
+    #index nav ul li ul {padding-left: 1em;}
+    @media screen and (max-width: 500px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+    @media screen and (max-width: 768px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+
+     
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width:24px;
+        border-right: 1px solid #c5c5c5;
+        color: hsla(0,0%,100%,.3);
+        border-right: 1px solid #000000;
+        text-align: center;
+    }
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+    .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+    .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+    .highlight pre, pre, .highlight .hll{padding: 6px 0px;padding-top: 22px;background-color:#282c34;border-radius: 6px;}
+    .hljs{padding: 8px 0px;background-color:#282c34;color: #ccc;}
+
+</style>
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.naah69.com/">Naah-Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="max-height: 1000px;" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naah69.com/">HOME</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/essay"  target="_blank" >essay</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/foundation"  target="_blank" >foundation</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/go"  target="_blank" >go</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/java"  target="_blank" >java</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/math"  target="_blank" >math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/others"  target="_blank" >others</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/python"  target="_blank" >python</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/categories/software"  target="_blank" >software</a>
+                    </li>
+                    
+
+                    <li>
+                        <a href="https://www.naah69.com/about">About Me</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.naah69.com/search/article">Search <img src="https://www.naah69.com/img/search.png" height="15" style="cursor: pointer;"></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            
+            $navbar.className = " ";
+            
+            setTimeout(function () {
+                
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+</script>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/others" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Others</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;机器学习系列
+                        </a>
+                        
+                        <a class="tag" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;环境配置系列
+                        </a>
+                        
+                        <a class="tag" href="/tags/nvidia" title="NVIDIA" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;NVIDIA
+                        </a>
+                        
+                        <a class="tag" href="/tags/gpu" title="GPU" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;GPU
+                        </a>
+                        
+                        <a class="tag" href="/tags/cuda" title="CUDA" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;CUDA
+                        </a>
+                        
+                        <a class="tag" href="/tags/centos" title="CentOS" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;CentOS
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>CentOS配置GPU开发环境教程</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Sunday, Dec 08,2019 17:29:04
+                        
+                        <span id="/post/2019-12-08-centos7-gpu-env/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
+</span>
+</span>
+
+
+
+                        
+                    </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container">
+
+                
+
+                
+
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#1-nvidia显卡驱动">1 nvidia显卡驱动</a>
+<ul>
+<li><a href="#1-1-安装elrepo镜像源">1.1 安装ELRepo镜像源</a></li>
+<li><a href="#1-2-查找需要安装的驱动版本">1.2 查找需要安装的驱动版本</a></li>
+<li><a href="#1-3-安装nvidia显卡驱动">1.3 安装nvidia显卡驱动</a></li>
+<li><a href="#1-4-禁用nouveau">1.4 禁用nouveau</a></li>
+<li><a href="#1-5-重启后测试">1.5 重启后测试</a></li>
+</ul></li>
+<li><a href="#2-cuda">2 cuda</a>
+<ul>
+<li>
+<ul>
+<li><a href="#2-1-下载cuda">2.1 下载cuda</a></li>
+<li><a href="#2-2-安装cuda">2.2 安装cuda</a></li>
+<li><a href="#2-3-配置cuda">2.3 配置cuda</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#3-cudnn">3 cudnn</a>
+<ul>
+<li>
+<ul>
+<li><a href="#3-1-下载cudnn">3.1 下载cudnn</a></li>
+<li><a href="#3-2-安装cudnn">3.2 安装cudnn</a>
+<ul>
+<li>
+<ul>
+<li><a href="#3-2-1-解压">3.2.1 解压</a></li>
+<li><a href="#3-2-2-安装">3.2.2 安装</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#3-3-查看版本">3.3 查看版本</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </div>
+                
+                
+                
+
+                
+
+<p>本文环境 CentOS7</p>
+
+<h1 id="1-nvidia显卡驱动">1 nvidia显卡驱动</h1>
+
+<p>通过<code>ELRepo源</code>的<code>nvidia-detect</code>命令来自动化安装驱动，省时省力，告别传统手工操作，一步一个坑</p>
+
+<h2 id="1-1-安装elrepo镜像源">1.1 安装ELRepo镜像源</h2>
+
+<p>1.导入公共秘钥</p>
+
+<pre><code class="language-bash">rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+</code></pre>
+
+<p>2.选择对应版本安装</p>
+
+<pre><code class="language-bash">#centos7
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+
+#centos6
+rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+  
+#centos5
+rpm -Uvh http://www.elrepo.org/elrepo-release-5-5.el5.elrepo.noarch.rpm  
+</code></pre>
+
+<h2 id="1-2-查找需要安装的驱动版本">1.2 查找需要安装的驱动版本</h2>
+
+<p>1.安装nvidia-detect</p>
+
+<p>通过<code>nvidia-detect</code>这个命令来查找我们需要安装的驱动版本,所以我们需要来安装它</p>
+
+<pre><code class="language-bash">yum install -y nvidia-detect 
+</code></pre>
+
+<p>2.运行nvidia-detect</p>
+
+<pre><code class="language-bash">nvidia-detect
+</code></pre>
+
+<blockquote>
+<p>输出以下结果，说明安装最新版本就可以，不需要制定版本
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pgpvtamej30yc04cdg1.jpg" alt="" /></p>
+</blockquote>
+
+<h2 id="1-3-安装nvidia显卡驱动">1.3 安装nvidia显卡驱动</h2>
+
+<pre><code class="language-bash">sudo yum install -y kmod-nvidia.x86_64
+</code></pre>
+
+<h2 id="1-4-禁用nouveau">1.4 禁用nouveau</h2>
+
+<p>1.判断是否开启<code>nouveau</code></p>
+
+<pre><code class="language-bash">lsmod | grep nouveau 
+</code></pre>
+
+<p>2.关闭<code>nouveau</code>(上方命令如果无输出则无需进行此步)</p>
+
+<pre><code class="language-bash">sudo echo &quot;blacklist nouveau&quot; &gt; /etc/modprobe.d/blacklist-nouveau.conf
+sudp echo &quot;options nouveau modeset=0&quot; &gt; /etc/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
+</code></pre>
+
+<h2 id="1-5-重启后测试">1.5 重启后测试</h2>
+
+<p>1.重启</p>
+
+<pre><code class="language-bash">reboot
+</code></pre>
+
+<p>2.测试</p>
+
+<blockquote>
+<p>运行下方命令，如果出现显卡详情则代表安装成功</p>
+
+<pre><code class="language-bash">nvidia-smi
+</code></pre>
+</blockquote>
+
+<h1 id="2-cuda">2 cuda</h1>
+
+<h3 id="2-1-下载cuda">2.1 下载cuda</h3>
+
+<p><a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=runfilelocal">CUDA官网</a></p>
+
+<p>选择配置，但是<code>Installer Type</code>必须选择<code>runfile</code>,根据下方给出的url下载安装包，可选择使用<code>wget</code>直接在<code>centos</code>下载，也可以选择使用其他方式下载然后上传至<code>centos</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pgn7rzn7j31ei0p8t9h.jpg" alt="" /></p>
+
+<h3 id="2-2-安装cuda">2.2 安装cuda</h3>
+
+<p>在ubuntu上运行下方代码</p>
+
+<pre><code class="language-bash">sh cuda_10.0.130_410.48_linux.run
+</code></pre>
+
+<p>根据下方步骤进行安装</p>
+
+<ol>
+<li>文档，输入<code>q</code></li>
+<li>接受，输入<code>accept</code>，<code>回车</code></li>
+<li>是否安装驱动，输入<code>n</code>，<code>回车</code></li>
+<li>是否安装cuda，输入<code>y</code>，<code>回车</code></li>
+<li>默认安装目录，<code>回车</code></li>
+<li>是否建立目录软链接，<code>回车</code></li>
+<li>是否安装默认程序，输入<code>y</code></li>
+<li>默认程序位置，<code>回车</code></li>
+</ol>
+
+<p><img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9hdtt5insj30hg0bq74z.jpg" alt="" /></p>
+
+<h3 id="2-3-配置cuda">2.3 配置cuda</h3>
+
+<pre><code class="language-bash">vim /etc/profile
+加入下面三行环境变量
+export CUDA_HOME=/usr/local/cuda:/usr/local/cuda-10.0
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-10.0/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/TensorRT-6.0.1.5/lib:/usr/local/cuda/extras/CUPTI/lib64
+export PATH=$PATH:$CUDA_HOME/bin 
+保存
+source /etc/profile
+</code></pre>
+
+<h1 id="3-cudnn">3 cudnn</h1>
+
+<h3 id="3-1-下载cudnn">3.1 下载cudnn</h3>
+
+<p><a href="https://developer.nvidia.com/cudnn">cudnn官网</a>,需要登录下载</p>
+
+<p>选择跟<code>cuda</code>相对应的版本，选择<code>cuDNN Library for Linux</code>版本下载</p>
+
+<p><img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9hdupg2tqj30zk0k0dh3.jpg" alt="" /></p>
+
+<h3 id="3-2-安装cudnn">3.2 安装cudnn</h3>
+
+<h5 id="3-2-1-解压">3.2.1 解压</h5>
+
+<pre><code class="language-bash">tar -zxvf cudnn-10.0-linux-x64-v7.6.5.32.tgz
+</code></pre>
+
+<h5 id="3-2-2-安装">3.2.2 安装</h5>
+
+<pre><code class="language-bash">sudo cp cuda/include/cudnn.h /usr/local/cuda/include/ 
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/ 
+sudo chmod a+r /usr/local/cuda/include/cudnn.h 
+sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+</code></pre>
+
+<h3 id="3-3-查看版本">3.3 查看版本</h3>
+
+<pre><code class="language-bash">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+</code></pre>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2019-12-08-jenkins-dingding-notify-new-version/" data-toggle="tooltip" data-placement="top" title="jenkins钉钉机器人通知(201912最新版本)">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/2019-12-08-rancher2-webhoook/" data-toggle="tooltip" data-placement="top" title="Rancher2配置Webhook(修复官方bug)">下一篇 &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+
+
+
+<div id="SOHUCS" sid='2019-12-08-17:29:04-CentOS配置GPU开发环境教程'></div>
+
+
+
+<script type="text/javascript">
+    (function(){
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            script.id = 'changyan_mobile_js';
+            script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+            head.appendChild(script);
+        } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+
+            </div>
+            
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    <section class="visible-md visible-lg">
+        <hr>
+        <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
+        <div class="short-about">
+            
+            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            
+
+            <h3 style="margin-bottom: 20px;">
+                
+                那焱(纳兰)
+                
+                &nbsp;
+                
+                Naah
+                
+            </h3>
+
+            
+            <p>算法工程师</p>
+            
+
+            
+            <p>热爱生活,拥抱变化</p>
+            
+
+            
+            <ul class="list-inline">
+                
+                
+                <li>
+                    <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li>
+                    <a target="_blank" href="https://weibo.com/naah">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                
+                <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+                <script>
+                    function wx() {
+                        layer.open({
+                            type: 1,
+                            title: false,
+                            closeBtn: 1,
+                            area: ['500px', '500px'],
+                            skin: 'layui-layer-nobg', 
+                            shadeClose: true,
+                            content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                        });
+                    }
+                </script>
+                <li>
+
+                    <a href="javascript:wx()">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a target="_blank" href="https://github.com/naah69">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5><a href="/tags/"   target="_blank" >标签展示</a></h5>
+        <div class="tags">
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础"  target="_blank" >
+            算法基础(16)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="数据结构"  target="_blank" >
+            数据结构(14)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank" >
+            环境配置系列(10)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法"  target="_blank" >
+            排序算法(9)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%9B%BE" title="图"  target="_blank" >
+            图(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
+            机器学习系列(7)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8" title="算法应用"  target="_blank" >
+            算法应用(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E9%9A%8F%E7%AC%94" title="随笔"  target="_blank" >
+            随笔(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/ci/cd" title="ci/cd"  target="_blank" >
+            ci/cd(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/hugo" title="hugo"  target="_blank" >
+            hugo(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/mark" title="mark"  target="_blank" >
+            mark(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91" title="二叉树"  target="_blank" >
+            二叉树(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E8%AE%B0%E5%BD%95" title="记录"  target="_blank" >
+            记录(4)
+            </a>
+
+            
+            
+            
+            <a href="/tags/docker" title="docker"  target="_blank" >
+            docker(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springboot" title="springboot"  target="_blank" >
+            springboot(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springcloud" title="springcloud"  target="_blank" >
+            springcloud(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/springmvc" title="springmvc"  target="_blank" >
+            springmvc(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E5%B7%A5%E5%85%B7" title="工具"  target="_blank" >
+            工具(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE" title="思维导图"  target="_blank" >
+            思维导图(3)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98" title="最小生成树问题"  target="_blank" >
+            最小生成树问题(3)
+            </a>
+
+            
+
+            <a href="/tags/"  target="_blank" >
+            全部标签
+            </a>
+
+        </div>
+    </section>
+    
+
+    
+    <hr>
+    <h5>友情链接</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+        
+        <li><a target="_blank" href="http://www.dayanzai.me/">大眼仔旭下载站</a></li>
+        
+        <li><a target="_blank" href="http://www.carrotchou.blog/">胡萝卜周下载站</a></li>
+        
+        <li><a target="_blank" href="http://xclient.info/">Xclient Mac下载站</a></li>
+        
+    </ul>
+
+    
+    <hr>
+    <h5>工具网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="https://www.algolia.com/">Algolia</a></li>
+        
+        <li><a target="_blank" href="https://changyan.kuaizhan.com/">畅言</a></li>
+        
+        <li><a target="_blank" href="http://tool.chinaz.com/">站长工具</a></li>
+        
+        <li><a target="_blank" href="https://tool.lu/">程序猿在线工具箱</a></li>
+        
+        <li><a target="_blank" href="https://www.bejson.com/">配置文件工具箱</a></li>
+        
+        <li><a target="_blank" href="http://www.jq22.com/textDifference">文本对比</a></li>
+        
+        <li><a target="_blank" href="https://cloudconvert.com/formats">在线文件格式转换</a></li>
+        
+    </ul>
+    
+    <hr>
+    <h5>收藏网站</h5>
+    <ul class="">
+        
+        <li><a target="_blank" href="http://ifeve.com/">并发编程网</a></li>
+        
+        <li><a target="_blank" href="https://www.nowcoder.com/">牛客网</a></li>
+        
+        <li><a target="_blank" href="http://www.acmcoder.com/">赛码网</a></li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </div>
+</article>
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a href="mailto:nayan3480232@163.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://weibo.com/naah">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    <li>
+                        <a href="javascript:wx()">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/naah69">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;   2019 浙ICP备19040622号
+                    <br>
+                    
+                    <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if ($('#tag_cloud').length !== 0) {
+        async("/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+<script>
+    
+    var _baId = '42bb6d1561e839923c67614c1e149bca';
+
+    
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

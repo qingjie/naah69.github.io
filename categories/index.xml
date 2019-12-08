@@ -6,10 +6,19 @@
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Dec 2019 18:24:13 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 19:22:05 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Others</title>
+      <link>https://www.naah69.com/categories/others/</link>
+      <pubDate>Sun, 08 Dec 2019 19:22:05 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/categories/others/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Python</title>
@@ -17,15 +26,6 @@
       <pubDate>Sun, 01 Dec 2019 18:24:13 +0800</pubDate>
       
       <guid>https://www.naah69.com/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Others</title>
-      <link>https://www.naah69.com/categories/others/</link>
-      <pubDate>Sun, 01 Dec 2019 13:23:02 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/categories/others/</guid>
       <description></description>
     </item>
     
