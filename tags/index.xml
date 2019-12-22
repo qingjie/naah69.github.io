@@ -6,7 +6,7 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Dec 2019 19:22:05 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 14:52:00 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>CI/CD</title>
       <link>https://www.naah69.com/tags/ci/cd/</link>
-      <pubDate>Sun, 08 Dec 2019 19:22:05 +0800</pubDate>
+      <pubDate>Sun, 22 Dec 2019 14:52:00 +0800</pubDate>
       
       <guid>https://www.naah69.com/tags/ci/cd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins</title>
+      <link>https://www.naah69.com/tags/jenkins/</link>
+      <pubDate>Sun, 22 Dec 2019 14:52:00 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>环境配置系列</title>
+      <link>https://www.naah69.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sun, 22 Dec 2019 14:52:00 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/</guid>
       <description></description>
     </item>
     
@@ -26,15 +44,6 @@
       <pubDate>Sun, 08 Dec 2019 19:22:05 +0800</pubDate>
       
       <guid>https://www.naah69.com/tags/sonarqube/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>环境配置系列</title>
-      <link>https://www.naah69.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/</link>
-      <pubDate>Sun, 08 Dec 2019 19:22:05 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97/</guid>
       <description></description>
     </item>
     
@@ -89,15 +98,6 @@
       <pubDate>Sun, 08 Dec 2019 17:29:04 +0800</pubDate>
       
       <guid>https://www.naah69.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jenkins</title>
-      <link>https://www.naah69.com/tags/jenkins/</link>
-      <pubDate>Sun, 08 Dec 2019 17:23:38 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/tags/jenkins/</guid>
       <description></description>
     </item>
     
