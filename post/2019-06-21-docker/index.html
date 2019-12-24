@@ -424,7 +424,7 @@ sudo yum makecache fast
 现在官方已经出了镜像站，我们同样也可以进行配置</p>
 
 <pre><code>sudo systemctl stop docker
-sudo echo &quot;{&quot;registry-mirrors&quot;:[&quot;https://registry.docker-cn.com&quot;,&quot;https://docker.mirrors.ustc.edu.cn&quot;,&quot;https://xgb5chrw.mirror.aliyuncs.com&quot;]}&quot; &gt; /etc/docker/daemon.json
+sudo echo '{&quot;registry-mirrors&quot;:[&quot;https://registry.docker-cn.com&quot;,&quot;https://docker.mirrors.ustc.edu.cn&quot;,&quot;https://xgb5chrw.mirror.aliyuncs.com&quot;]}' &gt; /etc/docker/daemon.json
 sudo systemctl start docker
 </code></pre>
 
