@@ -681,20 +681,33 @@
     post {
       failure {
         echo '构建失败'
+        script{
+          jenkins_projectname=env.JOB_NAME.substring(0,env.JOB_NAME.indexOf('/'))
+          log_url=env.JENKINS_URL+&quot;blue/organizations/jenkins/&quot;+jenkins_projectname+&quot;/detail/&quot;+env.BRANCH_NAME+&quot;/&quot;+env.BUILD_NUMBER+&quot;/pipeline#&quot;
+        }
+        echo &quot;${log_url}&quot;
         dingTalk(accessToken: &quot;$jenkins_dingding_token&quot;, imageUrl: 'http://www.iconsdb.com/icons/preview/soylent-red/x-mark-3-xxl.png',
-        message: &quot;构建失败&quot;, jenkinsUrl: &quot;${env.BUILD_URL}&quot;)
+        message: &quot;构建失败&quot;, jenkinsUrl: &quot;${log_url}&quot;)
       }
     
       success {
         echo '构建成功'
+        script{
+          jenkins_projectname=env.JOB_NAME.substring(0,env.JOB_NAME.indexOf('/'))
+          log_url=env.JENKINS_URL+&quot;blue/organizations/jenkins/&quot;+jenkins_projectname+&quot;/detail/&quot;+env.BRANCH_NAME+&quot;/&quot;+env.BUILD_NUMBER+&quot;/pipeline#&quot;
+        }
         dingTalk(accessToken: &quot;$jenkins_dingding_token&quot;, imageUrl: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png',
-        message: &quot;构建成功&quot;,jenkinsUrl: &quot;${env.BUILD_URL}&quot;)
+        message: &quot;构建成功&quot;,jenkinsUrl: &quot;${log_url}&quot;)
       }
  
       always {
         echo '开始构建'
+        script{
+          jenkins_projectname=env.JOB_NAME.substring(0,env.JOB_NAME.indexOf('/'))
+          log_url=env.JENKINS_URL+&quot;blue/organizations/jenkins/&quot;+jenkins_projectname+&quot;/detail/&quot;+env.BRANCH_NAME+&quot;/&quot;+env.BUILD_NUMBER+&quot;/pipeline#&quot;
+        }
         dingTalk(accessToken: &quot;$jenkins_dingding_token&quot;, imageUrl: 'http://icon-park.com/imagefiles/loading7_gray.gif',
-         message: &quot;开始构建&quot;, jenkinsUrl: &quot;${env.BUILD_URL}&quot;)
+         message: &quot;开始构建&quot;, jenkinsUrl: &quot;${log_url}&quot;)
       }
     }
 
