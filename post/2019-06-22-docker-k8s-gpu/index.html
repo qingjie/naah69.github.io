@@ -22,6 +22,36 @@
     <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
     <script src="https://www.naah69.com/js/hux-blog.min.js"></script>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <script>
+        var _baId = '5d8997bbef4253c1fdbcba1a8fb66019';
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?"+ _baId;
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+
 
 
 
@@ -489,7 +519,7 @@ rancher/rancher:stable
 <blockquote>
 <p><strong>对了，有个坑的地方！rancher的 server url 最好使用ip，不然可能有坑！</strong></p>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4a9ziejc0j20is0lctav.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4a9ziejc0j20is0lctav.jpg" alt="" /></p>
 </blockquote>
 
 <h2 id="4-2-安装k8s">4.2 安装k8s</h2>
@@ -498,11 +528,11 @@ rancher/rancher:stable
 
 <h3 id="4-2-1-添加集群">4.2.1 添加集群</h3>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aa5sacwfj20cu07ygm7.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aa5sacwfj20cu07ygm7.jpg" alt="" /></p>
 
 <h3 id="4-2-2-custome-输入集群名称">4.2.2 CUSTOME，输入集群名称</h3>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aa70nsujj20wk0d6q48.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aa70nsujj20wk0d6q48.jpg" alt="" /></p>
 
 <h3 id="4-2-3-添加节点">4.2.3 添加节点</h3>
 
@@ -542,7 +572,7 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 
 <p>我这里全部选中，如果多节点可以搭配选择！</p>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aa82s1j2j21ds0ck0wf.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aa82s1j2j21ds0ck0wf.jpg" alt="" /></p>
 </blockquote>
 
 <p>3.因为这些机器需要运行<code>rancher-agent</code>,需要pull 这个镜像，所以可能要等等</p>
@@ -552,13 +582,13 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 
 <p>点击确定后，下面的状态代表pull k8s的镜像，因为k8s的部署也是节点形式，需要pull <code>k8s</code>的镜像</p>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aace5unfj20xq084jtq.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aace5unfj20xq084jtq.jpg" alt="" /></p>
 </blockquote>
 
 <p>4.下面这个状态的时候，代表k8s集群已经安装完成啦！</p>
 
 <blockquote>
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aagtmjmhj21zm100tfu.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aagtmjmhj21zm100tfu.jpg" alt="" /></p>
 </blockquote>
 
 <h3 id="4-2-4-安装kubectl">4.2.4 安装kubectl</h3>
@@ -568,7 +598,7 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 <p>1.进入页面 <a href="https://docs.rancher.cn/rancher2x/install-prepare/download/kubernetes.html">kubectl下载</a></p>
 
 <blockquote>
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4ac6c5jnlj20t413kmxm.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4ac6c5jnlj20t413kmxm.jpg" alt="" /></p>
 </blockquote>
 
 <p>2.选择对应版本下载</p>
@@ -577,9 +607,9 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 <p>查看k8s版本：</p>
 
 <p>点击rancher页面的集群
-<img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4ac7ugwaoj20iw05st8j.jpg" alt="" />
+<img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4ac7ugwaoj20iw05st8j.jpg" alt="" />
 红线处标明了k8s的版本
-<img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4ac8xjm8aj20l40b43yc.jpg" alt="" /></p>
+<img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4ac8xjm8aj20l40b43yc.jpg" alt="" /></p>
 </blockquote>
 
 <p>3.下载</p>
@@ -590,7 +620,7 @@ sudo echo 'LANG=&quot;en_US.UTF-8&quot;' &gt;&gt; /etc/profile;source /etc/profi
 <pre><code>wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.13.7-kubectl
 </code></pre>
 
-<p><img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4acb3eruyj20hm08wweg.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4acb3eruyj20hm08wweg.jpg" alt="" /></p>
 </blockquote>
 
 <p>4.安装kubectl</p>
@@ -615,13 +645,13 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 <blockquote>
 <p>进入rancher页面，点击集群
-<img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4ac7ugwaoj20iw05st8j.jpg" alt="" /></p>
+<img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4ac7ugwaoj20iw05st8j.jpg" alt="" /></p>
 
 <p>点击右方的kubeconfig文件，然后你会看到一大片yaml
-<img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4acl40jlqj20hy05emwz.jpg" alt="" /></p>
+<img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4acl40jlqj20hy05emwz.jpg" alt="" /></p>
 
 <p>滑动到底部，点击复制到剪贴板
-<img src="http://ws3.sinaimg.cn/large/ed1d2fb9ly1g4aclyaki9j20j806a3ye.jpg" alt="" /></p>
+<img src="http://tva1.sinaimg.cn/large/ed1d2fb9ly1g4aclyaki9j20j806a3ye.jpg" alt="" /></p>
 
 <p>这时候用vim或者其他方式写入文件吧!</p>
 
@@ -738,7 +768,7 @@ vim ~/.kube/config
         <h5><a href="https://www.naah69.com/about" target="_blank">博主信息</a></h5>
         <div class="short-about">
             
-            <img src="http://ws3.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
+            <img src="http://tva1.sinaimg.cn/large/ed1d2fb9gy1fw0npk3155j20u0140aca.jpg"/>
             
 
             <h3 style="margin-bottom: 20px;">
@@ -1067,7 +1097,7 @@ vim ~/.kube/config
                                 area: ['500px', '500px'],
                                 skin: 'layui-layer-nobg', 
                                 shadeClose: true,
-                                content: '<img src="http:\/\/ws3.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
+                                content: '<img src="http:\/\/tva1.sinaimg.cn\/large\/ed1d2fb9gy1fw0ntoycqcj20rr0rs3zo.jpg" width="500px" height="500px">'
                             });
                         }
                     </script>
@@ -1147,57 +1177,6 @@ vim ~/.kube/config
         var $nav = document.querySelector("nav");
         if ($nav) FastClick.attach($nav);
     })
-</script>
-
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        }
-        else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-
-
-
-<script>
-    
-    var _baId = '42bb6d1561e839923c67614c1e149bca';
-
-    
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?" + _baId;
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-
-
-<script>
-    (function(){
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        }
-        else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
 </script>
 
 
