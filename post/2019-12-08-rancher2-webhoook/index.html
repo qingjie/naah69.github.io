@@ -548,7 +548,7 @@
 <li>键: 以<code>.json</code>结尾的文件名，比如<code>springboot-demo.json</code>;</li>
 <li>值: 设置为上一步中修改的配置文件;</li>
 <li>如果有多个服务，可以添加多个键值对，如图:
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oedklztoj31n80quq3s.jpg" alt="" /></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9oedklztoj31n80quq3s.jpg" alt="" /></li>
 </ul>
 
 <h1 id="2-webhooks镜像安装">2 webhooks镜像安装</h1>
@@ -562,12 +562,12 @@
 
 <ol>
 <li><p>配置服务名称和镜像
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oeju59zuj31c40dyjrl.jpg" alt="" /></p></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9oeju59zuj31c40dyjrl.jpg" alt="" /></p></li>
 
 <li><p>对外服务</p>
 
 <p>服务默认监听端口为9000，如果使用NodePort提供服务，则安以下方式配置；
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oekl3ibzj31na0eit8v.jpg" alt="" /></p></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9oekl3ibzj31na0eit8v.jpg" alt="" /></p></li>
 
 <li><p>环境变量</p>
 
@@ -585,17 +585,17 @@
 
 <li><p>配置健康检查
 端口: <code>9000</code>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9oenzi6rtj31b40py0to.jpg" alt="" /></p></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9oenzi6rtj31b40py0to.jpg" alt="" /></p></li>
 
 <li><p>配置数据卷</p>
 
 <ul>
 <li>选择配置映射卷
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ofn71lz9j30ea0kujrr.jpg" alt="" /></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9ofn71lz9j30ea0kujrr.jpg" alt="" /></li>
 <li>配置映射名: 选择前面创建的配置映射;</li>
 <li>容器路径: <code>/etc/webhook/source</code>;</li>
 <li>其他参数保持默认;
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogonnblrj31hs0u0dh5.jpg" alt="" /></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9ogonnblrj31hs0u0dh5.jpg" alt="" /></li>
 </ul></li>
 
 <li><p>最后点击启动，启动后查看日志，可以看到当前监听的服务</p></li>
@@ -606,9 +606,9 @@
 
 <ul>
 <li>如图，选择 <code>查看/编辑YAML</code>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogqmix7ij31zs0pc772.jpg" alt="" /></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9ogqmix7ij31zs0pc772.jpg" alt="" /></li>
 <li>在<code>securityContext: {}</code> 下边添加<code>serviceAccount: cattle</code>和<code>serviceAccountName: cattle</code>；
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9ogr96hddj30xu0fst9p.jpg" alt="" /></li>
+<img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9ogr96hddj30xu0fst9p.jpg" alt="" /></li>
 <li>保存</li>
 </ul></li>
 </ol>
@@ -679,9 +679,9 @@ repo_type=&lt;repo_type&gt;
 
 <p>webhooks服务收到消息后，会马上触发服务的升级。查看webhooks服务的日志，可以看到已经成功升级。</p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pe1pb9xdj31oq0l075p.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9pe1pb9xdj31oq0l075p.jpg" alt="" /></p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pe1tgz04j31vy0le0v9.jpg" alt="" /></p>
+<p><img src="http://tva1.sinaimg.cn/large/006tNbRwly1g9pe1tgz04j31vy0le0v9.jpg" alt="" /></p>
 
                 
                 <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
