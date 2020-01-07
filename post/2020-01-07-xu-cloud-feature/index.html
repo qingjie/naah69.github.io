@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-	<meta name="generator" content="Hugo 0.55.6" />
-    <title>纳兰小筑</title>
+    <title>云计算的未来：云计算3.0-纳兰小筑</title>
     <meta name="description" content="Naah,那焱,纳兰,一只正在通往机器学习的可爱的程序猿,热爱生活,拥抱变化,喜欢有关草木植物的任何事物,偶尔喜欢读读书写写诗" />
-    <meta name="keywords" content="Naah,那焱,纳兰,NaYan,nayan,纳兰的博客,那焱的网络日志,那焱的博客,Naah Blog,博客,个人网站,Java,Python" />
+    <meta name="keywords" content="云计算,机器计算,云原生,应用工厂" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://www.naah69.com/">
+    <link rel="canonical" href="https://www.naah69.com/post/2020-01-07-xu-cloud-feature/">
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -56,7 +55,74 @@
 
 
 
+    
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/bash.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/shell.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/java.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/json.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/python.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/xml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/yaml.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/languages/properties.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<style>
+
      
+    header.intro-header {
+        background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')
+    }
+     
+    #floatting_dir {
+        position: fixed;
+        display: none;
+        width: auto;
+        height: auto;
+        font-size: 13px;
+    }
+    #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+    #index nav ul li {padding-left: 0em;}
+    #index nav ul li ul {padding-left: 1em;}
+    @media screen and (max-width: 500px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+    @media screen and (max-width: 768px){
+        #index nav ul{margin-left: 0px;padding-left: 0em;list-style: none;margin-bottom:0em;}
+        #index nav ul li {padding-left: 0em;}
+        #index nav ul li ul {padding-left: 1em;}
+    }
+
+     
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width:24px;
+        border-right: 1px solid #c5c5c5;
+        color: hsla(0,0%,100%,.3);
+        border-right: 1px solid #000000;
+        text-align: center;
+    }
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+    .hljs-ln{border-collapse:collapse}.hljs-ln td{padding-left:1em}
+    .hljs-ln-n:before{content:attr(data-line-number);margin-right:1em;}
+    .highlight pre, pre, .highlight .hll{padding: 6px 0px;padding-top: 22px;background-color:#282c34;border-radius: 6px;}
+    .hljs{padding: 8px 0px;background-color:#282c34;color: #ccc;}
+
+</style>
+
 </head>
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -163,15 +229,115 @@
 
 
 
-<header class="intro-header" style="background-image: url('http://tva1.sinaimg.cn/large/006tNbRwly1g9hjo9cef1j31hc0ec0tz.jpg')">
+
+<script language="javascript">
+
+    $(document).ready(function () {
+        top();
+        $('#floatting_dir').css('left', '0px');
+        $("#floatting_dir").css('display', 'block');
+
+        function top() {
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+            } else {
+
+                $("#floatting_dir").css('top', window.innerHeight / 9 + 'px');
+            }
+        }
+
+        function ishide() {
+
+            if ($('.container').width() <= 720) {
+                $("#floatting_dir").css('top', '0px');
+                
+                
+                
+            } else {
+                $("#floatting_dir").css('display', 'block');
+            }
+        }
+
+        $(window).scroll(function () {
+            ishide();
+            if (($(window).scrollTop() != 0) && ($('#floatting_dir').css('display') == 'block')) {
+                top();
+            }
+        });
+
+        window.onresize = function () {
+            ishide();
+        }
+
+        $("#dir_btn_open").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "none":
+                    $("#dir_btn_close").show()
+                    $('#floatting_dir #index').show();
+                    $('#floatting_dir header').css("border-bottom", "1px solid gray");
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        $("#dir_btn_close").click(function () {
+            switch ($('#floatting_dir #index').css('display')) {
+                case "block":
+                    $("#dir_btn_close").hide()
+                    $('#floatting_dir #index').hide();
+                    $('#floatting_dir header').css("border-bottom", "");
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+
+</script>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>纳兰小筑</h1>
-                    
-                    <span class="subheading">给别人一般如沐春风的温馨，锋芒可以不用太露。<br><br>给自己保留随意任性的自由，名气可以不用太大。
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a href="https://www.naah69.com/%20categories/others" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;Others</a>
+                        
+                        
+                        <a class="tag" href="/tags/%E7%9B%B8%E5%85%B3%E6%80%9D%E8%80%83" title="相关思考" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;相关思考
+                        </a>
+                        
+                        <a class="tag" href="/tags/ecug" title="ECUG" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;ECUG
+                        </a>
+                        
+
+                    </div>
+
+                    <h1>云计算的未来：云计算3.0</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Naah on Tuesday, Jan 07,2020 14:46:06
+                        
+                        <span id="/post/2020-01-07-xu-cloud-feature/" class="meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span>
+    </span>
+    &nbsp;
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>
+
 </span>
+</span>
+
+
+
+                        
+                    </span><br>
+
                 </div>
             </div>
         </div>
@@ -181,490 +347,163 @@
 
 
 
-<div class="container">
-    <div class="row">
-        
-        
-        <div class="
-            col-lg-8 col-lg-offset-1
+<article>
+    <div class="container" id="container_div">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-1
             col-md-8 col-md-offset-1
             col-sm-12
             col-xs-12
-            post-container
-        ">
-            
+            post-container">
 
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2020-01-07-xu-cloud-feature/" target="_blank">
-        <h2 class="post-title">
-            <span>云计算的未来：云计算3.0</span>
+                
 
-        </h2>
+                
 
-        
-        <div class="post-content-preview">
-            
-            老许是七牛CEO许世伟，我们这里就叫他老许好了。他在大会上分享了一些关于对未来行业的看法，我会在这里写下我汲取老许的观点后的一些思考。 1 云+
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Tuesday, Jan 07,2020 14:46:06
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%9B%B8%E5%85%B3%E6%80%9D%E8%80%83" title="相关思考"  target="_blank">相关思考</a>、
-        
-        <a class="tag"  href="/tags/ecug" title="ECUG"  target="_blank">ECUG</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2020-01-06-chaos-mesh/" target="_blank">
-        <h2 class="post-title">
-            <span>有关混沌工程的学习</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            最近参加了ECUG大会，其中有一个分享是pingCAP的CEO大佬刘奇分析的他们开源的在k8s平台上使用的混沌工程插件Chaos Mesh，我
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Monday, Jan 06,2020 16:02:27
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/chaos" title="Chaos"  target="_blank">Chaos</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2020-01-04-microservice-servicemesh-thinkabout/" target="_blank">
-        <h2 class="post-title">
-            <span>微服务拆分及技术选型(2019总结版)</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            手把手教你如何拆分微服务，以及如何对微服务进行技术选型
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Saturday, Jan 04,2020 21:45:39
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1" title="微服务"  target="_blank">微服务</a>、
-        
-        <a class="tag"  href="/tags/%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC" title="服务网格"  target="_blank">服务网格</a>、
-        
-        <a class="tag"  href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86" title="微服务拆分"  target="_blank">微服务拆分</a>、
-        
-        <a class="tag"  href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B" title="技术选型"  target="_blank">技术选型</a>、
-        
-        <a class="tag"  href="/tags/%E5%A4%A7%E4%BC%9A%E5%88%86%E4%BA%AB" title="大会分享"  target="_blank">大会分享</a>、
-        
-        <a class="tag"  href="/tags/%E7%9B%B8%E5%85%B3%E6%80%9D%E8%80%83" title="相关思考"  target="_blank">相关思考</a>、
-        
-        <a class="tag"  href="/tags/ecug" title="ECUG"  target="_blank">ECUG</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-22-jenkins-pipeline/" target="_blank">
-        <h2 class="post-title">
-            <span>BlueOcean实战多分支pipeline构建(Jenkins)</span>
-
-        </h2>
-
-        
-        <h3 class="post-subtitle">
-            把jenkinsfile的语法给你讲的明明白白！！！
-        </h3>
-        
-        <div class="post-content-preview">
-            
-            最近，将公司的CI/CD从jenkins传统配置更改成了jenkins最新的声明式流水线(Declarative Pipeline)，这样就可
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 22,2019 14:52:00
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/jenkins" title="Jenkins"  target="_blank">Jenkins</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-23-jenkinsflie-plugin/" target="_blank">
-        <h2 class="post-title">
-            <span>Jenkinsfile的高亮、提示和校验</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            原本我以为强大的IDEA什么插件都有，然而这个，真没有！ 但是在VsCode里找到了jenkinsfile高亮、提示和校验插件 1 高亮、代码提示
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 22,2019 14:36:00
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/jenkins" title="Jenkins"  target="_blank">Jenkins</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-08-sonar-p3c/" target="_blank">
-        <h2 class="post-title">
-            <span>SonarQube7.7安装阿里JAVA规范插件P3C</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            阿里的p3c规则插件大部分都是民间构建的，所以版本支持不全，本文章仅支持7.7社区版
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 08,2019 19:22:05
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/sonarqube" title="SonarQube"  target="_blank">SonarQube</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-08-sonarqube/" target="_blank">
-        <h2 class="post-title">
-            <span>docker构建SonarQube进行代码质量检查</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            代码质量检查是CI/CD中很重要的一步，今天我们就开始让我们代码健壮起来
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 08,2019 19:18:54
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/sonarqube" title="SonarQube"  target="_blank">SonarQube</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-08-rancher2-webhoook/" target="_blank">
-        <h2 class="post-title">
-            <span>Rancher2配置Webhook(修复官方bug)</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            通过webhook来操作rancher2达成持续部署
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 08,2019 19:01:18
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/rancher" title="rancher"  target="_blank">rancher</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-08-centos7-gpu-env/" target="_blank">
-        <h2 class="post-title">
-            <span>CentOS配置GPU开发环境教程</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            centos构建包含nvidia drive,cuda,cudnn的gpu开发环境
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 08,2019 17:29:04
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank">机器学习系列</a>、
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/nvidia" title="NVIDIA"  target="_blank">NVIDIA</a>、
-        
-        <a class="tag"  href="/tags/gpu" title="GPU"  target="_blank">GPU</a>、
-        
-        <a class="tag"  href="/tags/cuda" title="CUDA"  target="_blank">CUDA</a>、
-        
-        <a class="tag"  href="/tags/centos" title="CentOS"  target="_blank">CentOS</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://www.naah69.com/post/2019-12-08-jenkins-dingding-notify-new-version/" target="_blank">
-        <h2 class="post-title">
-            <span>jenkins钉钉机器人通知(201912最新版本)</span>
-
-        </h2>
-
-        
-        <div class="post-content-preview">
-            
-            钉钉机器人安全策略下配置Jenkins通知
-            
-        </div>
-    </a>
-    <p class="post-meta" style="margin-bottom: 5px">
-        Posted by Naah on Sunday, Dec 08,2019 17:23:38
-    </p>
-<div>
-    <span class="categories_list">
-        <i class="fa fa-folder-o" ></i>
-        
-        <a href="https://www.naah69.com/categories/others"  target="_blank">Others</a>、
-        
-    </span>
-    <span class="categories_list">
-        <i class="fa fa-tags" ></i>
-        
-        <a class="tag"  href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E5%88%97" title="环境配置系列"  target="_blank">环境配置系列</a>、
-        
-        <a class="tag"  href="/tags/jenkins" title="Jenkins"  target="_blank">Jenkins</a>、
-        
-        <a class="tag"  href="/tags/ci/cd" title="CI/CD"  target="_blank">CI/CD</a>、
-        
-    </span>
-</div>
-</div>
-<div>
-</div>
-<hr>
-
-
-
-            
-
-
-
-<ul class="pager">
-    
-
-    
-    
-    <li class="pagination__item">
-        <a  style="background-color:#404040;color: white;"  aria-label="Goto page 1" href="/">1</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 2" href="/page/2/">2</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 3" href="/page/3/">3</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 4" href="/page/4/">4</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 5" href="/page/5/">5</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 6" href="/page/6/">6</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 7" href="/page/7/">7</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 8" href="/page/8/">8</a>
-    </li>
-    
-    <li class="pagination__item">
-        <a  aria-label="Goto page 9" href="/page/9/">9</a>
-    </li>
-    
-    
-
-    
-    <li class="next">
-        <a href="/page/2/">下一页 &rarr;</a>
-    </li>
-    
+                
+                
+                <div id="floatting_dir" style="margin: 10px;border: 1px solid gray;z-index:99999;">
+                    <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                        <strong id="dir_btn_open" style="color: black;font-size: large;">目录</strong>
+                        <strong id="dir_btn_close" style="color: black;font-size: large;float: right">x</strong>
+                    </header>
+                    <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#1-云-端的发展趋势">1 云+端的发展趋势</a></li>
+<li><a href="#2-it普惠时代对职业发展的影响">2 IT普惠时代对职业发展的影响</a>
+<ul>
+<li><a href="#2-1-后端开发需求大幅下降">2.1 后端开发需求大幅下降</a></li>
+<li><a href="#2-2-全栈开发和架构师需求上扬">2.2 全栈开发和架构师需求上扬</a></li>
+<li><a href="#2-3-数据分析需求上扬">2.3 数据分析需求上扬</a></li>
+</ul></li>
+<li><a href="#3-快速构建应用的套路">3 快速构建应用的套路</a></li>
+<li><a href="#4-看待成长">4 看待成长</a></li>
 </ul>
+</nav>
+                    </div>
+                </div>
+                
+                
+                
+
+                
+
+<p>老许是七牛CEO许世伟，我们这里就叫他老许好了。他在大会上分享了一些关于对未来行业的看法，我会在这里写下我汲取老许的观点后的一些思考。</p>
+
+<h1 id="1-云-端的发展趋势">1 云+端的发展趋势</h1>
+
+<ol>
+<li>云计算1.0：机器计算（云主机）</li>
+<li>云计算2.0：容器计算（云原生/Cloud Native）</li>
+<li>云计算3.0：应用计算（应用工厂/Application Factory）</li>
+</ol>
+
+<p>其中前两点，我们都知道，因为我们已经经历过了，那第三点是什么意思呢？</p>
+
+<p>其实第三点是指随着IT市场的不断发展，不断沉淀和不断抽象会出现一批通用化的程序，而我们未来会基于这些通用程序进行积木式的组合来代替传统应用开发。</p>
+
+<p>未来如果真的这么便捷的话，那么我们可能会进入一个新的时代，老许称他为<code>IT普惠时代</code>。这个时代告别传统的定制化应用开发，造就了技术的极致的生产力。</p>
+
+<h1 id="2-it普惠时代对职业发展的影响">2 IT普惠时代对职业发展的影响</h1>
+
+<h2 id="2-1-后端开发需求大幅下降">2.1 后端开发需求大幅下降</h2>
+
+<p>我们上面曾经说过云计算3.0带来的是IT普惠，云上会出现大量的封装好的抽象应用供大家选择。</p>
+
+<p>而传统后端开发，其实本质上是对数据库进行写sql，拿到数据后进行相关的校验、计算等操作。</p>
+
+<p>而封装好的抽象应用会简化我们的逻辑，提高生产力，专注写sql语句，所以后端开发的需求可能会大幅下降。</p>
+
+<p>这里不考虑各种优化，服务架构等需求。</p>
+
+<h2 id="2-2-全栈开发和架构师需求上扬">2.2 全栈开发和架构师需求上扬</h2>
+
+<p>虽然进入了IT普惠的时代，但是对于定制化要求高的前端来说，提高的生产力还是有限的。并不能大量解放双手。</p>
+
+<p>而在后端开发都将聚焦在写sql上，这个时候针对这种通用业务服务，就需要架构师来对架构设计，对服务编排管理。</p>
+
+<h2 id="2-3-数据分析需求上扬">2.3 数据分析需求上扬</h2>
+
+<p>这个点，大家应该都明白，近几年的情况。大家也都看得到，数据分析的需求越来越高，国内人大多数都学会了基于数据说话，而不是拍脑袋。</p>
+
+<p>决策，优化等都需要数据分析师。</p>
+
+<h1 id="3-快速构建应用的套路">3 快速构建应用的套路</h1>
+
+<p>互联网发展20年，20年前谁也未曾想到这20年是翻天覆地的变化，那我们站在现在这个节点，去想象下未来20年到底会发生什么，会发展到什么程度？这20年必定无法想象</p>
+
+<p>那么我们如何在这激流勇进的互联网时代，快速跟上变化而不掉队，这也算一个好问题，我们做什么事想要提高效率，总是要抽象它，分析它，思考它的方法论，俗称这事的套路。</p>
+
+<p>在这里，老许提出了一个点<code>开放封闭原则</code>，这个本来是设计模式中的一种思想，却被老许抛转引玉，拿到生活中来进行实践。不愧是实践出真知啊。</p>
+
+<p>开放封闭原则：对扩展开放，对修改封闭。</p>
+
+<p>老许的观点是，找到最小核心系统，这个核心一定要小，要足够稳定，然后配合周边组件进行组合使用。</p>
+
+<p>也就是我们要找到需求中的稳定点，系统的核心价值，这部分是稳定的，是封闭的，是不会改变的。（以不变应万变）</p>
+
+<p>其次找到需求中的变化点，做开放修改，这部分是多变的，是扩展的，是开放的。</p>
+
+<p>我们找到了每个思维热潮下的不变的点和变化的点，那我们就能做到紧跟时代潮流不掉队。就能在不修改基础架构的前提下，去适应多变性。</p>
+
+<p>拥抱变化真正的含义是理解变化，并且找到不变</p>
+
+<p>其实这种思想还是蛮重要的，举个栗子，比如java中的spring，它的核心就很小，就是IOC，很小，很简单，也很稳定,其他的都以插件的形式进行组合使用</p>
+
+<h1 id="4-看待成长">4 看待成长</h1>
+
+<p>一个人的成长不是看他有多聪明，而是看他有多开放的心态，只有有开发的心态，才能保持持续的上进，不断的学习，跟上社会的脚步。</p>
+
+<p>任何一个思潮，都有一定的可取的地方，没有100%是错的，如果找不到，可能是我们看待它的角度还不对</p>
+
+                
+                <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
+                <div id="cyEmoji" role="cylabs" data-use="emoji"></div>
+                
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/2020-01-06-chaos-mesh/" data-toggle="tooltip" data-placement="top" title="有关混沌工程的学习">&larr; 上一篇</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
 
 
-        </div>
-        
+
+
+<div id="SOHUCS" sid='2020-01-07-14:46:06-云计算的未来：云计算3.0'></div>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
+
+<script type="text/javascript">
+    (function(){
+        var appid = 'cytako4HR';
+        var conf = 'prod_b9da8b3167eed0ab02bb9913a13e0435';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            script.id = 'changyan_mobile_js';
+            script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+            head.appendChild(script);
+        } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+
+            </div>
+            
 <div class="
     col-lg-3 col-lg-offset-0
     col-md-3 col-md-offset-0
@@ -955,10 +794,12 @@
     </ul>
 </div>
 
+
+        </div>
+
     </div>
-</div>
-
-
+</article>
+<script src="https://www.naah69.com/js/hl-copy.js"></script>
 
 
 
