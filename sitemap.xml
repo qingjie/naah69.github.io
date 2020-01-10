@@ -4,38 +4,61 @@
   
   <url>
     <loc>https://www.naah69.com/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.naah69.com/tags/ci/cd/</loc>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.naah69.com/categories/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.naah69.com/tags/devops/</loc>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.naah69.com/tags/ecug/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.naah69.com/categories/others/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.naah69.com/post/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.naah69.com/tags/scrum/</loc>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.naah69.com/tags/</loc>
-    <lastmod>2020-01-07T14:46:06+08:00</lastmod>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.naah69.com/post/2020-01-09-scrum-xp-devops/</loc>
+    <lastmod>2020-01-09T21:14:07+08:00</lastmod>
   </url>
   
   <url>
@@ -98,12 +121,6 @@
   <url>
     <loc>https://www.naah69.com/post/2019-12-22-jenkins-pipeline/</loc>
     <lastmod>2019-12-22T14:52:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.naah69.com/tags/ci/cd/</loc>
-    <lastmod>2019-12-22T14:52:00+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
