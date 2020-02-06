@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 09 Jan 2020 21:14:07 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2020 10:46:49 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深度学习数学基础(一)之神经元构造</title>
+      <link>https://www.naah69.com/post/2020-02-06-neurous/</link>
+      <pubDate>Thu, 06 Feb 2020 10:46:49 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2020-02-06-neurous/</guid>
+      <description>过年期间，我抽时间把深度学习的神经网络的数学基础学习了一下，简单的看了看神经网络的基础，在这里我通过写这个系列的博文来沉淀我所学到的知识。 1</description>
+    </item>
     
     <item>
       <title>关于Scrum&#43;XP&#43;DevOps的学习</title>
