@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>深度学习数学基础(一)之神经元构造-纳兰小筑</title>
+    <title>深度学习数学基础(二)之神经网络构造-纳兰小筑</title>
     <meta name="description" content="Naah,那焱,纳兰,一只正在通往机器学习的可爱的程序猿,热爱生活,拥抱变化,喜欢有关草木植物的任何事物,偶尔喜欢读读书写写诗" />
-    <meta name="keywords" content="神经元,数学,深度学习,神经网络" />
+    <meta name="keywords" content="深度学习,神经网络,神经网络结构" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://www.naah69.com/post/2020-02-06-neurous/">
+    <link rel="canonical" href="https://www.naah69.com/post/2020-02-06-neural-network-structure/">
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -346,11 +346,11 @@
 
                     </div>
 
-                    <h1>深度学习数学基础(一)之神经元构造</h1>
+                    <h1>深度学习数学基础(二)之神经网络构造</h1>
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Naah on Thursday, Feb 06,2020 10:46:49
+                    <span class="meta">Posted by Naah on Thursday, Feb 06,2020 19:40:19
                         
-                        <span id="/post/2020-02-06-neurous/" class="meta_data_item" data-flag-title="">
+                        <span id="/post/2020-02-06-neural-network-structure/" class="meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span>
     </span>
@@ -403,23 +403,24 @@
                     <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;overflow: auto;height: 25em;">
                         <nav id="TableOfContents">
 <ul>
-<li><a href="#1-生物学上的神经元">1 生物学上的神经元</a>
+<li><a href="#1-神经网络">1 神经网络</a></li>
+<li><a href="#2-神经网络层级的职责">2 神经网络层级的职责</a></li>
+<li><a href="#3-神经网络的结构">3 神经网络的结构</a>
 <ul>
-<li><a href="#1-1-神经元的概念">1.1 神经元的概念</a></li>
-<li><a href="#1-2-神经元的工作">1.2 神经元的工作</a></li>
+<li><a href="#3-1-示例说明">3.1 示例说明</a></li>
+<li><a href="#3-2-偏置">3.2 偏置</a></li>
+<li><a href="#3-3-实例解释">3.3 实例解释</a></li>
 </ul></li>
-<li><a href="#2-神经元的简单数学表示">2 神经元的简单数学表示</a>
+<li><a href="#4-神经网络的信息说明">4 神经网络的信息说明</a>
 <ul>
-<li><a href="#2-1-输入">2.1 输入</a></li>
-<li><a href="#2-2-输出">2.2 输出</a></li>
-<li><a href="#2-3-权重">2.3 权重</a></li>
-<li><a href="#2-4-点火条件">2.4 点火条件</a></li>
-<li><a href="#2-5-点火条件图形表示-阶跃函数">2.5 点火条件图形表示（阶跃函数）</a></li>
-<li><a href="#2-6-激活函数">2.6 激活函数</a>
+<li><a href="#4-1-权重与偏置">4.1 权重与偏置</a></li>
+<li><a href="#4-2-模型合理性">4.2 模型合理性</a></li>
+<li><a href="#4-3-网络自学习的神经网络">4.3 网络自学习的神经网络</a>
 <ul>
-<li><a href="#sigmoid函数">sigmoid函数</a></li>
+<li><a href="#4-3-1-有监督学习">4.3.1 有监督学习</a></li>
+<li><a href="#4-3-2-最优解">4.3.2 最优解</a></li>
+<li><a href="#4-3-3-代价函数">4.3.3 代价函数</a></li>
 </ul></li>
-<li><a href="#2-7-偏置">2.7 偏置</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -431,171 +432,159 @@
 
                 
 
-<p>过年期间，我抽时间把深度学习的神经网络的数学基础学习了一下，简单的看了看神经网络的基础，在这里我通过写这个系列的博文来沉淀我所学到的知识。</p>
-
-<h1 id="1-生物学上的神经元">1 生物学上的神经元</h1>
-
-<h2 id="1-1-神经元的概念">1.1 神经元的概念</h2>
-
-<p>神经网络的这个想法，是受到生物学上的神经元的启发所创建出来的。在生物学上，神经元是以下方的流程来作出反应的。</p>
+<p>书接上文，继续说说神经网络的结构。首先我们要回顾上一篇文章<a href="https://www.naah69.com/post/2020-02-06-neurous/">深度学习数学基础(一)之神经元构造</a>中讲到的两个公式。</p>
 
 <ol>
-<li>神经元形成网络</li>
-<li>从其他多个神经元传递过来的信号，如果他们的和不超过某个固定大小的值（阈值），则神经元不做出任何反应</li>
-<li>如果他们的和超过某个固定大小的值（阈值），则神经元做出反应（称为<code>点火</code>），向另外的神经元传递固定强度的信号</li>
-<li>在2和3中，从多个神经元传递过来的信号中，每个信号对应的<code>权重</code>是不同的。</li>
+<li>加权输入公式
+$$z=w_1x_1+w_2x_2+w_3x_3+&hellip;+b $$</li>
+<li>激活公式
+$$y=a(z)$$</li>
 </ol>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmhwvtheij30xy0aijtw.jpg" alt="" /></p>
+<p>还有神经元构造图：
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmxyn9isyj30xw09cdhm.jpg" alt="" /></p>
 
-<h2 id="1-2-神经元的工作">1.2 神经元的工作</h2>
+<p>我们只要将这样的神经元连接成网络状，那么就形成了<code>神经网络</code>。这里我们主要说最基础的<code>阶层型神经网络</code>,像<code>卷积神经网络</code>,<code>循环神经网络</code>等需要学习完本系列后再进行学习。</p>
 
-<p>阈值：神经元固有的边界敏感值值</p>
+<p>那么我们先来通俗的比喻下神经网络用来干什么的，我们以往在写程序的时候都是求结果，而神经网络求得却不是结果，而是公式或规则（比喻），其实神经网络就是通过大量的计算来不断的减小误差来求距离正解最相似的公式的权重和偏置等（统称参数）。所以感觉神经网络高大上的朋友们不要有感觉自己学不会的想法，其实神经网络并不难，就是一个又一个的公式组合起来而已，不同的算法其实就是各个大佬用数学建模，我们不看那么远，先跟我一起把神经网络的基础入门一下吧。</p>
 
-<p>点火：神经元参数的和超过阈值，神经元对此作出反应</p>
+<h1 id="1-神经网络">1 神经网络</h1>
 
-<blockquote>
-<p>对于生命来说，神经元会忽略微笑的输入信号，这是十分重要的。</p>
+<p>下面就是一个阶层型的神经网络的图片，按照层对该神经网络划分，可分为<code>输入层</code>,<code>隐藏层</code>(也称为中间层),<code>输出层</code>。</p>
 
-<p>反之，如果神经元对于任何微小的信号都变得兴奋，那么这个神经系统将“情绪不稳定”</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmy301uw2j30zc0hon1e.jpg" alt="" /></p>
 
-<p>（想想网络上说的玻璃心是不是就是这个意思呢）</p>
-</blockquote>
+<h1 id="2-神经网络层级的职责">2 神经网络层级的职责</h1>
 
-<h1 id="2-神经元的简单数学表示">2 神经元的简单数学表示</h1>
-
-<p>上面我们说到神经元是通过将输入的信号的和是否超过阈值来判断是否点火，那么如果点火之后呢，点火的输出又是什么呢？</p>
-
-<p>其实，神经元的点火输出也是信号，有意思的是，无论神经元接受到多大的刺激或很多很多神经元传来的信号，这个神经元也只输出固定大小的信号，比如点火后的输出是0或1。简单整理如下：</p>
+<p>下面我们说说神经网络中各层的职责：</p>
 
 <ol>
-<li>来自其他多个神经元的信号之和成为神经元的输入</li>
-<li>如果输入超过神经元固有的阈值，则点火</li>
-<li>神经元的点火输出可以用数字信号0和1来表示，及时有多个输出端，值也是同一个。</li>
+<li><code>输入层</code>：该层负责读取神经网络需要的数据，这个层的神经元没有输入监听，他们的输出是将读取的数据原样输出。<strong>输入==输出</strong></li>
+<li><code>隐藏层</code>：该层神经元则负责上面我们所回顾的两个公式的计算操作，在神经网络中，这层是实际处理信息的部分。<strong>计算z和y</strong></li>
+<li><code>输出层</code>：该层与隐藏层一样，执行两个公式的计算，并且显示神经网络的计算结果，也就是最终输出。<strong>计算z和y并显示结果</strong></li>
 </ol>
 
-<p>下面让我们用数学来简单的表示<code>1-1</code>中的流程吧：</p>
+<p>下图是一个最简单的神经网络示例，用于我们来理解神经网络的本质。这个简单的神经网络的特征是，前一层的神经单与下一层的所有神经元都有箭头连接，这样的层构造称为<code>全连接层（fully connected layer）</code>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmyc9at60j30xm0pydlb.jpg" alt="" /></p>
 
-<h2 id="2-1-输入">2.1 输入</h2>
+<p>输入层：输入与输出是相同的，如果一定要引入激活函数，那激活函数就是恒等函数$a(z)=z$，该示例中输入层有12个神经元，对应图片的12个像素数据</p>
 
-<p>我们这里将神经元的阈值设置为0，大于阈值则点火，输入则分为$\le 0$和$&gt;0$，也可以成为”有“、“无”两种输入信号。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnns6i500j30p60fiq4d.jpg" alt="" /></p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmk36kxspj305k01i3yb.jpg" alt="" /></p>
+<p>隐藏层：输入是变量，根据对应的权重和偏置来计算z，再经由激活函数计算，输出值传递到下一层</p>
 
-<h2 id="2-2-输出">2.2 输出</h2>
+<p>输出层：该层有两个神经元，分别对应着要识别的数字0和1，两个神经元分别是对两个输出值较为兴奋的神经元，通过sigmoid我们可以拿到两个神经元对数据的兴奋度，通过对连个兴奋度做比较，我们就可以来猜这个数据到底是什么了!</p>
 
-<p>我们这里将神经元的点火设置为<code>0</code>和<code>1</code>两种信号。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnnswhex8j312q0dugoj.jpg" alt="" /></p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmk7dai2nj30ae03owec.jpg" alt="" /></p>
+<h1 id="3-神经网络的结构">3 神经网络的结构</h1>
 
-<p>则</p>
+<h2 id="3-1-示例说明">3.1 示例说明</h2>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmkaolpplj312e0b2acy.jpg" alt="" /></p>
+<p>我们还使用上方的示例来进行说明</p>
 
-<h2 id="2-3-权重">2.3 权重</h2>
+<p>建立一个神经网络，用来识别通过 4×3 像素的图像读取的手写数字 0 和 1。学习数据是 64 张图像，其中像素是单色二值。</p>
 
-<p>从上面我们知道。神经元点火与否是根据输入信号的和来判断的，但是这个求和的方式不是简单的求和，而是不同的输入的重要性不同，这个重要性系数就是我们的<code>权重</code>，比如打网球的时候，我们的视觉神经信号的是比听觉神经信号更重要的，那么视觉神经元和听觉神经元的权重就不同。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnnvsc0juj311m0aet9m.jpg" alt="" /></p>
 
-<p>假设我们有三个神经元${x}_{1}$、${x}_{2}$、${x}_{3}$,则神经元的输入信号的和为：
-$${w}_{1}{x}_{1}+{w}_{2}{x}_{2}+{w}_{3}{x}_{3}$$</p>
+<p>模式识别的难点在于答案不标准，这个例题也体现了这样的特性。即使是区区一个 4×3 像素的二值图像，所读入的手写数字0 和 1 的像素模式也是多种多样的。例如，上方图像可以认为是读入了手写数字 0。对于这样的数字 0，即使人能设法识别出来，让计算机来判断也十分困难。下面让我们使用一个小故事来了解下如何使用神经网络来解决这个问题。</p>
 
-<p>其中${w}_{1}$、${w}_{2}$、${w}_{3}$分别是输入信号${x}_{1}$、${x}_{2}$、${x}_{3}$对应的权重。</p>
+<p>假设有个神经网络，输入层12个神经元小弟，隐藏层住着3个神经元中层干部，顶层住着2个神经元大哥，</p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmkyk9wdaj30y609qwgn.jpg" alt="" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbno7quihyj31q60u07ga.jpg" alt="" /></p>
 
-<h2 id="2-4-点火条件">2.4 点火条件</h2>
+<p>底层输入层的12个小弟接到任务要监控图片的动静，所以12个输入层小弟分别住在4x3像素的图像的各个像素上对图片进行监控，如果像素信号是白色0，小弟就睡觉不管，如果像素是黑色1，小弟就兴奋向上层通风报信，将他们的信息传递个他们的领导A、B、C</p>
 
-<p>根据上述，神经元在信号之和超过阈值时，点火，那么我们根据${w}_{1}{x}_{1}+{w}_{2}{x}_{2}+{w}_{3}{x}_{3}$推出，点火条件如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnodl2fzaj30vw0boad2.jpg" alt="" /></p>
 
-<blockquote>
-<p>这里的 $\theta$ 代表<code>阈值</code></p>
-</blockquote>
+<p>住在隐藏层的3个中层干部ABC分别重视下面三个地方，从下面的小弟那里拿到信息，然后自身对信息的思考（计算z和y），看看有没有需要自己注意的地方，把自己的想法跟顶层的两个大哥汇报</p>
 
-<p>$$无输出信号（y=0）：{w}_{1}{x}_{1}+{w}_{2}{x}_{2}+{w}_{3}{x}_{3}&lt;\theta\\有输出信号（y=1）：{w}_{1}{x}_{1}+{w}_{2}{x}_{2}+{w}_{3}{x}_{3}\ge \theta $$</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnp9t8egrj31i00hwwgx.jpg" alt="" /></p>
 
-<p>例 1　来自两个神经元 1、2 的输入信号分别为变量$x_1$ 、$x_2$ ，权重为$w_1$ 、$w_2$，神经元的阈值为$\theta$ 。当$w_1=5$ ，$w_2=3$ ，$\theta=4$ 时，考察信号之和${w}_{1}{x}_{1}+{w}_{2}{x}_{2}$的值与表示点火与否的输出信号$y$的值。</p>
+<p>住在最顶层输出层的大哥拿到下面三个干部递交的信息，与三个干部一样，也进行了思考作出了对应的策略，然后两个大哥看了下各自的策略，选出更好的那一个(兴奋度高的)作为了这次行动的策略。</p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmlbdvfilj31420kgdgb.jpg" alt="" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnovmevrhj32120osdjb.jpg" alt="" /></p>
 
-<h2 id="2-5-点火条件图形表示-阶跃函数">2.5 点火条件图形表示（阶跃函数）</h2>
+<p>让我们再来回顾下上面说到的隐藏层，3个中层干部分别重视三个模式，所以3个中层干部对12个手下各有偏爱，比如A干部就看重小弟4和7，B干部看重小弟5和8，C干部看中小弟6和9。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnpfl38kxj312m0ja408.jpg" alt="" /></p>
 
-<p>下面我们将上方的点火条件函数进行图形化，以神经元的输入信号的和为横轴，神经元的输出信号y为纵轴，如下图所示：当信号之和小于$\theta$时，y取0，反之取1</p>
+<p>所以这几个干部有点偏心，着重看了直接小弟给的情报，所以他们之间传递的兴奋度的管道也变粗了。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnpkbp931j31qh0u0du2.jpg" alt="" /></p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmliojacuj30xk0am754.jpg" alt="" /></p>
+<p>而住在顶层的大哥对中层的干部也各有偏爱，比如大哥0喜欢干部A和C，大哥1喜欢干部B
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnq6k09i0j31cu0p077w.jpg" alt="" /></p>
 
-<p>如果用函数来表示这个图像，那么就需要用到下方的<code>单位阶跃函数</code>
-$$u(z)=\left\{ \begin{matrix} 0\quad (z&lt;0) \\ 1\quad (z\ge 0) \end{matrix} \right\} $$</p>
+<p>那么，我们读入手写数字0，下面的小弟4、7、6、9看到这个图就特别兴奋了
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnq9b6mkoj30re0c4ac1.jpg" alt="" /></p>
 
-<p>阶跃函数图形如下：</p>
+<p>兴奋的小弟4和7向干部A传递消息，兴奋的小弟6和9向干部C传递了消息，没人向干部B传递消息。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnqe9x6iij31sq0swdqx.jpg" alt="" /></p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmmbrdkgnj30oq09ajrj.jpg" alt="" /></p>
+<p>干部A和C也接到了小弟传来的信息也兴奋了起来，于是干部A和C也向上层向大哥0发送信息，而干部B由于没有掌握到信息，就没有向大哥1发送消息。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnqloshcqj31380q076w.jpg" alt="" /></p>
 
-<p>利用阶跃函数，我们将我们的<code>神经元输入</code>和<code>阈值</code>带入，可以推出我们的<code>点火函数</code>：
-$$y=u(w_1x_1+w_2x_2+w_3x_3-\theta )$$</p>
+<p>由于大哥0是兴奋地，而大哥1是冷静的，根据之前说的大哥0的兴奋度比大哥1高，所以就判断这个图片是0</p>
 
-<p>那么阶跃函数中的自变量z，我们就可以求出来了。这个z，我们又称作<code>加权输入</code>
-$$z=w_1x_1+w_2x_2+w_3x_3-\theta $$</p>
+<h2 id="3-2-偏置">3.2 偏置</h2>
 
-<h2 id="2-6-激活函数">2.6 激活函数</h2>
+<p>在上面的示例中，下层的兴奋度会或多或少的向上层传递，但是除了干部看中小弟和大哥看中干部的关系而传送的兴奋度外，还遗漏了一些信息，这个信息就是”噪音“，如果这些噪声迷住了每个人的脑子，就会导致无法正确的传递兴奋度信息，隐藏我们需要减少噪音的功能，也就是我们所说的<code>偏置</code>，将偏置放在每个人（神经元）的心中，用来忽略少量的噪音，这个心中的偏置，就是各个人固有的个性。</p>
 
-<p>下面的图是神经元的简化图
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmmmafz3uj30vc07e407.jpg" alt="" /></p>
+<h2 id="3-3-实例解释">3.3 实例解释</h2>
 
-<p>因为在上面说道在生物界，y的值为1或0，那么除去生物这个限制，我们就需要对我们的点火函数进行修改,这里我们把u变成a,这里的a通常是建模者定义的函数，成为<code>激活函数</code>。
-$$y=a(w_1x_1+w_2x_2+w_3x_3-\theta )$$</p>
+<p>在上面的示例中，我们理解了神经网络识别数字的的模式识别，而我们应该看到了每个人之间的关系（就是权重）和每个人的个性(偏置)合作推导出了答案，也就是神经网络整体的判断。所以我们应该明白，我们最终从神经网络中获取的应该是关系和个性，也就是<code>权重</code>和<code>偏置</code>，也就是我们所说的模型的参数。</p>
 
-<p>在上面这个函数中，y可以取到任何值。如果通俗一点的话，可以理解为这个y值是神经元的<strong>兴奋度</strong>、<strong>反应度</strong>、<strong>活性度</strong></p>
+<h1 id="4-神经网络的信息说明">4 神经网络的信息说明</h1>
 
-<p>下面对比下两种神经元的差异：</p>
+<p>上面我们通过实例考察了大哥带着小弟来识别数字0、1的结构，只要将这个组织替换为神经网络，我们就可以理解神经元进模式识别的结构。</p>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmmzpx2uuj313q0fmmxr.jpg" alt="" /></p>
+<h2 id="4-1-权重与偏置">4.1 权重与偏置</h2>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmn1aiiezj315g0o8429.jpg" alt="" /></p>
+<p>观看下面的两张图，我们就会发现，输入层的12个小弟其实就是输入层的12个神经元，隐藏层的3个干部其实就是隐藏层的3个神经元，而顶层的两个大哥就是输出层的两个神经元。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbno7quihyj31q60u07ga.jpg" alt="" />
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnr54avtrj30c20jymzj.jpg" alt="" />、</p>
 
-<h3 id="sigmoid函数">sigmoid函数</h3>
+<p>接下来，我们将层级中领导对下级的看重的关系看做神经元的<code>权重</code>，干部A看重小弟4和7，这种关系可以看做是输入层的神经元4和7指向隐藏层的神经元A的箭头的权重较大，隐藏层与输出层的关系类似，下面我们将这种权重关系通过图片标记出来。通过这样的权重关系，最后输出层神经元0的输出值较大，所以最终输出0
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbnrbsq2qrj310c0u0th7.jpg" alt="" /></p>
 
-<p>激活函数的代表性例子就是Sigmoid函数$\sigma (z)$,下面是它的定义：</p>
+<p>在像上图这种前一层与后一层全连接的情况下，输入图像0时，原本不希望隐藏层B神经元以及输出层1神经元也有信号传递，所以我们需要禁止掉这种信号，使信号更清晰，这种功能就是我们说的<code>偏置</code>。</p>
 
-<p>$$\sigma (z)=\frac { 1 }{  1+{ e }^{ -z }} (z\approx2.718281&hellip; )$$</p>
+<h2 id="4-2-模型合理性">4.2 模型合理性</h2>
 
-<p>这个函数的作用是将输入值转换到（0，1）区间，也就是说sigmoid函数的输出值是大于0且小于1的任意值。该函数最重要的特性是<code>连续</code>、<code>光滑</code>，也就代表着<code>可导</code>。有了这种性质就使得sigmoid函数会很容易处理</p>
+<p>上面我们将小故事翻译成了神经网络，但是也不能保证一定能求出权重和偏置。如果想实际建立基于上面这个想法的神经网络，能充分解释所给的数据就能验证它的合理性，这点需要一定的数学计算，需要将我们的语言描述转化为数据的式子，我们会在下篇文章开始讲一些会用到的数学。</p>
 
-<p>阶跃函数的输出值为0和1可代表点火与否，而sigmoid函数的输出值却在（0，1）区间，那么我们就要换个思路了，不能用其输出值代表点火与否，但是可用它的输出值代表神经元的兴奋度，越接近1越兴奋。</p>
+<h2 id="4-3-网络自学习的神经网络">4.3 网络自学习的神经网络</h2>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmnbof5npj314m0c6goe.jpg" alt="" /></p>
+<p>本文开篇我们说神经网络是通过大量计算来算出权重和偏置等参数，而在上一个示例中，我们事先假定了权重的大小（假定中层对小弟的看看着关系），那么这个权重的大小应该如何确定呢？神经网络中比较重要的一点就是利用<code>网络自学习</code>算法来确定权重大小</p>
 
-<p>我们将主要使用sigmoid来作为标准的激活函数使用，如果使用数学上<code>单调递增</code>的<code>可导</code>函数来代替sigmoid作为激活函数，那么也是可以的.</p>
+<p>神经网络的参数确定方法分为<code>有监督学习</code>和<code>无监督学习</code>，在这个系列里我们只介绍有监督学习。</p>
 
-<h2 id="2-7-偏置">2.7 偏置</h2>
-
-<p>我们再来看下我们的激活函数：
-$$y=a(w_1x_1+w_2x_2+w_3x_3-\theta )$$</p>
-
-<p>这里的$\theta$我们称为阈值，在生物学上是神经元特性的值，通俗的讲$\theta$表示为神经元的感受能力，如果$\theta$较大，我们的神经元会不容易兴奋（就是迟钝），如果$\theta$较小，则神经元会很容易兴奋（特别敏感）</p>
-
-<p>上面的式子中$\theta$有负号，这帮搞数学的觉着负号不好看，认为减法容易算错，非要把负号干掉，所以就把$-\theta$替换为了$b$，于是就有了下面这两个式子：</p>
+<h3 id="4-3-1-有监督学习">4.3.1 有监督学习</h3>
 
 <blockquote>
-<p>下面这两个式子是神经网络的出发点，非常重要</p>
+<p>有监督学习：为了确定神经网络的权重和偏置，事先给予数据，这些数据成为<code>学习数据</code>、<code>训练数据</code>。根据给定的数据确定权重和偏置，称为<code>学习</code>、<code>训练</code>。</p>
 </blockquote>
 
-<p>$$z=w_1x_1+w_2x_2+w_3x_3+b $$
-$$y=a(z)=a(w_1x_1+w_2x_2+w_3x_3+b )$$</p>
+<h3 id="4-3-2-最优解">4.3.2 最优解</h3>
 
-<p>变成了这个样子，式子好看了，也不容易错了，于是这个$b$就叫做<code>偏置</code></p>
+<p>神经网络是如何学习的呢？</p>
 
-<p>生物学上的$w_1$、$w_2$、$w_3$和阈值$\theta$($-b$)都不是负数，因为负数不会在自然现象中出现，但是我们将神经元一般化后，是允许出现负数的。</p>
+<blockquote>
+<p>神经网络学习的思路：计算神经网络得出的预测值与正解的误差，确定使误差总和达到最小的权重和偏置，这在数学上成为模型的<code>最优化</code></p>
+</blockquote>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmo2y2ri9j316y0dygmt.jpg" alt="" /></p>
+<h3 id="4-3-3-代价函数">4.3.3 代价函数</h3>
 
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gbmo3xafgcj312s0g674l.jpg" alt="" /></p>
+<p>关于预测值和正解的误差总和，有各种各样的定义。这个误差的总和称为<code>代价函数</code>，符号表示是${C}_{T}$（T是Total的首字母）</p>
 
-<p>上面我们用一个例子来验证我们所学到的知识。相信很多人的算法就像上方表格中的加权输入z一样，其实对于计算机来说有一种更加容易的计算方式，那就是<code>线性代数</code>中的<code>内积</code>。</p>
+<p>我们这个系列中使用最经典的方式<code>平方误差和</code>，利用平方误差确定参数的方法在数学上成为最小二乘法，它在统计学中是回归分析的常规手段。</p>
 
-<p>我们将变量$x_1$、$x_2$、$x_3$作为<code>变量向量</code>，将权重$w_1$、$w_2$、$w_3$和偏执$b$作为一个<code>参数向量</code>，通过计算两个向量的内积来计算z,这时我们发现变量向量的长度是3，而权重和偏执的向量是4，所以我们需要使用1作为b的系数加入到变量向量中。
-$$\left[ x_1 ,x_2,x_3,1\right]\\*\\\left[ w_1 ,w_2,w_3,b\right]\\=w_1*x_1+w_2*x_2+w_3*x_3+1*b$$</p>
+<blockquote>
+<p>平方误差和：通过计算预测值与正解的误差的平方再求和</p>
+</blockquote>
 
-<p>这不就是我们上方使用的算法吗，这种向量的内积的计算方式虽然对人不太友好，但是计算机却更加擅长这种计算，在我们真正撸代码的时候会用到这种方法。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnsb00p1ij314i0mq43y.jpg" alt="" /></p>
+
+<p>下一篇开始，我们就要正式的进入数学的领域，兴奋不兴奋！</p>
 
                 
                 <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
@@ -606,13 +595,9 @@ $$\left[ x_1 ,x_2,x_3,1\right]\\*\\\left[ w_1 ,w_2,w_3,b\right]\\=w_1*x_1+w_2*x_
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/2020-01-09-scrum-xp-devops/" data-toggle="tooltip" data-placement="top" title="关于Scrum&#43;XP&#43;DevOps的学习">&larr; 上一篇</a>
+                        <a href="/post/2020-02-06-neurous/" data-toggle="tooltip" data-placement="top" title="深度学习数学基础(一)之神经元构造">&larr; 上一篇</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/2020-02-06-neural-network-structure/" data-toggle="tooltip" data-placement="top" title="深度学习数学基础(二)之神经网络构造">下一篇 &rarr;</a>
-                    </li>
                     
                 </ul>
 
@@ -621,7 +606,7 @@ $$\left[ x_1 ,x_2,x_3,1\right]\\*\\\left[ w_1 ,w_2,w_3,b\right]\\=w_1*x_1+w_2*x_
 
 
 
-<div id="SOHUCS" sid='2020-02-06-10:46:49-深度学习数学基础(一)之神经元构造'></div>
+<div id="SOHUCS" sid='2020-02-06-19:40:19-深度学习数学基础(二)之神经网络构造'></div>
 <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
 
