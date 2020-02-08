@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>算法基础之排序算法七之快速排序-纳兰小筑</title>
-    <meta name="description" content="使用JAVA实现快速排序" />
-    <meta name="keywords" content="算法基础,排序算法,快速排序" />
+    <title>深度学习数学基础(三)之简单数学-纳兰小筑</title>
+    <meta name="description" content="Naah,那焱,纳兰,一只正在通往机器学习的可爱的程序猿,热爱生活,拥抱变化,喜欢有关草木植物的任何事物,偶尔喜欢读读书写写诗" />
+    <meta name="keywords" content="神经元,数学,深度学习,神经网络" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://www.naah69.com/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%B8%83%E4%B9%8B%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+    <link rel="canonical" href="https://www.naah69.com/post/2020-02-08-math-basic/">
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -328,29 +328,29 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a href="https://www.naah69.com/%20categories/foundation" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;FOUNDATION</a>
+                        <a href="https://www.naah69.com/%20categories/math" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;MATH</a>
                         
                         
-                        <a class="tag" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;排序算法
+                        <a class="tag" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" title="深度学习" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;深度学习
                         </a>
                         
-                        <a class="tag" href="/tags/%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95" title="交换算法" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;交换算法
+                        <a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" title="神经网络" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;神经网络
                         </a>
                         
-                        <a class="tag" href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;算法基础
+                        <a class="tag" href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80" title="数学基础" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;数学基础
                         </a>
                         
 
                     </div>
 
-                    <h1>算法基础之排序算法七之快速排序</h1>
+                    <h1>深度学习数学基础(三)之简单数学</h1>
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Naah on Saturday, Sep 09,2017 09:22:37
+                    <span class="meta">Posted by Naah on Saturday, Feb 08,2020 14:13:58
                         
-                        <span id="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%B8%83%E4%B9%8B%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="meta_data_item" data-flag-title="">
+                        <span id="/post/2020-02-08-math-basic/" class="meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span>
     </span>
@@ -403,9 +403,31 @@
                     <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;overflow: auto;height: 25em;">
                         <nav id="TableOfContents">
 <ul>
-<li><a href="#选择排序算法">选择排序算法</a>
+<li><a href="#1-函数">1 函数</a>
 <ul>
-<li><a href="#快速排序">快速排序</a></li>
+<li><a href="#1-1-一次函数">1.1 一次函数</a>
+<ul>
+<li><a href="#1-1-1-一元一次函数">1.1.1 一元一次函数</a></li>
+<li><a href="#1-1-2-多元一次函数">1.1.2 多元一次函数</a></li>
+</ul></li>
+<li><a href="#1-2-二次函数">1.2 二次函数</a>
+<ul>
+<li><a href="#1-2-1-一元二次函数">1.2.1 一元二次函数</a></li>
+<li><a href="#1-2-2-多元二次函数">1.2.2 多元二次函数</a></li>
+</ul></li>
+<li><a href="#1-3-单位阶跃函数">1.3 单位阶跃函数</a></li>
+<li><a href="#1-4-指数函数">1.4 指数函数</a>
+<ul>
+<li><a href="#1-4-1-sigmoid函数">1.4.1 sigmoid函数</a></li>
+</ul></li>
+<li><a href="#1-5-正态分布的概率密度函数">1.5 正态分布的概率密度函数</a></li>
+</ul></li>
+<li><a href="#2-数列">2 数列</a>
+<ul>
+<li><a href="#2-1-数列的含义">2.1 数列的含义</a></li>
+<li><a href="#2-2-数列的通项公式">2.2 数列的通项公式</a></li>
+<li><a href="#2-3-数列与递推关系式">2.3 数列与递推关系式</a></li>
+<li><a href="#2-4-联立递推关系式">2.4 联立递推关系式</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -417,133 +439,193 @@
 
                 
 
-<h1 id="选择排序算法">选择排序算法</h1>
+<p>从本文开始，之后的三四篇我们都将沐浴在数学的海洋里，拼命地扑腾，这个系列我会尽力以通俗易懂的方式来讲述这些数学知识。</p>
 
-<p>选择排序（Selection sort）是一种简单直观的排序算法。</p>
+<h1 id="1-函数">1 函数</h1>
 
-<p>它的工作原理是每一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。</p>
+<h2 id="1-1-一次函数">1.1 一次函数</h2>
 
-<p>选择排序是不稳定的排序方法（比如序列[5， 5， 3]第一次就将第一个[5]与[3]交换，导致第一个5挪动到第二个5后面）。</p>
+<p>在数学函数中最基本、最重要的就是<code>一次函数</code>。也就是函数之基础、根本。它在神经网络的世界里也同样重要。</p>
 
-<p> </p>
+<h3 id="1-1-1-一元一次函数">1.1.1 一元一次函数</h3>
 
-<h2 id="快速排序">快速排序</h2>
+<p>这个函数可以用下面的式表示。$a$被称为<code>斜率</code>(用来控制直线的方向)，$b$被称为<code>截距</code>（用来控制直线和原点的偏移）
+$$y=ax+b（a、b为常数，a\neq 0）$$</p>
 
-<p>快速排序（Quicksort）是对冒泡排序的一种改进。</p>
+<p>当x、y两个变量满足上述公式时，就称为变量y和变量x是<code>一次函数关系</code>。</p>
 
-<p>它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
+<blockquote>
+<p>有两个变量$x$和$y$，如果对每个$x$都有唯一确定的$y$与它对应，则称$y$是$x$的函数，用 $y=f(x)$ 表示。此时，称$x$为自变量，$y$为因变量。</p>
+</blockquote>
 
-<p>算法复杂度：O (nlogn),不稳定</p>
+<p>一次函数的图像是直线，如下图的直线所示。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gboz1o0kn1j30hq0hy3yi.jpg" alt="" /></p>
 
-<p>算法思想：
-1. 设置两个变量i、j，排序开始的时候：i=0，j=N-1；
-2. 以第一个数组元素作为关键数据，赋值给key，即key=A[0]；
-3. 从j开始向前搜索，即由后开始向前搜索(j&ndash;)，找到第一个小于key的值A[j]，将A[j]和A[i]互换；
-4. 从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于key的A[i]，将A[i]和A[j]互换；
-5. 重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于key,4中A[i]不大于key的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</p>
+<p>示例：一次函数$y=2x+1$的图像如下图所示，截距为 1，斜率为 2。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gboz3igp2ij30ho0i43yi.jpg" alt="" /></p>
 
-<pre><code>/**
- * 快速排序
- * 交换排序
- * @author Naah
- *
- * @param &lt;T extends Comparable&lt;T&gt;&gt; 泛型类必须继承比较接口
- */
-public class QuickSort&lt;T extends Comparable&lt;T&gt;&gt; {
+<h3 id="1-1-2-多元一次函数">1.1.2 多元一次函数</h3>
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Integer[] array={3,5,6,7,8,1,-1,-64,324,56,234,22,886,5,44,6,6442,35,4656};
-		QuickSort&lt;Integer&gt; sort=new QuickSort&lt;Integer&gt;();
-		sort.quickSort(array);
-		for (Integer integer : array) {
-			System.out.println(integer);
-		}
-	}
+<p>上面我们说的$y=ax+b$中有一个变量x，我们称为一元，如果有多个变量，我们就称为是多元的，比如下面的式子。（有几个变量就是几元的，也可以理解为维度）
+$$y=ax_1+bx_2+&hellip;+c（a、b、c为常数，a\neq 0，b\neq 0）$$</p>
 
-	/**
-	 * 快速排序法
-	 * @param array 数组
-	 */
-	private void quickSort(T[] array) {
-		// TODO Auto-generated method stub
-		if (array.length&gt;0) {
+<p>当多个变量满足上述公式时，也称为变量y与变量是<code>一次函数关系</code>。</p>
 
-			//数组排序
-			sort(array,0,array.length-1);
-		}
-	}
+<p>就像我们之前说的神经元的<code>加权输入</code>$z$就可以表示为一次函数关系。如果把作为参数的权重$w_1、w_2、&hellip;、w_n$与偏置$b$看作常数，那么加权输入$z$h和$w_1、w_2、&hellip;、w_n$就是一次函数关系。
+$$z=w_1x_1+w_2x_2+&hellip;+w_nx_n+b$$</p>
 
-	/**
-	 * 快速排序算法
-	 * @param array 数组
-	 * @param low 区间左下标
-	 * @param high 区间右下标
-	 */
-	private void sort(T[] array, int low, int high) {
+<h2 id="1-2-二次函数">1.2 二次函数</h2>
 
-		//如果左下标小于右下标
-		if (low&lt;high) {
+<h3 id="1-2-1-一元二次函数">1.2.1 一元二次函数</h3>
 
-			//取得中间值
-			int middle=getMiddleIndex(array,low,high);
+<p>刚刚我们接触了一次函数，下面说说二次函数。二次函数很重要，像我们经常使用的<code>代价函数</code>平方误差就是二次函数。二次函数由下面的式表示。
+$$y=ax^2+bx+c（a、b、c为常数，a\neq 0）$$</p>
 
-			//递归以中间值为区间右下标排序
-			sort(array,0,middle-1);
+<p>二次函数的图像是抛物线，如下图所示。我们会发现抛物线的凹凸（开口朝向）是通过上方式子中$a$的正负来决定的。</p>
 
-			//递归以中间值为区间左下标排序
-			sort(array,middle+1,high);
-		}
+<ol>
+<li>当$a&gt;0$时，抛物线向上开口，向下凸起</li>
+<li>当$a&lt;0$时，抛物线向下开口，向上凸起。</li>
+</ol>
 
-	}
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbozwgwfwaj30zw0hiaa8.jpg" alt="" /></p>
 
-	/**
-	 * 取得中间值下标
-	 * @param array 数组
-	 * @param low 区间左下标
-	 * @param high 区间右下标
-	 * @return
-	 */
-	private int getMiddleIndex(T[] array, int low, int high) {
+<p>所以当$a&gt;0$时该函数的$y$存在最小值。（该性质是后面讲的<code>最小二乘法的</code>基础）</p>
 
-		//以区间最左元素作为临时变量
-		T temp=array[low];
+<p>示例：二次函数$y=(x-1)^2+2$的图像如右图所示。从图像中可以看到，当$x=1$时，函数取得最小值$y=2$。</p>
 
-		//当左下标在右下标左边时进行循环
-		while (low&lt;high) {
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbp0q272z0j30oi0lqglv.jpg" alt="" /></p>
 
-			//当左下标在右下标左边，并且
-			//区间最右元素大于等于临时变量时
-			while (low&lt;high&amp;&amp;(array[high].compareTo(temp)==1||array[high].compareTo(temp)==0)) {
+<h3 id="1-2-2-多元二次函数">1.2.2 多元二次函数</h3>
 
-				//缩小区间，区间右下标向左移1位
-				high--;
-			}
+<p>在我们实际的神经网络中需要处理更多变量的二次函数，这些二次函数统称<code>多元二次函数</code>，学会了一元二次函数，那么多元二次函数就不会太难了，下面我们以一个二元二次函数进行举例。</p>
 
-			//当条件不满足时，跳出循环，说明区间最右元素小于临时变量
-			//将当前区间最右元素，赋值给当前区间最左元素
-			array[low]=array[high];
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbp0w4wx4hj30m60ikt90.jpg" alt="" /></p>
 
-			//当左下标在右下标左边，并且
-			//区间最左元素小于等于临时变量时
-			while (low&lt;high&amp;&amp;(array[low].compareTo(temp)==-1||array[low].compareTo(temp)==0)) {
+<p>就像我们使用的代价函数平方误差c就是多元二次函数:
+$$C=(x_1-t_1)^2$$</p>
 
-				//缩小区间，区间左下标向右移1位
-				low++;
-			}
+<h2 id="1-3-单位阶跃函数">1.3 单位阶跃函数</h2>
 
-			//当条件不满足时，跳出循环，说明区间最左元素大于临时变量
-			//将当前区间最左元素，赋值给当前区间最右元素
-			array[high]=array[low];
-		}
+<p>之前，我们已经接触过它了，还记得吗，作为生物界神经元的激活函数。下面我们再说一遍吧。</p>
 
-		//将临时变量赋值给当前区间最左元素
-		array[low]=temp;
-		return low;
-	}
+<p>单位阶跃函数，在<code>原点处不连续</code>，也就是在<code>原点处不可导</code>，由于这两个性质，所以单位阶跃函数不能成为主要的激活函数。</p>
 
-}
-</code></pre>
+<p>$$u(x)=\left\{ \begin{matrix} 0\quad (x&lt;0) \\ 1\quad (x\ge 0) \end{matrix} \right\} $$</p>
+
+<p>单位阶跃函数的图像如下：</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbpce2fkbxj310s0d8t9w.jpg" alt="" /></p>
+
+<h2 id="1-4-指数函数">1.4 指数函数</h2>
+
+<p>什么是指数函数呢？我们之前讲了一次函数和二次函数，其实只要把变量放到幂的位置，其实就是指数函数了，具有以下形状的函数称为<code>指数函数</code>，常数$a$被称为函数的<code>底数</code>。
+$$y=a^x（a为正的常数，a\neq 1）$$</p>
+
+<p>指数函数的图像是类似于撇的一种样式，如下所示
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbp9lfrngnj30i80fm0sr.jpg" alt="" /></p>
+
+<p>上面说到底数，就不得不说<code>自然常数</code>$e$,又叫纳皮尔数或欧拉数，它和派$\pi$类似，是一个无限不循环小数，它的值如下
+$$e\approx 2.71828&hellip;$$</p>
+
+<h3 id="1-4-1-sigmoid函数">1.4.1 sigmoid函数</h3>
+
+<p>上面说到自然常数e，那么就不得不提到大名鼎鼎的自然指数函数$e^x$,它在数学界有自己的标识<code>exp</code>或<code>exp(x)</code></p>
+
+<p>而我们这里所要讲的是包含自然指数函数的复合函数<code>sigmoid</code>函数，它是神经网络中很具有代表性的激活函数。它的公式如下
+$$\sigma (x)=\frac { 1 }{ 1+{ e }^{ -x } } =\frac { 1 }{ 1+exp(-x) } $$</p>
+
+<p>通过下方的图像,我们可以看到，这个函数是<code>光滑的</code>，这就代表着这个函数<code>处处可导</code>，函数的取值在(0,1)区间内，那么这个函数值就可以用概率来解释
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbp9wnza40j30n40lc3yn.jpg" alt="" /></p>
+
+<h2 id="1-5-正态分布的概率密度函数">1.5 正态分布的概率密度函数</h2>
+
+<p>在计算机实际确定神经网络时，我们需要首先给权重和偏置设定初始值，这样神经网络才能进行计算。而这个初始值怎么取呢，这个时候我们就会用到一个非常有用的工具，叫做<code>正态分布</code>，这里就不长篇大论的解释啥是正态分布了，它也没什么高大上的地方，就是概率分布中的一种分布方式，但是这个分布方式是及其复合人类和自然界的，有兴趣的朋友可以去深入了解下。在这里只说一下，我们在给神经网络分配权重和偏置时分配一个服从正态分布的随机数，会比较容易取得好的结果。</p>
+
+<p>正态分布是服从下面的概率密度函数的概率分布。公式如下
+$$f\left( x \right) =\frac { 1 }{ \sqrt { 2\pi \sigma  }  } { e }^{ -\frac { { (x-\mu ) }^{ 2 } }{ 2{ \sigma  }^{ 2 } }  }$$</p>
+
+<ol>
+<li>常数$\mu$：期望值（平均值）</li>
+<li>$\sigma$：标注差</li>
+</ol>
+
+<p>它的图像如下，由于形状像教堂的钟，所以被称为叫<code>钟形曲线</code>
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbpa9gxab5j310u0d4gn9.jpg" alt="" /></p>
+
+<p>示例：试作出期望值$\mu$为0、标准差$\sigma$为1 的正态分布的概率密度函数的图像。
+$$f\left( x \right)=\frac { 1 }{ \sqrt { 2\pi  }  } e^{ -\frac { x^{ 2 } }{ 2 }  }$$
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbpambmcxdj30ok0q274p.jpg" alt="" /></p>
+
+<h1 id="2-数列">2 数列</h1>
+
+<h2 id="2-1-数列的含义">2.1 数列的含义</h2>
+
+<p><code>数列</code>就是数的序列，比如下面就是偶数列的数列
+$$2,4,6,8,&hellip;$$</p>
+
+<p>数列中的每一个数都被称为<code>项</code>，排在第一位的项叫做<code>首项</code>，排在第二位的项叫做<code>第2项</code>,以此类推，排在第n位的项叫做<code>第n项</code>(是不是有点废话)，神经网络中出现的数列都是有限的数列，这种数列叫做<code>有穷数列</code>，在有穷数列中最后一项称为<code>末项</code>,数列中的数量称为<code>项数</code>,而像上面的偶数列是<code>无穷数列</code></p>
+
+<p>示例：考察下面的有穷数列的首项，末项以及项数
+$$1,3,5,7,9$$</p>
+
+<p>这个数列的首项是1，末项是9，项数是5</p>
+
+<h2 id="2-2-数列的通项公式">2.2 数列的通项公式</h2>
+
+<p>数列中排在第$n$项的数通常用$a_n$表示，这里$a$是数列的名字，可随意取。当想要表达整个数列时，使用集合的符号来表示，如$\left\{a_n\right\}$</p>
+
+<p>将数列的第$n$项用一个关于$n$的式子标书出来，那么这个式子被称为<code>通项公式</code>，比如偶数列的通项公式就是下方的式子
+$$a_n=2n$$</p>
+
+<p>示例：求以下数列$\left\{b_n\right\}$的通项公式
+$$1,3,5,7,9$$
+通项公式为$b_n=2n-1$</p>
+
+<p>在神经网络中，神经元的加权输入和输出可以看成数列，比如使用下方的展示方式：</p>
+
+<ol>
+<li>加权输入：第$l$层的第$j$个神经元的加权输入用$z_j^l$</li>
+<li>输出：第$l$层的第$j$个神经元的输出用$a_j^l$</li>
+</ol>
+
+<h2 id="2-3-数列与递推关系式">2.3 数列与递推关系式</h2>
+
+<p>除了通项公式外，数列还有另外一种表示方式，就是用相邻的关系式来表示，这种表示法被称为数列的<code>递归定义</code></p>
+
+<p>一般，如果已知首项$a_n$以及相邻的两项$a_n、a_{n+1}$的关系式，那么就可以确定这个序列，这个关系式叫<code>递推关系式</code></p>
+
+<p>示例：已知首项$a_1=1$以及关系式$a_{n+1}=a_n+2$，可以确定以下数列，这个关系式就是数列的递推关系式。
+$$a_{1}=1\\a_{2}=a_{1+1}=a_{1}+2=1+2=3\\a_{3}=a_{2+1}=a_{2}+2=3+2=5\\a_{4}=a_{3+1}=a_{3}+2=5+2=7\\&hellip;\\a_{1}=1,a_{n+1}=a_{n}+2$$</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbpbfx8s8gj314u09ogmy.jpg" alt="" /></p>
+
+<h2 id="2-4-联立递推关系式">2.4 联立递推关系式</h2>
+
+<p>下面我们演示一个问题，这个算法就是神经网络中的<code>误差反向传播</code>中所用到的数列的解题算法<code>联立递推算法</code>。</p>
+
+<p>示例：求以下两个地推关系是定义的数列前3项，其中$a_1=b_1=1$
+$$\begin{cases} a_{ n+1 }=a_{ n }+2b_{ n }+2 \\ b_{n+1}=2a_{n}+3b_{n}+1 \end{cases}$$</p>
+
+<p>解题：
+$$\begin{cases} a_{ 2 }=a_{ 1 }+2b_{ 1 }+2=1+2\times 1=5 \\ b_2=2a_1+3b_1+1=2\times 1+3\times 1+1=6 \end{cases}$$
+$$\begin{cases} a_{ 3 }=a_{ 2 }+2b_{ 2 }+2=5+2\times 6+2=19 \\ b_{ 3 }=2a_{ 2 }+3b_{ 2 }+1=2\times 5+3\times 6+1=39 \end{cases}$$</p>
+
+<p>像这样，将多个数列的递推关系式联合起来组成一组，称为<code>联立递推关系式</code>。在神经网络的世界中，所有神经元的输入和输出在数学上都可以认为是用联立递推式联系起来的。例如，我们来看看之前文章中看过的一个神经元的图片</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gbpbv7ujk3j30eu0e40tw.jpg" alt="" /></p>
+
+<p>在箭头前端标记的是权重，神经元的圆圈中标记的是神经单元的输出变量。于是，如果以$a(z)$为激活函数，$b_1^3$、$b_2^3$为第3层各个神经元的偏置，那么以下关系式成立：
+$${ a }_{ 1 }^{ 3 }=a({ w }_{ 11 }^{ 3 }{ a }_{ 1 }^{ 2 }+{ w }_{ 12 }^{ 3 }{ a }_{ 2 }^{ 2 }+{ w }_{ 13 }^{ 3 }{ a }_{ 3 }^{ 2 }+{ b }_{ 1 }^{ 3 })$$
+$${ a }_{ 2 }^{ 3 }=a({ w }_{ 21 }^{ 3 }{ a }_{ 1 }^{ 2 }+{ w }_{ 22 }^{ 3 }{ a }_{ 2 }^{ 2 }+{ w }_{ 23 }^{ 3 }{ a }_{ 3 }^{ 2 }+{ b }_{ 2 }^{ 3 })$$</p>
+
+<p>根据这些关系式，第3层的输出$a_1^3$和$a_2^3$由第2层的输出$a_1^2$、$a_2^2$、$a_3^2$决定。也就是说，第2层的输出与第3层的输出由联立递推关系式联系起来。我们之后学的<code>误差反向传播</code>就是将这种观点应用在神经网络中。</p>
+
+<blockquote>
+<p>为什么要将联立递推应用在神经网络中呢？</p>
+</blockquote>
+
+<p>其实是因为对比计算冗长的偏导关系式，计算机更加擅长计算递推关系。</p>
 
                 
                 <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
@@ -554,13 +636,9 @@ public class QuickSort&lt;T extends Comparable&lt;T&gt;&gt; {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%85%AD%E4%B9%8B%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-toggle="tooltip" data-placement="top" title="算法基础之排序算法六之冒泡排序">&larr; 上一篇</a>
+                        <a href="/post/2020-02-06-neural-network-structure/" data-toggle="tooltip" data-placement="top" title="深度学习数学基础(二)之神经网络构造">&larr; 上一篇</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%85%AB%E4%B9%8B%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" data-toggle="tooltip" data-placement="top" title="算法基础之排序算法八之归并排序">下一篇 &rarr;</a>
-                    </li>
                     
                 </ul>
 
@@ -569,7 +647,7 @@ public class QuickSort&lt;T extends Comparable&lt;T&gt;&gt; {
 
 
 
-<div id="SOHUCS" sid='2017-09-09-09:22:37-算法基础之排序算法七之快速排序'></div>
+<div id="SOHUCS" sid='2020-02-08-14:13:58-深度学习数学基础(三)之简单数学'></div>
 <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
 
@@ -962,7 +1040,7 @@ public class QuickSort&lt;T extends Comparable&lt;T&gt;&gt; {
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy;   2017 <a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备19040622号</a>
+                    Copyright &copy;   2020 <a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备19040622号</a>
                     <br>
                     
                     <span id="busuanzi_container_site_pv">
