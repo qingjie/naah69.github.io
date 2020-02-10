@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Feb 2020 18:20:23 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2020 11:29:17 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深度学习数学基础(五)之导数基础</title>
+      <link>https://www.naah69.com/post/2020-02-10-derivative/</link>
+      <pubDate>Mon, 10 Feb 2020 11:29:17 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2020-02-10-derivative/</guid>
+      <description>之前我们提过，说神经网络会很牛逼的自己学习，那这个自己学习是什么原理呢？如果用数学上的非人话就是对权重和偏置进行最优化，使输出符合学习数据，</description>
+    </item>
     
     <item>
       <title>深度学习数学基础(四)之线性代数基础</title>

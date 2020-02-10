@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>算法基础之排序算法六之冒泡排序-纳兰小筑</title>
+    <title>深度学习数学基础(五)之导数基础-纳兰小筑</title>
     <meta name="description" content="Naah,那焱,纳兰,一只正在通往机器学习的可爱的程序猿,热爱生活,拥抱变化,喜欢有关草木植物的任何事物,偶尔喜欢读读书写写诗" />
-    <meta name="keywords" content="算法基础,排序算法,冒泡排序" />
+    <meta name="keywords" content="导数,微分,数学,深度学习,神经网络" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://www.naah69.com/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%85%AD%E4%B9%8B%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
+    <link rel="canonical" href="https://www.naah69.com/post/2020-02-10-derivative/">
     <meta name="google-site-verification" content="RvhbpALX9GqGk5KVFhjMl2VqnksKeAoApN3upkrcDxM" />
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -328,29 +328,29 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a href="https://www.naah69.com/%20categories/foundation" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;FOUNDATION</a>
+                        <a href="https://www.naah69.com/%20categories/math" target="_blank" ><i class="fa fa-folder-o"></i>&nbsp;MATH</a>
                         
                         
-                        <a class="tag" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" title="排序算法" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;排序算法
+                        <a class="tag" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" title="深度学习" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;深度学习
                         </a>
                         
-                        <a class="tag" href="/tags/%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95" title="交换算法" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;交换算法
+                        <a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" title="神经网络" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;神经网络
                         </a>
                         
-                        <a class="tag" href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80" title="算法基础" target="_blank">
-                        <i class="fa fa-tags"></i>&nbsp;算法基础
+                        <a class="tag" href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80" title="数学基础" target="_blank">
+                        <i class="fa fa-tags"></i>&nbsp;数学基础
                         </a>
                         
 
                     </div>
 
-                    <h1>算法基础之排序算法六之冒泡排序</h1>
+                    <h1>深度学习数学基础(五)之导数基础</h1>
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Naah on Saturday, Sep 09,2017 09:20:31
+                    <span class="meta">Posted by Naah on Monday, Feb 10,2020 11:29:17
                         
-                        <span id="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%85%AD%E4%B9%8B%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="meta_data_item" data-flag-title="">
+                        <span id="/post/2020-02-10-derivative/" class="meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span>
     </span>
@@ -403,9 +403,27 @@
                     <div id="index" style="background-color: #f3f3f3;color: black;padding: 10px;overflow: auto;height: 25em;">
                         <nav id="TableOfContents">
 <ul>
-<li><a href="#交换排序算法">交换排序算法</a>
+<li><a href="#1-导数基础">1 导数基础</a>
 <ul>
-<li><a href="#冒泡排序">冒泡排序</a></li>
+<li><a href="#1-1-导数的定义">1.1 导数的定义</a></li>
+<li><a href="#1-2-常用导数公式">1.2 常用导数公式</a></li>
+<li><a href="#1-3-导数符号">1.3 导数符号</a></li>
+<li><a href="#1-4-导数的线性性质">1.4 导数的线性性质</a>
+<ul>
+<li><a href="#1-4-1-导数的加减法">1.4.1 导数的加减法</a></li>
+<li><a href="#1-4-2-导数的常数倍">1.4.2 导数的常数倍</a></li>
+</ul></li>
+<li><a href="#1-5-分数函数导数">1.5 分数函数导数</a>
+<ul>
+<li><a href="#1-5-1-sigmoid函数的导数">1.5.1 sigmoid函数的导数</a></li>
+</ul></li>
+<li><a href="#1-5-最小值的条件">1.5 最小值的条件</a></li>
+</ul></li>
+<li><a href="#2-偏导数基础">2 偏导数基础</a>
+<ul>
+<li><a href="#2-1-偏导数的定义">2.1 偏导数的定义</a></li>
+<li><a href="#2-2-多变量函数的最小值条件">2.2 多变量函数的最小值条件</a></li>
+<li><a href="#2-3-拉格朗日乘数法">2.3 拉格朗日乘数法</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -417,52 +435,165 @@
 
                 
 
-<h1 id="交换排序算法">交换排序算法</h1>
+<p>之前我们提过，说神经网络会很牛逼的自己学习，那这个自己学习是什么原理呢？如果用数学上的非人话就是<code>对权重和偏置进行最优化，使输出符合学习数据</code>，人话说就是不断的求导调整参数，让算法找到学习数据的规律。而对于这里的<code>最优化</code>，<code>求导</code>是不可缺少的一部分。</p>
 
-<p>所谓交换，就是根据序列中两个记录键值的比较结果来对换这两个记录在序列中的位置，稳定的算法</p>
+<h1 id="1-导数基础">1 导数基础</h1>
 
-<p>交换排序的特点是：将键值较大的记录向序列的尾部移动，键值较小的记录向序列的前部移动。</p>
+<h2 id="1-1-导数的定义">1.1 导数的定义</h2>
 
-<p> </p>
+<p>导数就是函数图像在某一点处的斜率，比如下图，作出函数$f\left( x \right)$的图像，$f^{&lsquo;}\left(x\right)$表示图像切线的斜率。因此光滑图像的函数是<code>可导的</code>。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbr5sha4fvj31gm0jmacu.jpg" alt="" /></p>
 
-<h2 id="冒泡排序">冒泡排序</h2>
+<p>函数$f\left( x \right)$的<code>导函数</code>$f^{&lsquo;}\left(x\right)$定义如下
+$$f^{ &lsquo; }\left( x \right) =\lim _{ \Delta x\rightarrow 0 }{ \frac { f\left( x+\Delta x \right) -f\left( x \right)  }{ \Delta x }  } $$</p>
 
-<p>它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。</p>
+<blockquote>
+<p>注：$\Delta$读作 delta，对应拉丁字母 D。此外，带有 （prime）符号的函数或变量
+表示导函数。</p>
+</blockquote>
 
-<p>这个算法的名字由来是因为越大的元素会经由交换慢慢“浮”到数列的顶端，故名。</p>
+<p>$\lim _{ \Delta x\rightarrow 0 }{ (\Delta x的式子) } $是指当$\Delta x$无线接近0时，$(\Delta x的式子)$接近的值,这个lim就是<code>极限</code></p>
 
-<p>算法复杂度：O(n^2),稳定</p>
+<blockquote>
+<p>示例 1：当$f(x)=3x$，它的$f`(x)$是多少?
+$$f&rsquo;(x)=\lim _{ \Delta x\rightarrow 0 }{ \frac { 3(x+\Delta x)-3x }{ \Delta x }  } =\lim _{ \Delta x\rightarrow 0 }{ \frac { 3\Delta x }{ \Delta x }  } =\lim _{ \Delta x\rightarrow 0 }{ 3 } =3$$</p>
 
-<p>算法思想：</p>
+<p>示例 2：当$f(x)=x^2$，它的$f`(x)$是多少?
+$$f&rsquo;(x)=\lim _{ \Delta x\rightarrow 0 }{ \frac { { (x+\Delta x) }^{ 2 }-x^{ 2 } }{ \Delta x }  } =\lim _{ \Delta x\rightarrow 0 }{ \frac { 2x\Delta x+{ (\Delta x) }^{ 2 } }{ \Delta x }  } =\lim _{ \Delta x\rightarrow 0 }{ (2x+\Delta x) } =2x$$</p>
+</blockquote>
 
-<ol>
-<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
-<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
-<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<p>如上示例，已知函数$f(x)$，求导函数$f&rsquo;(x)$，称为对函数$f(x)$<code>求导</code>，当$f&rsquo;(x)$存在时，称函数<code>可导</code></p>
 
-<li><p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<h2 id="1-2-常用导数公式">1.2 常用导数公式</h2>
 
-<pre><code>public class BubbleSort
-{
-public void sort(int[] a)
-{
-    int temp = 0;
-    for (int i = a.length - 1; i &gt; 0; --i)
-    {
-        for (int j = 0; j &lt; i; ++j)
-        {
-            if (a[j + 1] &lt; a[j])
-            {
-                temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-        }
-    }
-}
-}
-</code></pre></li>
-</ol>
+<p>在神经网络中，我们会经常用到导数，下面就简单列举几个常用的导数公式。
+$$( c )&lsquo;=0，c代表常数$$
+$$(x)&lsquo;=1$$
+$$(x^2)&lsquo;=2x$$
+$$(e^x)&lsquo;=e^x$$
+$$({e}^{-x})&lsquo;=-{e}^{-x}$$</p>
+
+<h2 id="1-3-导数符号">1.3 导数符号</h2>
+
+<p>在本文的<strong>1.1</strong>中的公式中，函数$f\left( x \right)$的导函数用$f^{&lsquo;}\left(x\right)$表示，但是也存在不同的表示方式，比如下面使用分数表示的方法
+$$f^{ &lsquo; }\left( x \right) =\frac { dy }{ dx } $$</p>
+
+<p>这种表示方式是十分方便的，因为复杂的函数可以像分数一样计算导数</p>
+
+<blockquote>
+<p>示例1：$( c )&lsquo;=0$，可以记为$\frac { dc }{ dx } =0$（c为常数）</p>
+
+<p>示例2：$( x )&lsquo;=1$，可以记为$\frac { dx }{ dx } =1$</p>
+</blockquote>
+
+<h2 id="1-4-导数的线性性质">1.4 导数的线性性质</h2>
+
+<p>我们在计算中免不了使用加减乘除，在这里我们先介绍导数的<code>线性性</code>，其实就是导数的加减法和常数倍，而这个导数的线性性就是我们后面会说到的<code>误差反向传播算法</code>背后的主角</p>
+
+<h3 id="1-4-1-导数的加减法">1.4.1 导数的加减法</h3>
+
+<p><code>和的导数等于导数的和</code>
+$${f(x)+g(x)}’=f&rsquo;(x)+g&rsquo;(x)$$</p>
+
+<p><code>差的导数等于导数的差</code>
+$${f(x)-g(x)}’=f&rsquo;(x)-g&rsquo;(x)$$</p>
+
+<h3 id="1-4-2-导数的常数倍">1.4.2 导数的常数倍</h3>
+
+<p><code>常数倍的导数为导数的常数倍</code>
+$${cf(x)}&lsquo;=cf&rsquo;(x)$$</p>
+
+<blockquote>
+<p>示例：$C={(2-y)}^{2}$,（y为变量）时，求$C&rsquo;$
+$$C&rsquo;=(4-4y+y^2)&lsquo;=(4)&rsquo;-4(y)&lsquo;+({y}^{2})&rsquo;=0-4+2y=2y-4$$</p>
+</blockquote>
+
+<h2 id="1-5-分数函数导数">1.5 分数函数导数</h2>
+
+<p>当函数是分数形式时，求导时可以使用下面的分数函数的求导公式。$f(x)$不能取0
+$$\left\{ \frac { 1 }{ f(x) }  \right\}&lsquo;=-\frac { f&rsquo;(x) }{ { \left\{ f(x) \right\}  }^{ 2 } }$$</p>
+
+<h3 id="1-5-1-sigmoid函数的导数">1.5.1 sigmoid函数的导数</h3>
+
+<p>sigmoid函数$\sigma (x)$是神经网络中最著名的激活函数之一，我们之前有讲过，它的定义如下：
+$$\sigma (x)=\frac { 1 }{ 1+{ e }^{ -x } }$$</p>
+
+<p>在后面的<code>梯度下降算法</code>中，需要对这个函数求导，求导时我们使用下面的公式会更方便一些，通过这个式子及时不对sigmoid函数求导，也能通过$\sigma (x)$的值得到sigmoid函数的导函数值
+$$\sigma &lsquo;(x)=\sigma(x)(1-\sigma(x))$$</p>
+
+<h2 id="1-5-最小值的条件">1.5 最小值的条件</h2>
+
+<p>上面我们说过由于导函数$f&rsquo;(x)$表示切线的斜率，那么我们就可以得到在后面最优化中需要用到的一条极其重要的原理，该原理如下所示
+$$当函数f(x)在x=a处取得最小值时，f&rsquo;(a)=0$$</p>
+
+<blockquote>
+<p>证明：导函数$f&rsquo;(a)$表示切线斜率，所以根据下图可以清楚地看出$f&rsquo;(a)=0$。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbrb21a5sgj31ay0b8jsz.jpg" alt="" /></p>
+</blockquote>
+
+<p>在使用时要一定要记住下面的条件
+$$f&rsquo;(a)=0是函数f(x)在x=a处取最小值的必要条件$$</p>
+
+<p>从下面的函数$y=f(x)$的图像可以清楚地看出这一点。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbrb9ms6lej31k20cugoa.jpg" alt="" /></p>
+
+<p>所以我们就看到以下<code>必要不充分</code>的条件：
+$$f(x)最小\Rightarrow f&rsquo;(a)=0\\ f(x)最小\nLeftarrow f&rsquo;(a)=0$$</p>
+
+<p>就是因为这个性质，导致我们后面在使用梯度下降算法时，遭遇到了很大的困难</p>
+
+<blockquote>
+<p>示例：求$f(x)=3x^4-4x^3-12x^2+32$的最小值</p>
+
+<p>首先我们求出该函数的导函数$f&rsquo;(x)=12x^3-12x^2-24x=12x(x+1)(x-2)$
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbrcpifpulj30eo0f074c.jpg" alt="" />
+下面是该函数的增减表，我们发现在$x=-1、0、2$的时候，该函数的导函数为0，但是$x=-1、0$时却不是最小值，所以验证了我们上方所说的性质
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbrcqnwg8fj31r60jy3yp.jpg" alt="" /></p>
+</blockquote>
+
+<h1 id="2-偏导数基础">2 偏导数基础</h1>
+
+<p>上面我们所说的导数都是基于一元的函数，那么多元的函数怎么办呢？其实多元函数也可以进行求导，只不过我们必须指明要对哪个一个变量进行求导，而关于某个特定的变量的导数就叫<code>偏导数</code>。</p>
+
+<h2 id="2-1-偏导数的定义">2.1 偏导数的定义</h2>
+
+<p>多元函数进行求偏导时，除了指定的变量外其他的变量都作为常数来求导，比如有个二元函数$z=f(x,y)$，我们对它的变量x进行求导，以此求得的导数称为<code>关于x的偏导数</code>，用下方的符号来进行表示
+$$\frac { \partial z }{ \partial x } =\frac { \partial f(x,y) }{ \partial x } =\lim _{ \Delta x\rightarrow 0 }{ \frac { f(x+\Delta x,y)-f(x,y) }{ \Delta x }  } $$</p>
+
+<p>关于y的偏导数，也差不多
+$$\frac { \partial z }{ \partial y } =\frac { \partial f(x,y) }{ \partial y } =\lim _{ \Delta x\rightarrow 0 }{ \frac { f(x,y+\Delta y)-f(x,y) }{ \Delta y }  } $$</p>
+
+<blockquote>
+<p>示例：当$z=wx+b$时，$\frac { \partial z }{ \partial x } =w,\frac { \partial z }{ \partial w } =x,\frac { \partial z }{ \partial b } =1$</p>
+</blockquote>
+
+<h2 id="2-2-多变量函数的最小值条件">2.2 多变量函数的最小值条件</h2>
+
+<p>之前我们说过，光滑的单变量函数$y=f(x)$在点$x$处取得最小值的必要条件是导函数在该点取值0，这个性质在多元函数同样适用，例如对两个变量的函数，可以如下所示。
+$$函数z=f(x)取得最小值的必要条件是\frac { \partial f }{ \partial x } =0,\frac { \partial f }{ \partial y }=0$$</p>
+
+<p>上面的性质很容易扩展到$n$个变量的情形，只要满足所有偏导数都为0，此外，从下图可以清楚地看出上述的条件是成立的。因为从$x$方向以及$y$方向来看，函数$z=f(x,y)$取得最小值的点就像葡萄酒杯的底部。
+<img src="https://tva1.sinaimg.cn/large/0082zybply1gbrew37c1yj31ia0ci75u.jpg" alt="" /></p>
+
+<p>但是要记住的是上面的条件跟单变量函数的最小值条件一样，即使满足上述条件，也不能满足在该点取得最小值。</p>
+
+<h2 id="2-3-拉格朗日乘数法">2.3 拉格朗日乘数法</h2>
+
+<p>在实际的最小值问题中，有时会对变量附加约束条件，例如下面这个问题</p>
+
+<blockquote>
+<p>示例：当$x^2+y^2=1$时，求$x+y$的最小值</p>
+
+<p>这种情况下我们使用<code>拉格朗日乘数法</code>，首先引入参数$\lambda $,创建下面的函数$L$
+$$L=f(x,y)-\lambda g(x,y)=(x+y)-\lambda(x^2+y^2-1)$$
+$$\frac { \partial L }{ \partial x } =1-2\lambda x=0$$
+$$\frac { \partial L }{ \partial y } =1-2\lambda y=0$$
+根据这些式子以及约束条件$x^2+y^2=1$，可得x=y=$\lambda=\pm \frac { 1 }{ \sqrt { 2 }  } $</p>
+
+<p>因此，当$x=y=-\frac { 1 }{ \sqrt { 2 }}$时，$x+y$取最小值$-\sqrt { 2 }$</p>
+
+<p>在用于求性能良好的神经网络的正则化技术中，经常会使用该方法。</p>
+</blockquote>
 
                 
                 <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center"></div>
@@ -473,13 +604,9 @@ public void sort(int[] a)
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BA%94%E4%B9%8B%E5%A0%86%E6%8E%92%E5%BA%8F/" data-toggle="tooltip" data-placement="top" title="算法基础之排序算法五之堆排序">&larr; 上一篇</a>
+                        <a href="/post/2020-02-09-linear-algebra/" data-toggle="tooltip" data-placement="top" title="深度学习数学基础(四)之线性代数基础">&larr; 上一篇</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/2017-09-09-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%B8%83%E4%B9%8B%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" data-toggle="tooltip" data-placement="top" title="算法基础之排序算法七之快速排序">下一篇 &rarr;</a>
-                    </li>
                     
                 </ul>
 
@@ -488,7 +615,7 @@ public void sort(int[] a)
 
 
 
-<div id="SOHUCS" sid='2017-09-09-09:20:31-算法基础之排序算法六之冒泡排序'></div>
+<div id="SOHUCS" sid='2020-02-10-11:29:17-深度学习数学基础(五)之导数基础'></div>
 <script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
 
@@ -881,7 +1008,7 @@ public void sort(int[] a)
                     
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy;   2017 <a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备19040622号</a>
+                    Copyright &copy;   2020 <a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备19040622号</a>
                     <br>
                     
                     <span id="busuanzi_container_site_pv">
