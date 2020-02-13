@@ -6,7 +6,7 @@
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Feb 2020 11:29:17 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Feb 2020 15:06:33 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>MATH</title>
       <link>https://www.naah69.com/categories/math/</link>
-      <pubDate>Mon, 10 Feb 2020 11:29:17 +0800</pubDate>
+      <pubDate>Thu, 13 Feb 2020 15:06:33 +0800</pubDate>
       
       <guid>https://www.naah69.com/categories/math/</guid>
       <description></description>
@@ -44,24 +44,6 @@
       <pubDate>Sun, 28 Jul 2019 10:41:51 +0800</pubDate>
       
       <guid>https://www.naah69.com/categories/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://www.naah69.com/categories/go/</link>
-      <pubDate>Sun, 23 Jun 2019 13:42:08 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/categories/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SOFTWARE</title>
-      <link>https://www.naah69.com/categories/software/</link>
-      <pubDate>Sat, 22 Jun 2019 20:28:03 +0800</pubDate>
-      
-      <guid>https://www.naah69.com/categories/software/</guid>
       <description></description>
     </item>
     

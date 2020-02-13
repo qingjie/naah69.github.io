@@ -6,10 +6,19 @@
     <description>Recent content in 数学基础 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Feb 2020 11:29:17 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Feb 2020 15:06:33 +0800</lastBuildDate>
     
 	<atom:link href="https://www.naah69.com/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深度学习数学基础(六)之链式法则</title>
+      <link>https://www.naah69.com/post/2020-02-11-linked/</link>
+      <pubDate>Thu, 13 Feb 2020 15:06:33 +0800</pubDate>
+      
+      <guid>https://www.naah69.com/post/2020-02-11-linked/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>深度学习数学基础(五)之导数基础</title>
