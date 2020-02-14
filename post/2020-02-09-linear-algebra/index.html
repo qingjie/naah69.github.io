@@ -76,6 +76,13 @@
         #index nav ul li {padding-left: 0em;}
         #index nav ul li ul {padding-left: 1em;}
     }
+    .katex-display>.katex{
+        white-space:normal;
+    }
+
+    .katex .base, .katex .strut{
+        margin-top: 0.5em;
+    }
 
 
 </style>
@@ -464,8 +471,8 @@ $$3A=\begin{bmatrix} 3\times 2 &amp; 3\times 7 \\ 3\times 1 &amp; 3\times 8 \end
 
 <blockquote>
 <p>示例：$A=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}，B=\begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}$，求$AB和BA$
-$$AB=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}\\=\begin{bmatrix} 2\times 2+7\times 1 &amp; 2\times 8+7\times 3 \\ 1\times 2+8\times 1 &amp; 1\times 8+8\times 3 \end{bmatrix}\\=\begin{bmatrix} 11 &amp; 37 \\ 10 &amp; 32 \end{bmatrix}$$
-$$BA=\begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}\\=\begin{bmatrix} 2\times 2+8\times 1 &amp; 2\times 7+8\times 8 \\ 1\times 2+3\times 1 &amp; 1\times 7+3\times 8 \end{bmatrix}\\=\begin{bmatrix} 12 &amp; 78 \\ 5 &amp; 31 \end{bmatrix}$$</p>
+$$AB=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}=\begin{bmatrix} 2\times 2+7\times 1 &amp; 2\times 8+7\times 3 \\ 1\times 2+8\times 1 &amp; 1\times 8+8\times 3 \end{bmatrix}=\begin{bmatrix} 11 &amp; 37 \\ 10 &amp; 32 \end{bmatrix}$$
+$$BA=\begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}=\begin{bmatrix} 2\times 2+8\times 1 &amp; 2\times 7+8\times 8 \\ 1\times 2+3\times 1 &amp; 1\times 7+3\times 8 \end{bmatrix}=\begin{bmatrix} 12 &amp; 78 \\ 5 &amp; 31 \end{bmatrix}$$</p>
 </blockquote>
 
 <p>通过上面的示例，我们会发现矩阵的乘法步满足交换律，也就是说除例外情况，矩阵的乘法满足下方式子
@@ -480,7 +487,7 @@ $$AE=EA=A$$</p>
 
 <blockquote>
 <p>示例：$A=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}，B=\begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}$，求$A\bigodot B$
-$$A\bigodot B=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}\\=\begin{bmatrix} 2\times 2 &amp; 7\times 8 \\ 1\times 1 &amp; 8\times 3 \end{bmatrix}\\=\begin{bmatrix} 4 &amp; 56 \\ 1 &amp; 24 \end{bmatrix}$$</p>
+$$A\bigodot B=\begin{bmatrix} 2 &amp; 7 \\ 1 &amp; 8 \end{bmatrix}\cdot \begin{bmatrix} 2 &amp; 8 \\ 1 &amp; 3 \end{bmatrix}=\begin{bmatrix} 2\times 2 &amp; 7\times 8 \\ 1\times 1 &amp; 8\times 3 \end{bmatrix}=\begin{bmatrix} 4 &amp; 56 \\ 1 &amp; 24 \end{bmatrix}$$</p>
 </blockquote>
 
 <h2 id="2-6-转置矩阵">2.6 转置矩阵</h2>
@@ -679,6 +686,13 @@ $${  }^{ t }{ A }=\begin{bmatrix} 2 &amp; 1 \\ 7 &amp; 8 \end{bmatrix}$$</p>
             
             
             
+            <a href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80" title="数学基础"  target="_blank" >
+            数学基础(7)
+            </a>
+
+            
+            
+            
             <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97" title="机器学习系列"  target="_blank" >
             机器学习系列(7)
             </a>
@@ -686,8 +700,15 @@ $${  }^{ t }{ A }=\begin{bmatrix} 2 &amp; 1 \\ 7 &amp; 8 \end{bmatrix}$$</p>
             
             
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80" title="数学基础"  target="_blank" >
-            数学基础(6)
+            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" title="深度学习"  target="_blank" >
+            深度学习(6)
+            </a>
+
+            
+            
+            
+            <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" title="神经网络"  target="_blank" >
+            神经网络(6)
             </a>
 
             
@@ -716,20 +737,6 @@ $${  }^{ t }{ A }=\begin{bmatrix} 2 &amp; 1 \\ 7 &amp; 8 \end{bmatrix}$$</p>
             
             <a href="/tags/software" title="software"  target="_blank" >
             software(5)
-            </a>
-
-            
-            
-            
-            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" title="深度学习"  target="_blank" >
-            深度学习(5)
-            </a>
-
-            
-            
-            
-            <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" title="神经网络"  target="_blank" >
-            神经网络(5)
             </a>
 
             
