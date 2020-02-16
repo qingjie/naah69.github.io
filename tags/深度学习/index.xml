@@ -17,7 +17,7 @@
       <pubDate>Thu, 13 Feb 2020 15:06:33 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-11-linked/</guid>
-      <description>上次讲了导数和偏导数的基础，那么这些还不足以使用起来，今天就来讲讲误差反向传播中用来解决复杂函数求导的链式法则。 1 复合函数 已知函数$y=f(</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 上次讲了导数和偏导数的基础，那么这些还不足以使用起来，今天就来讲讲误差反向传播中用来解决复杂</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Mon, 10 Feb 2020 11:29:17 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-10-derivative/</guid>
-      <description>之前我们提过，说神经网络会很牛逼的自己学习，那这个自己学习是什么原理呢？如果用数学上的非人话就是对权重和偏置进行最优化，使输出符合学习数据，</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 之前我们提过，说神经网络会很牛逼的自己学习，那这个自己学习是什么原理呢？如果用数学上的非人话</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Sun, 09 Feb 2020 18:20:23 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-09-linear-algebra/</guid>
-      <description>1 向量基础 向量就是具有大小和方向的量。 1.1 有向线段与向量 有两个点$A、B$，我们考虑从$A$指向$B$的线段，这条具有方向的线段$AB$叫作有</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 1 向量基础 向量就是具有大小和方向的量。 1.1 有向线段与向量 有两个点$A、B$，我们考虑从$A$指</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Sat, 08 Feb 2020 14:13:58 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-08-math-basic/</guid>
-      <description>从本文开始，之后的三四篇我们都将沐浴在数学的海洋里，拼命地扑腾，这个系列我会尽力以通俗易懂的方式来讲述这些数学知识。 1 函数 1.1 一次函数 在数学函</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 从本文开始，之后的三四篇我们都将沐浴在数学的海洋里，拼命地扑腾，这个系列我会尽力以通俗易懂的</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
       <pubDate>Thu, 06 Feb 2020 19:40:19 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-06-neural-network-structure/</guid>
-      <description>书接上文，继续说说神经网络的结构。首先我们要回顾上一篇文章深度学习数学基础(一)之神经元构造中讲到的两个公式。 加权输入公式 $$z=w_1x_1+w_2x_2+w_3x_3+&amp;hellip;+b $$ 激活公式 $$y=a(z)$$ 还有</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 书接上文，继续说说神经网络的结构。首先我们要回顾上一篇文章深度学习数学基础(一)之神经元构造</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@
       <pubDate>Thu, 06 Feb 2020 10:46:49 +0800</pubDate>
       
       <guid>https://www.naah69.com/post/2020-02-06-neurous/</guid>
-      <description>过年期间，我抽时间把深度学习的神经网络的数学基础学习了一下，简单的看了看神经网络的基础，在这里我通过写这个系列的博文来沉淀我所学到的知识。 1</description>
+      <description>本篇内容含有大量公式，如果展示不佳，请跳转至原文 过年期间，我抽时间把深度学习的神经网络的数学基础学习了一下，简单的看了看神经网络的基础，在这</description>
     </item>
     
   </channel>
