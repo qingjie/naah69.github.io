@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>CentOS配置GPU开发环境教程 | 纳兰小筑</title>
-    <meta name="description" content="centos构建包含nvidia drive,cuda,cudnn的gpu开发环境" />
-    <meta name="keywords" content="nvidia驱动,cuda,cudnn,ubuntu" />
+    <title>CentOS7配置GPU开发环境教程 | 纳兰小筑</title>
+    <meta name="description" content="centos7构建包含nvidia drive,cuda,cudnn的gpu开发环境" />
+    <meta name="keywords" content="nvidia驱动,cuda,cudnn,centos" />
     <meta name="baidu-site-verification" content="LRrmH41lz7" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -225,7 +225,7 @@
 
                     </div>
 
-                    <h1>CentOS配置GPU开发环境教程</h1>
+                    <h1>CentOS7配置GPU开发环境教程</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by Naah on Sunday, Dec 08,2019 17:29:04
                         
@@ -418,6 +418,11 @@ sudo dracut --force
 <p>根据上面安装的驱动版本安装cuda，如果上方是<code>kmod-nvidia</code>，则可以安装最新版本，如果是其他的则需要根据下图进行选择版本下载
 <img src="https://tva1.sinaimg.cn/large/0082zybply1gby1l4gq1yj31640iqab3.jpg" alt="" /></p>
 
+<blockquote>
+<p>注意：显卡算力在3.0以下的老显卡，需要安装cuda8，cuda9会导致一些地方不可用
+<a href="https://developer.nvidia.com/cuda-gpus#compute">nvidia显卡算力表</a></p>
+</blockquote>
+
 <p>选择配置，但是<code>Installer Type</code>必须选择<code>runfile</code>,根据下方给出的url下载安装包，可选择使用<code>wget</code>直接在<code>centos</code>下载，也可以选择使用其他方式下载然后上传至<code>centos</code></p>
 
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9pgn7rzn7j31ei0p8t9h.jpg" alt="" /></p>
@@ -510,7 +515,7 @@ sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
 
 
 
-<div id="SOHUCS" sid='2019-12-08-17:29:04-CentOS配置GPU开发环境教程'></div>
+<div id="SOHUCS" sid='2019-12-08-17:29:04-CentOS7配置GPU开发环境教程'></div>
 <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com
 /js/lib/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytako4HR"></script>
